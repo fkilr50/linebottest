@@ -13,8 +13,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
-handler = WebhookHandler('YOUR_CHANNEL_SECRET')
+line_bot_api = LineBotApi('77290a3cf310d97b2ea31faa35dbdb1a')
+handler = WebhookHandler('https://linebottest-opal.vercel.app/hook')
 
 
 @app.route("/callback", methods=['POST'])
