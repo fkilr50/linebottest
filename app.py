@@ -11,6 +11,8 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
+import logging
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('dSnC5XyuryPz4LZqiqPezEjkVUrt7Ihw1OGvsulf3xIdZfRlNOKdiIKufCW1/LYUDZD/MZSYdftj8ZKuQJOnNCzv6PGBHQDelKYpZGs/waYp5oHYptnVbLFv1QOauUYCKBDsm/J0jmrz2T2uQgohHgdB04t89/1O/w1cDnyilFU=')
@@ -24,6 +26,8 @@ def callback():
 
     # Get request body as text
     body = request.get_data(as_text=True)
+    logging.basicConfig(level=logging.INFO)
+    logging.info(f"thebod:\n{body}")
     app.logger.info("Request body: " + body)
 
     # Handle webhook body
