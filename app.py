@@ -30,7 +30,7 @@ logging.basicConfig(level=logging.INFO)
 
 configuration = Configuration(access_token=os.getenv("CHANNEL_ACCESS_TOKEN"))
 api_client = ApiClient(configuration=configuration)
-line_bot_api = MessagingApi(api_client=api_client) # CORRECT: Pass ApiClient here
+line_bot_api = MessagingApi(api_client=api_client)
 parser = WebhookParser(channel_secret=os.getenv("CHANNEL_SECRET"))
 
 @app.route("/")
@@ -57,13 +57,12 @@ def callback():
         abort(400)
     except Exception as e:
         app.logger.error(f"Error parsing webhook request: {e}")
-        abort(500) # Internal server error
+        abort(500)
 
     for event in events:
         app.logger.info(f"Processing event type: {type(event)}")
         if isinstance(event, MessageEvent): 
             if isinstance(event.message, TextMessageContent):
-                 # Call your separate function to handle the text message
                 handle_text_message(event)
             else:
                 print("It's not a TextMessageContent from user")
@@ -86,7 +85,6 @@ def handle_text_message(event: MessageEvent):
     else:
         input_text = event.message.text
         app.logger.info(f"Handling text message: '{input_text}' with token {event.reply_token[:10]}...")
-        #output_text = ""
 
         # all input messages will be processed here
 
@@ -104,7 +102,6 @@ def handle_text_message(event: MessageEvent):
         
         else:
             output_text = f"I received '{input_text}'. Please try 'assignments', 'activities', or 'echo [your text]'."
-
 
 
         # --- v3 Replying ---
@@ -125,12 +122,10 @@ def handle_text_message(event: MessageEvent):
 
 
 def handle_follow_event(event: FollowEvent):
-    #user_id = event.source.__dict__.get("user_id")
     userid = event.source.user_id
     newusers[event.source.user_id] = {"id": None, "pass": None}
-    #id = line_bot_api.get_profile(user_id) # Now it's recognized correctly
 
-    print("Bot has been added by:", userid) #userId
+    print("Bot has been added by:", userid)
     
     output_text = "Hello, I am testBot25.\nPlease state your portal id and pass each in one different message with the following format;\n\nstudent id: 1123xxx\npassword: 123xx" 
 
