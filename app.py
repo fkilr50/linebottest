@@ -1,5 +1,9 @@
 import os
 import logging
+import schedule as s
+import time
+import threading
+
 from dotenv import load_dotenv
 from flask import Flask, request, abort
 
@@ -146,7 +150,7 @@ def handle_new_user(event):
 
     user_data = newusers[user_id]
 
-    response = "Sorry, I didn't understand. Try 'student id: 1123xxx' or 'password: abc123'"
+    response = "Sorry, I didn't understand. Please enter with the correct format"
 
     if user_data["id"] is None and ("student" in text or "id" in text):
         portalid = getid(text)
@@ -214,6 +218,40 @@ def getpass(string):
                 pword += string[i]
     return pword 
 
+def reminder():
+    print("you have an assignment due in 3 days")
+
+assignment = (2025, 4, 28, 0, 0, 0, 0, 0, 0)
+if time.mktime(assignment) - time.time() <= 259200:
+    reminder()
+else:
+    print("still good bro")
+
+def sendmessage():
+    userid = "U2d05e1777e259a7a068e91b5f33c942e"
+    output_text = "you will get this message at 27/04 00:10"
+    push_request = PushMessageRequest(
+    to = userid,
+    messages = [TextMessage(text = output_text)]
+    )
+
+    line_bot_api.push_message(push_request)
+    app.logger.info(f"Successfully sent: '{output_text}'")
+
+def checktime():
+    mssgtime = (2025, 4, 27, 00, 10, 0, 0, 0, 0)
+    while True:
+        if abs(time.mktime(mssgtime) - time.time()) < 1:
+            sendmessage()
+            time.sleep(60)
+        time.sleep(1)
+
+def start_background_tasks():
+    thread = threading.Thread(target=checktime)
+    thread.daemon = True 
+    thread.start()
+
 if __name__ == "__main__":
+    start_background_tasks()
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)

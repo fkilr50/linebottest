@@ -66,13 +66,6 @@ class _TupleAttributeAtIndex(object):
         return '%s(%d)' % (self.__class__.__name__, self.index)
 
 
-class undefined(object):
-    def __repr__(self):
-        return 'undefined'
-    def __bool__(self):
-        return False
-    __nonzero__ = __bool__
-undefined = undefined()
 
 
 class TupleSize(NamedConstant):
@@ -81,7 +74,7 @@ class TupleSize(NamedConstant):
     variable = constant('variable', 'tuple length can be anything')
 
 class NamedTupleMeta(type):
-    """Metaclass for NamedTuple"""
+    "Metaclass for NamedTuple"
 
     @classmethod
     def __prepare__(metacls, cls, bases, size=undefined, **kwds):
@@ -421,6 +414,13 @@ def __new__(cls, *args, **kwds):
         if cls._size_ is not TupleSize.variable or undefined in final_args:
             raise TypeError('values not provided for field(s): %s' % ', '.join(missing))
     return tuple.__new__(cls, tuple(final_args))
+
+@namedtuple_dict
+def __getitem__(self, index):
+    if isinstance(index, basestring):
+        return getattr(self, index)
+    else:
+        return tuple.__getitem__(self, index)
 
 @namedtuple_dict
 def __reduce_ex__(self, proto):

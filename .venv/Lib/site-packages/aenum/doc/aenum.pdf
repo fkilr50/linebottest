@@ -367,7 +367,7 @@ endobj
 endobj
 46 0 obj
 <<
-/Author () /CreationDate (D:20230626171511+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20230626171511+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+/Author () /CreationDate (D:20250424183133+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20250424183133+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title (aenum --- support for advanced enumerations, namedtuples, and constants) /Trapped /False
 >>
 endobj
@@ -581,7 +581,7 @@ endobj
 endobj
 87 0 obj
 <<
-/Length 4842
+/Length 4850
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -618,6 +618,7 @@ q
 Q
 q
 1 0 0 1 62.69291 468.6772 cm
+q
 .960784 .960784 .862745 rg
 n 0 84 469.8898 -84 re f*
 0 0 0 rg
@@ -638,6 +639,7 @@ Q
 Q
 q
 1 0 0 1 16 16 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -651,6 +653,7 @@ Q
 q
 Q
 Q
+Q
 q
 1 J
 1 j
@@ -660,6 +663,7 @@ n 0 84 m 469.8898 84 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 84 l S
 n 469.8898 0 m 469.8898 84 l S
+Q
 Q
 Q
 q
@@ -767,12 +771,13 @@ endstream
 endobj
 88 0 obj
 <<
-/Length 5767
+/Length 5775
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
 1 0 0 1 62.69291 682.0236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -800,6 +805,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -877,6 +883,7 @@ q
 Q
 q
 1 0 0 1 62.69291 401.0236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -904,6 +911,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -1018,7 +1026,7 @@ endstream
 endobj
 89 0 obj
 <<
-/Length 5850
+/Length 5888
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -1066,6 +1074,7 @@ q
 Q
 q
 1 0 0 1 62.69291 528.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -1077,6 +1086,7 @@ q
 Q
 q
 1 0 0 1 20 48 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -1095,11 +1105,13 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 20 42 cm
 Q
 q
 1 0 0 1 20 30 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -1112,10 +1124,11 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (The attributes ) Tj /F2 10 Tf (Color.red) Tj /F1 10 Tf (, ) Tj /F2 10 Tf (Color.green) Tj /F1 10 Tf (, etc., are ) Tj /F5 10 Tf (enumeration members) Tj /F1 10 Tf ( \(or ) Tj /F5 10 Tf (enum members) Tj /F1 10 Tf (\).) Tj T* ET
+BT 1 0 0 1 0 2 Tm -0.044024 Tw 12 TL /F1 10 Tf 0 0 0 rg (The attributes ) Tj /F2 10 Tf (Color.red) Tj /F1 10 Tf (, ) Tj /F2 10 Tf (Color.green) Tj /F1 10 Tf (, etc., are ) Tj /F5 10 Tf (enumeration members) Tj /F1 10 Tf ( \(or ) Tj /F5 10 Tf (enum members) Tj /F1 10 Tf (\).) Tj T* 0 Tw ET
 Q
 Q
 q
+Q
 Q
 Q
 q
@@ -1123,6 +1136,7 @@ q
 Q
 q
 1 0 0 1 20 0 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -1141,10 +1155,12 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 20 0 cm
 Q
 q
+Q
 Q
 Q
 q
@@ -1155,6 +1171,7 @@ q
 Q
 q
 1 0 0 1 62.69291 433.8236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -1182,6 +1199,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -1297,7 +1315,7 @@ endstream
 endobj
 90 0 obj
 <<
-/Length 3944
+/Length 3948
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -1332,6 +1350,7 @@ q
 Q
 q
 1 0 0 1 62.69291 516.8236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -1360,6 +1379,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -1476,7 +1496,7 @@ endstream
 endobj
 91 0 obj
 <<
-/Length 5378
+/Length 5398
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -1515,6 +1535,7 @@ q
 Q
 q
 1 0 0 1 62.69291 665.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -1533,11 +1554,13 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 659.8236 cm
 Q
 q
 1 0 0 1 62.69291 647.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -1556,11 +1579,13 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 641.8236 cm
 Q
 q
 1 0 0 1 62.69291 629.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -1579,11 +1604,13 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 623.8236 cm
 Q
 q
 1 0 0 1 62.69291 611.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -1602,6 +1629,7 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 611.8236 cm
 Q
@@ -1610,6 +1638,7 @@ q
 Q
 q
 1 0 0 1 62.69291 516.8236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -1637,6 +1666,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -1853,7 +1883,7 @@ endstream
 endobj
 93 0 obj
 <<
-/Length 4382
+/Length 4386
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -1973,6 +2003,7 @@ q
 Q
 q
 1 0 0 1 62.69291 210.2236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -2000,6 +2031,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -2037,7 +2069,7 @@ endstream
 endobj
 94 0 obj
 <<
-/Length 4186
+/Length 4190
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -2144,6 +2176,7 @@ q
 Q
 q
 1 0 0 1 62.69291 113.4236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -2173,6 +2206,7 @@ n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 107.4236 cm
 Q
@@ -2181,7 +2215,7 @@ endstream
 endobj
 95 0 obj
 <<
-/Length 4204
+/Length 4208
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -2330,6 +2364,7 @@ q
 Q
 q
 1 0 0 1 62.69291 121.2236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -2360,6 +2395,7 @@ n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 115.2236 cm
 Q
@@ -2368,7 +2404,7 @@ endstream
 endobj
 96 0 obj
 <<
-/Length 4534
+/Length 4536
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -2407,7 +2443,7 @@ Q
 q
 1 0 0 1 62.69291 564.8236 cm
 q
-BT 1 0 0 1 0 14 Tm .781098 Tw 12 TL /F1 10 Tf 0 0 0 rg (The semantics of this API resemble ) Tj /F2 10 Tf (namedtuple) Tj /F1 10 Tf (. The first argument of the call to ) Tj /F2 10 Tf (Enum) Tj /F1 10 Tf ( is the name of) Tj T* 0 Tw (the enumeration.) Tj T* ET
+BT 1 0 0 1 0 14 Tm -0.137907 Tw 12 TL /F1 10 Tf 0 0 0 rg (The semantics of this API resemble ) Tj /F2 10 Tf (namedtuple) Tj /F1 10 Tf (. The first argument of the call to ) Tj /F2 10 Tf (Enum) Tj /F1 10 Tf ( is the name of the) Tj T* 0 Tw (enumeration.) Tj T* ET
 Q
 Q
 q
@@ -2631,7 +2667,7 @@ endstream
 endobj
 98 0 obj
 <<
-/Length 4053
+/Length 4145
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -2744,7 +2780,8 @@ q
 1 0 0 1 62.69291 350.2236 cm
 Q
 q
-1 0 0 1 62.69291 134.6236 cm
+1 0 0 1 62.69291 110.6236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -2759,10 +2796,10 @@ q
 .662745 .662745 .662745 RG
 .5 w
 .960784 .960784 .862745 rg
-n -6 -6 448.6898 84 re B*
+n -6 -6 448.6898 108 re B*
 Q
 q
-BT 1 0 0 1 0 62 Tm 12 TL /F2 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( from aenum import STRICT, CONFORM, EJECT) Tj T* (>) Tj (>) Tj (>) Tj ( Perm._boundary_ = STRICT) Tj T* (>) Tj (>) Tj (>) Tj ( Perm.X | 8) Tj T* (Traceback \(most recent call last\):) Tj T* (...) Tj T* (ValueError: 9 is not a valid Perm) Tj T* ET
+BT 1 0 0 1 0 86 Tm 12 TL /F2 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( from aenum import STRICT, CONFORM, EJECT) Tj T* (>) Tj (>) Tj (>) Tj ( Perm._boundary_ = STRICT) Tj T* (>) Tj (>) Tj (>) Tj ( Perm.X | 8) Tj T* (Traceback \(most recent call last\):) Tj T* (...) Tj T* (ValueError: ) Tj (<) Tj (aenum 'Perm') Tj (>) Tj ( invalid value 9) Tj T* (    given 0b0 1001) Tj T* (  allowed 0b0 0111) Tj T* ET
 Q
 Q
 Q
@@ -2811,15 +2848,16 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 134.6236 cm
+1 0 0 1 62.69291 110.6236 cm
 Q
  
 endstream
 endobj
 99 0 obj
 <<
-/Length 3958
+/Length 3975
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -2865,7 +2903,7 @@ q
 1 0 0 1 62.69291 501.8236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Individual flags should have values that are powers of two \(1, 2, 4, 8, ...\), while combinations of flags won't:) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL -0.08896 Tw (Individual flags should have values that are powers of two \(1, 2, 4, 8, ...\), while combinations of flags won't:) Tj T* 0 Tw ET
 Q
 Q
 q
@@ -2947,7 +2985,7 @@ endstream
 endobj
 100 0 obj
 <<
-/Length 6807
+/Length 6835
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -2976,6 +3014,7 @@ q
 Q
 q
 1 0 0 1 62.69291 564.8236 cm
+q
 .960784 .960784 .862745 rg
 n 0 119 469.8898 -119 re f*
 0 0 0 rg
@@ -3003,6 +3042,7 @@ n 0 119 m 469.8898 119 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 119 l S
 n 469.8898 0 m 469.8898 119 l S
+Q
 Q
 Q
 q
@@ -3062,6 +3102,7 @@ q
 Q
 q
 1 0 0 1 62.69291 385.6236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -3080,11 +3121,13 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 379.6236 cm
 Q
 q
 1 0 0 1 62.69291 343.6236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -3103,11 +3146,13 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 337.6236 cm
 Q
 q
 1 0 0 1 62.69291 313.6236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -3126,11 +3171,13 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 307.6236 cm
 Q
 q
 1 0 0 1 62.69291 283.6236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -3149,11 +3196,13 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 277.6236 cm
 Q
 q
 1 0 0 1 62.69291 253.6236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -3172,6 +3221,7 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 253.6236 cm
 Q
@@ -3180,6 +3230,7 @@ q
 Q
 q
 1 0 0 1 62.69291 158.6236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -3209,6 +3260,7 @@ n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 152.6236 cm
 Q
@@ -3220,12 +3272,13 @@ endstream
 endobj
 101 0 obj
 <<
-/Length 4047
+/Length 4051
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
 1 0 0 1 62.69291 682.0236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -3253,6 +3306,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -3433,7 +3487,7 @@ endstream
 endobj
 103 0 obj
 <<
-/Length 4095
+/Length 4099
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -3533,6 +3587,7 @@ q
 Q
 q
 1 0 0 1 62.69291 146.4236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -3560,6 +3615,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -3643,7 +3699,7 @@ endstream
 endobj
 105 0 obj
 <<
-/Length 3815
+/Length 3819
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -3672,6 +3728,7 @@ q
 Q
 q
 1 0 0 1 62.69291 612.8236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -3699,6 +3756,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -3792,7 +3850,7 @@ endstream
 endobj
 106 0 obj
 <<
-/Length 3915
+/Length 3919
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -3821,6 +3879,7 @@ q
 Q
 q
 1 0 0 1 62.69291 600.8236 cm
+q
 .960784 .960784 .862745 rg
 n 0 107 469.8898 -107 re f*
 0 0 0 rg
@@ -3848,6 +3907,7 @@ n 0 107 m 469.8898 107 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 107 l S
 n 469.8898 0 m 469.8898 107 l S
+Q
 Q
 Q
 q
@@ -3997,7 +4057,7 @@ endstream
 endobj
 108 0 obj
 <<
-/Length 5719
+/Length 5723
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -4018,6 +4078,7 @@ q
 Q
 q
 1 0 0 1 62.69291 586.0236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -4045,6 +4106,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -4146,12 +4208,13 @@ endstream
 endobj
 109 0 obj
 <<
-/Length 4234
+/Length 4242
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
 1 0 0 1 62.69291 682.0236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -4179,6 +4242,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -4245,6 +4309,7 @@ q
 Q
 q
 1 0 0 1 62.69291 161.8236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -4275,6 +4340,7 @@ n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
 Q
 Q
+Q
 q
 1 0 0 1 62.69291 155.8236 cm
 Q
@@ -4286,12 +4352,13 @@ endstream
 endobj
 110 0 obj
 <<
-/Length 4886
+/Length 4890
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
 1 0 0 1 62.69291 682.0236 cm
+q
 .960784 .960784 .862745 rg
 n 0 83 469.8898 -83 re f*
 0 0 0 rg
@@ -4319,6 +4386,7 @@ n 0 83 m 469.8898 83 l S
 n 0 0 m 469.8898 0 l S
 n 0 0 m 0 83 l S
 n 469.8898 0 m 469.8898 83 l S
+Q
 Q
 Q
 q
@@ -4478,7 +4546,7 @@ endstream
 endobj
 111 0 obj
 <<
-/Length 3092
+/Length 3109
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -4496,7 +4564,7 @@ q
 n -6 -6 468.6898 276 re B*
 Q
 q
-BT 1 0 0 1 0 254 Tm 12 TL /F2 10 Tf 0 0 0 rg (...     g = 1, 'green component', 29) Tj T* (...     b = 2, 'blue component', 37) Tj T* (...) Tj T* (>) Tj (>) Tj (>) Tj ( Pixel = NamedTuple\('Pixel', Point+Color, module=__name__\)) Tj T* (>) Tj (>) Tj (>) Tj ( pixel = Pixel\(99, -101, 255, 128, 0\)) Tj T*  T* (>) Tj (>) Tj (>) Tj ( pixel._asdict\(\)) Tj T* (OrderedDict\([\('x', 99\), \('y', -101\), \('r', 255\), \('g', 128\), \('b', 0\)]\)) Tj T*  T* (>) Tj (>) Tj (>) Tj ( Point._make\(\(4, 5\)\)) Tj T* (Point\(x=4, y=5\)) Tj T*  T* (>) Tj (>) Tj (>) Tj ( purple = Color\(127, 0, 127\)) Tj T* (>) Tj (>) Tj (>) Tj ( mid_gray = purple._replace\(g=127\)) Tj T* (>) Tj (>) Tj (>) Tj ( mid_gray) Tj T* (Color\(r=127, g=127, b=127\)) Tj T*  T* (>) Tj (>) Tj (>) Tj ( pixel._fields) Tj T* (['x', 'y', 'r', 'g', 'b']) Tj T*  T* (>) Tj (>) Tj (>) Tj ( Pixel._fields) Tj T* (['x', 'y', 'r', 'g', 'b']) Tj T* ET
+BT 1 0 0 1 0 254 Tm 12 TL /F2 10 Tf 0 0 0 rg (...     g = 1, 'green component', 29) Tj T* (...     b = 2, 'blue component', 37) Tj T* (...) Tj T* (>) Tj (>) Tj (>) Tj ( Pixel = NamedTuple\('Pixel', Point+Color, module=__name__\)) Tj T* (>) Tj (>) Tj (>) Tj ( pixel = Pixel\(99, -101, 255, 128, 0\)) Tj T*  T* (>) Tj (>) Tj (>) Tj ( pixel._asdict\(\) # doctest: +SKIP) Tj T* (OrderedDict\([\('x', 99\), \('y', -101\), \('r', 255\), \('g', 128\), \('b', 0\)]\)) Tj T*  T* (>) Tj (>) Tj (>) Tj ( Point._make\(\(4, 5\)\)) Tj T* (Point\(x=4, y=5\)) Tj T*  T* (>) Tj (>) Tj (>) Tj ( purple = Color\(127, 0, 127\)) Tj T* (>) Tj (>) Tj (>) Tj ( mid_gray = purple._replace\(g=127\)) Tj T* (>) Tj (>) Tj (>) Tj ( mid_gray) Tj T* (Color\(r=127, g=127, b=127\)) Tj T*  T* (>) Tj (>) Tj (>) Tj ( pixel._fields) Tj T* (['x', 'y', 'r', 'g', 'b']) Tj T*  T* (>) Tj (>) Tj (>) Tj ( Pixel._fields) Tj T* (['x', 'y', 'r', 'g', 'b']) Tj T* ET
 Q
 Q
 Q
@@ -5114,66 +5182,66 @@ xref
 0000013732 00000 n 
 0000013857 00000 n 
 0000014112 00000 n 
-0000019006 00000 n 
-0000024825 00000 n 
-0000030727 00000 n 
-0000034723 00000 n 
-0000040153 00000 n 
-0000043501 00000 n 
-0000047935 00000 n 
-0000052173 00000 n 
-0000056429 00000 n 
-0000061015 00000 n 
-0000065222 00000 n 
-0000069327 00000 n 
-0000073337 00000 n 
-0000080197 00000 n 
-0000084297 00000 n 
-0000087567 00000 n 
-0000091715 00000 n 
-0000095057 00000 n 
-0000098925 00000 n 
-0000102893 00000 n 
-0000105820 00000 n 
-0000111592 00000 n 
-0000115879 00000 n 
-0000120818 00000 n 
-0000123963 00000 n 
-0000127735 00000 n 
-0000131537 00000 n 
-0000132291 00000 n 
-0000132637 00000 n 
-0000132672 00000 n 
-0000132707 00000 n 
-0000132742 00000 n 
-0000132777 00000 n 
-0000132812 00000 n 
-0000132847 00000 n 
-0000132882 00000 n 
-0000132917 00000 n 
-0000132952 00000 n 
-0000132988 00000 n 
-0000133024 00000 n 
-0000133060 00000 n 
-0000133096 00000 n 
-0000133132 00000 n 
-0000133168 00000 n 
-0000133204 00000 n 
-0000133240 00000 n 
-0000133276 00000 n 
-0000133312 00000 n 
-0000133348 00000 n 
-0000133384 00000 n 
-0000133420 00000 n 
-0000133456 00000 n 
-0000133492 00000 n 
-0000133528 00000 n 
-0000133564 00000 n 
-0000133600 00000 n 
+0000019014 00000 n 
+0000024841 00000 n 
+0000030781 00000 n 
+0000034781 00000 n 
+0000040231 00000 n 
+0000043579 00000 n 
+0000048017 00000 n 
+0000052259 00000 n 
+0000056519 00000 n 
+0000061107 00000 n 
+0000065314 00000 n 
+0000069511 00000 n 
+0000073538 00000 n 
+0000080426 00000 n 
+0000084530 00000 n 
+0000087800 00000 n 
+0000091952 00000 n 
+0000095294 00000 n 
+0000099166 00000 n 
+0000103138 00000 n 
+0000106065 00000 n 
+0000111841 00000 n 
+0000116136 00000 n 
+0000121079 00000 n 
+0000124241 00000 n 
+0000128013 00000 n 
+0000131815 00000 n 
+0000132569 00000 n 
+0000132915 00000 n 
+0000132950 00000 n 
+0000132985 00000 n 
+0000133020 00000 n 
+0000133055 00000 n 
+0000133090 00000 n 
+0000133125 00000 n 
+0000133160 00000 n 
+0000133195 00000 n 
+0000133230 00000 n 
+0000133266 00000 n 
+0000133302 00000 n 
+0000133338 00000 n 
+0000133374 00000 n 
+0000133410 00000 n 
+0000133446 00000 n 
+0000133482 00000 n 
+0000133518 00000 n 
+0000133554 00000 n 
+0000133590 00000 n 
+0000133626 00000 n 
+0000133662 00000 n 
+0000133698 00000 n 
+0000133734 00000 n 
+0000133770 00000 n 
+0000133806 00000 n 
+0000133842 00000 n 
+0000133878 00000 n 
 trailer
 <<
 /ID 
-[<0480a0ed05945e18dfdbcdd1622d7eb9><0480a0ed05945e18dfdbcdd1622d7eb9>]
+[<30db5e4613d389193c75425473e947a5><30db5e4613d389193c75425473e947a5>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
 /Info 46 0 R
@@ -5181,5 +5249,5 @@ trailer
 /Size 144
 >>
 startxref
-133636
+133914
 %%EOF
