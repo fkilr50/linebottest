@@ -5,7 +5,16 @@ import time
 import threading
 
 from dotenv import load_dotenv
+load_dotenv()
+#print(f"load_dotenv() executed. Found and loaded .env")
 from flask import Flask, request, abort
+
+from supabase import create_client, Client
+
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
+supabase: Client = create_client(url, key)
+#print("URL:", url[:10])
 
 from linebot.v3 import (
     WebhookParser
@@ -28,7 +37,6 @@ from linebot.v3.messaging import (
     PushMessageResponse
 )
 
-load_dotenv()
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
@@ -130,7 +138,7 @@ def handle_follow_event(event: FollowEvent):
     newusers[event.source.user_id] = {"id": None, "pass": None}
 
     print("Bot has been added by:", userid)
-    
+    #push greeting message
     output_text = "Hello, I am testBot25.\nPlease state your portal id and pass each in one different message with the following format;\n\nstudent id: 1123xxx\npassword: 123xx" 
 
     push_request = PushMessageRequest(
@@ -140,7 +148,7 @@ def handle_follow_event(event: FollowEvent):
 
     line_bot_api.push_message(push_request)
     app.logger.info(f"Successfully sent: '{output_text}'")
-
+    
 
 def handle_new_user(event):
     user_id = event.source.user_id
@@ -171,6 +179,35 @@ def handle_new_user(event):
     # After both are collected
     if newusers[user_id]["id"] and newusers[user_id]["pass"]:
         app.logger.info(f"User {user_id} registered with ID: {user_data['id']} and pass: {user_data['pass']}")
+        
+        try:
+            datatobeinserted = {
+                "LineID": f"s{user_id}",
+                "StID": user_data['id'],
+                "Ps": user_data['pass']
+            }
+
+            response = (
+                supabase.table("Login data")
+                .insert(datatobeinserted)
+                .execute()
+            )
+
+            if response.data:
+                print(f"Successfully inserted data into supa: {response}")
+            else:
+                print("Insert failed.")
+                if hasattr(response, 'error') and response.error:
+                    print(f"Error details: {response.error.message}")
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            if hasattr(e, 'json') and callable(e.json):
+                try:
+                    print(f"APIError details: {e.json()}")
+                except:
+                    pass
+
         response = f"Registration complete. You can now use commands like 'assignments', 'schedule' or 'echo'."
         del newusers[user_id]
 
