@@ -290,7 +290,7 @@ def scrape_grades():
     return False
 
 
-# Python: Main part of the script that runs everything
+# Python: Main part of the script that runs everything (literally)
 try:
     # Python: Try logging in up to 3 times (in case of alerts or errors)
     max_attempts = 3
