@@ -1,15 +1,13 @@
 import os
 import logging
 import schedule as s
-import time
-import threading
 
 from dotenv import load_dotenv
 load_dotenv()
 #print(f"load_dotenv() executed. Found and loaded .env")
+
 from flask import Flask, request, abort
 from cryptography.fernet import Fernet
-
 from supabase import create_client, Client
 
 url: str = os.environ.get("SUPABASE_URL")
