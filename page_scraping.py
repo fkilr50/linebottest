@@ -44,6 +44,14 @@ from bs4 import (
     BeautifulSoup,
 )  # BeautifulSoup: Reads the webpage's code to pull out information (not used yet)
 
+# Supabase: initialize supabase client
+from supabase import create_client, Client
+
+supabase: Client = create_client(
+    "https://opvnwapzljuxnncvpbrn.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wdm53YXB6bGp1eG5uY3ZwYnJuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NjY0MDAxNCwiZXhwIjoyMDYyMjE2MDE0fQ.kXweuLkjFzqTRh-dHmRHK2TTsPvKANVJFY-hW4xHBbA",
+)
+
 # Python: Set up the logging tool to show messages with time and status (like "Starting Edge...")
 # This helps you follow what the script is doing
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -172,54 +180,47 @@ login_url = "https://portalx.yzu.edu.tw/PortalSocialVB/Login.aspx"  # Python: A 
 
 # Python: A custom function to try logging into the portal
 # It returns True if login works, False if it fails
-def attempt_login():
+def attempt_login(username, password):
     try:
-        # Selenium: Tell the browser to visit the login page
-        logging.info(f"Opening {login_url}")  # Python: Print the URL
-        driver.get(login_url)  # Selenium: Opens the webpage
-        time.sleep(2)  # Python: Wait 2 seconds for the page to load
+        logging.info(f"Opening {login_url} for user {username}")
+        driver.get(login_url)
+        time.sleep(2)
 
-        # Selenium: Find the username box, password box, and login button on the page
-        logging.info("Filling in username and password...")  # Python: Print a status message
-        username_field = driver.find_element(By.ID, "Txt_UserID")  # Selenium: Finds the username box by its ID
-        password_field = driver.find_element(By.ID, "Txt_Password")  # Selenium: Finds the password box by its ID
-        login_button = driver.find_element(By.ID, "ibnSubmit")  # Selenium: Finds the login button by its ID
+        logging.info(f"Filling in username and password for {username}...")
+        username_field = driver.find_element(By.ID, "Txt_UserID")
+        password_field = driver.find_element(By.ID, "Txt_Password")
+        login_button = driver.find_element(By.ID, "ibnSubmit")
 
-        # Selenium: Type your username and password into the boxes
-        username_field.send_keys("s1123542")  # Selenium: Types your username (e.g., s1121234)
-        password_field.send_keys("Kaiser.lev123")  # Selenium: Types your password (e.g., H123456789@Yzu)
+        username_field.send_keys(username)
+        password_field.send_keys(password)
 
-        # Selenium: Click the login button
-        logging.info("Clicking login button...")  # Python: Print a status message
-        login_button.click()  # Selenium: Clicks the button
+        logging.info("Clicking login button...")
+        login_button.click()
 
-        # Python: Wait 5 seconds for the login to finish (gives the website time to respond)
-        logging.info("Waiting for login to finish...")  # Python: Print a status message
+        logging.info("Waiting for login to finish...")
         time.sleep(5)
 
-        # Selenium: Check if the website shows a pop-up alert (like the timeout message)
         try:
-            alert = Alert(driver)  # Selenium: Gets the pop-up alert
-            alert_text = alert.text  # Selenium: Reads the alert’s message
-            logging.warning(f"Alert detected: {alert_text}")  # Python: Print the alert message
-            alert.accept()  # Selenium: Closes the alert by clicking "OK"
-            return False  # Python: Return False because the login failed (alert means trouble)
+            alert = Alert(driver)
+            alert_text = alert.text
+            logging.warning(f"Alert detected for {username}: {alert_text}")
+            alert.accept()
+            return False
         except:
-            pass  # Python: If no alert, keep going
+            pass
 
-        # Python: Check if the login worked by looking at the webpage’s content
-        page_source = driver.page_source  # Selenium: Gets the webpage’s HTML code
-        if "Login Failed" not in page_source:  # Python: Check if "Login Failed" is in the HTML
-            logging.info("Login successful!")  # Python: Print success message
-            return True  # Python: Return True because login worked
+        page_source = driver.page_source
+        if "Login Failed" not in page_source:
+            logging.info(f"Login successful for {username}!")
+            return True
         else:
-            logging.error("Login failed. Check credentials or page content.")  # Python: Print failure message
-            logging.debug(f"Page content: {page_source[:1000]}...")  # Python: Show first 1000 characters of HTML
-            return False  # Python: Return False because login failed
+            logging.error(f"Login failed for {username}. Check credentials or page content.")
+            logging.debug(f"Page content: {page_source[:1000]}...")
+            return False
 
-    except Exception as e:  # Python: Catch any errors (like webpage not loading)
-        logging.error(f"Error during login attempt: {e}")  # Python: Print the error
-        return False  # Python: Return False because something went wrong
+    except Exception as e:
+        logging.error(f"Error during login attempt for {username}: {e}")
+        return False
 
 
 # Python: A custom function to click an element by ID
@@ -240,47 +241,63 @@ def click_by_id(element_id, start_message, success_message, debug_file):
 
 
 # Python: A custom function to scrape the Activity Sign-up table
-def scrape_activities():
+def scrape_activities(student_id):
     try:
-        # Python: Log that we're setting up for scraping
-        logging.info("Preparing BeautifulSoup for scraping...")
+        logging.info(f"Preparing BeautifulSoup for scraping for user {student_id}...")
 
-        # Python: Navigate to English version by clicking the language button
-        # Selenium: Call click_by_id to click "MainBar_ibnChangeVersion"
         if not click_by_id("MainBar_ibnChangeVersion", "Switching to English version...", "Switched to English version successfully.", "debug_menu.html"):
             return False
 
-        # Python: Navigate to Activity Sign-up page by clicking the menu link
-        # Selenium: Call click_by_id to click "tdP4"
         if not click_by_id("tdP4", "Navigating to Activity Sign-up page by clicking menu link...", "Clicked Activity Sign-up link successfully.", "debug_menu.html"):
             return False
         current_url = driver.current_url
         logging.info(f"Current URL after navigation: {current_url}")
 
-        # Python: Navigate to My Sign-up page by clicking the link
-        # Selenium: Call click_by_id to click "linkAlreadyRegistry"
         if not click_by_id("linkAlreadyRegistry", "Navigating to My Sign-up page by clicking link...", "Clicked My Sign-up link successfully.", "debug_my_signup.html"):
             return False
         current_url = driver.current_url
         logging.info(f"Current URL after navigation: {current_url}")
 
-        logging.info("Scraping activity table...")  # Python: Log that we're starting to scrape the activity table
-        page_source = driver.page_source  # Selenium: Get the page's HTML code
-        soup = BeautifulSoup(page_source, "html.parser")  # BeautifulSoup: Parse the HTML to make it easier to search
-        table = soup.find("table", class_="table_1")  # BeautifulSoup: Find the table with class "table_1" (contains activities)
-        rows = table.find_all("tr")[1:]  # BeautifulSoup: Get all rows in the table, skipping the header row
-        logging.info(f"Activities found: {len(rows)}")  # Python: Log how many activities (rows) we found
+        logging.info("Scraping activity table...")
+        page_source = driver.page_source
+        soup = BeautifulSoup(page_source, "html.parser")
+        table = soup.find("table", class_="table_1")
+        rows = table.find_all("tr")[1:]
+        logging.info(f"Activities found for {student_id}: {len(rows)}")
+
         for row in rows:
-            cells = row.find_all("td")  # BeautifulSoup: Get all cells (columns) in the row
-            subject = cells[1].find("a").get_text(strip=True)  # BeautifulSoup: Extract Subject from the <a> tag in the second column
-            date = cells[2].get_text(separator=" ", strip=True)  # BeautifulSoup: Extract Date from the third column, combining <br> tags with spaces
+            cells = row.find_all("td")
+            subject = cells[1].find("a").get_text(strip=True)
+            date = cells[2].get_text(separator=" ", strip=True)
+
+            try:
+                datatobeinserted = {"UserID": student_id, "ActName": subject, "ActDate": date}
+                response = supabase.table("Activity table").insert(datatobeinserted).execute()
+
+                if response.data:
+                    logging.info(f"Successfully inserted for {student_id}: {response.data}")
+                else:
+                    logging.error(f"Insert failed for {student_id}: {response}")
+                    if hasattr(response, "error") and response.error:
+                        logging.error(f"Error details: {response.error.message}")
+
+            except Exception as e:
+                logging.error(f"Error inserting activity for {student_id}: {str(e)}")
+                if hasattr(e, "response") and e.response:
+                    try:
+                        error_details = e.response.json()
+                        logging.error(f"APIError details: {error_details}")
+                    except:
+                        logging.error("Failed to parse API error details")
+
             logging.info(f"Subject: {subject}")
             logging.info(f"Date: {date}")
             logging.info("---")
-        logging.info("Scraped activity table successfully.")
+
+        logging.info(f"Scraped activity table successfully for {student_id}.")
         return True
     except Exception as e:
-        logging.warning(f"Failed to scrape activity table: {e}")
+        logging.warning(f"Failed to scrape activity table for {student_id}: {e}")
         return False
 
 
@@ -290,28 +307,42 @@ def scrape_grades():
     return False
 
 
-# Python: Main part of the script that runs everything (literally)
+# Python: Main part of the script that runs everything
 try:
-    # Python: Try logging in up to 3 times (in case of alerts or errors)
-    max_attempts = 3
-    for attempt in range(max_attempts):
-        logging.info(f"Login attempt {attempt + 1}/{max_attempts}")
-        if attempt_login():
-            option = "activities"  # Python: Change to "grades" or use input() later
-            scrapers = {"activities": scrape_activities, "grades": scrape_grades}  # Python: Maps "activities" to scrape_activities function  # Python: Maps "grades" to scrape_grades function
-            # Python: If option is not in scrapers (e.g., "attendance"), logs "Invalid option"
-            scraper = scrapers.get(option, lambda: logging.error("Invalid option"))  # Python: Run the selected scraping function (e.g., scrape_activities())
-            scraper()  # Python: Break the loop since login and scraping are done
-            break
-        else:
-            logging.info("Retrying after alert or failure...")  # Python: Print a retry message
-            time.sleep(2)  # Python: Wait 2 seconds before trying again
+    # Fetch student credentials
+    logging.info("Fetching student credentials from Login data table...")
+    response = supabase.table("Login data").select("StID, Ps").execute()
+    if response.data:
+        student_credentials = response.data
+        logging.info(f"Retrieved {len(student_credentials)} student credentials.")
     else:
-        logging.error("All login attempts failed.")  # Python: Print if all tries failed
+        raise Exception("No credentials found in Login data table.")
 
-except Exception as e:  # Python: Catch any errors
-    logging.error(f"Something went wrong: {e}")  # Python: Print the error
+    # Process each student
+    max_attempts = 3
+    for student in student_credentials:
+        username = student["StID"]
+        password = student["Ps"]
+        logging.info(f"Processing student {username}...")
 
+        for attempt in range(max_attempts):
+            logging.info(f"Login attempt {attempt + 1}/{max_attempts} for {username}")
+            if attempt_login(username, password):
+                option = "activities"  # Change to "grades" or use input() later
+                scrapers = {"activities": lambda: scrape_activities(username), "grades": scrape_grades}
+                scraper = scrapers.get(option, lambda: logging.error("Invalid option"))
+                scraper()
+                break
+            else:
+                logging.info(f"Retrying after alert or failure for {username}...")
+                time.sleep(2)
+        else:
+            logging.error(f"All login attempts failed for {username}.")
+
+        time.sleep(2)
+
+except Exception as e:
+    logging.error(f"Something went wrong: {e}")
 finally:
-    logging.info("Closing browser...")  # Python: Print a status message
-    driver.quit()  # Selenium: Closes the browser and driver
+    logging.info("Closing browser...")
+    driver.quit()
