@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 #print(f"load_dotenv() executed. Found and loaded .env")
 from flask import Flask, request, abort
+from cryptography.fernet import Fernet
 
 from supabase import create_client, Client
 
@@ -53,7 +54,7 @@ newusers = {}
 
 @app.route("/callback", methods=['POST'])
 def callback():
-    # Get X-Line-Signature header value
+    # Get X-Line-Signature header value for security purposes
     signature = request.headers['X-Line-Signature']
     # Get request body as text
     body = request.get_data(as_text=True)
@@ -71,9 +72,10 @@ def callback():
         app.logger.error(f"Error parsing webhook request: {e}")
         abort(500)
 
+    # setelah textnya di process, set route replynya disini
     for event in events:
         app.logger.info(f"Processing event type: {type(event)}")
-        if isinstance(event, MessageEvent): 
+        if isinstance(event, MessageEvent): # A lot of different types of MessageEvent
             if isinstance(event.message, TextMessageContent):
                 handle_text_message(event)
             else:
@@ -89,7 +91,8 @@ def callback():
     return 'OK'
 
 
-def handle_text_message(event: MessageEvent):
+# huggingface input and output in this function
+def handle_text_message(event: MessageEvent): 
     print("Received message:", event.message.text)
     if event.source.user_id in newusers:
         handle_new_user(event)
@@ -219,14 +222,14 @@ def handle_new_user(event):
     line_bot_api.reply_message(reply_request)
 
 
-def getid(body):
+def getid(string):
     stid = ""
-    if "student" in body.lower() or "id" in body.lower():
+    if "student" in string.lower() or "id" in string.lower():
         try:
-            x = body.find('1')
-            y = len(body) - x
-            for i in range (len(body) - y, (len(body)- y) + 7, 1):
-                stid += body[i]
+            x = string.find('1')
+            y = len(string) - x
+            for i in range (len(string) - y, (len(string)- y) + 7, 1):
+                stid += string[i]
             return stid
         except: 
             return None
@@ -254,41 +257,3 @@ def getpass(string):
             else:
                 pword += string[i]
     return pword 
-
-def reminder():
-    print("you have an assignment due in 3 days")
-
-assignment = (2025, 4, 28, 0, 0, 0, 0, 0, 0)
-if time.mktime(assignment) - time.time() <= 259200:
-    reminder()
-else:
-    print("still good bro")
-
-def sendmessage():
-    userid = "U2d05e1777e259a7a068e91b5f33c942e"
-    output_text = "you will get this message at 27/04 00:10"
-    push_request = PushMessageRequest(
-    to = userid,
-    messages = [TextMessage(text = output_text)]
-    )
-
-    line_bot_api.push_message(push_request)
-    app.logger.info(f"Successfully sent: '{output_text}'")
-
-def checktime():
-    mssgtime = (2025, 4, 27, 00, 10, 0, 0, 0, 0)
-    while True:
-        if abs(time.mktime(mssgtime) - time.time()) < 1:
-            sendmessage()
-            time.sleep(60)
-        time.sleep(1)
-
-def start_background_tasks():
-    thread = threading.Thread(target=checktime)
-    thread.daemon = True 
-    thread.start()
-
-if __name__ == "__main__":
-    start_background_tasks()
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
