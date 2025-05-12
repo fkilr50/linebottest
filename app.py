@@ -2,12 +2,14 @@ import os
 import logging
 import schedule as s
 
+from functools import reduce
 from dotenv import load_dotenv
 load_dotenv()
 #print(f"load_dotenv() executed. Found and loaded .env")
 
 from flask import Flask, request, abort
 from cryptography.fernet import Fernet
+from transformers import pipeline
 from supabase import create_client, Client
 
 url: str = os.environ.get("SUPABASE_URL")
@@ -100,21 +102,28 @@ def handle_text_message(event: MessageEvent):
         app.logger.info(f"Handling text message: '{input_text}' with token {event.reply_token[:10]}...")
 
         # all input messages will be processed here
-
         if event.source.user_id in newusers:
             handle_new_user(event)
-
-        elif "assignments" in input_text.lower():
-            output_text = "you have 15 remaining assignments"
-
-        elif "activities" in input_text.lower():
-            output_text = "you have 3 activities next week"
         
-        elif "echo" in input_text.lower():
-            output_text = event.message.text.lower().replace("echo", "", 1).strip()
+        elif event:
+            shit = classify(input_text)
+            if "homework" == shit:
+                output_text = "you have 3 remaining assignments"
+
+            elif "activities" == shit:
+                output_text = "you have 5 activities next week"
+
+            elif "politics" == shit:
+                output_text = "indo goblok"
+            
+            elif "youtube" == shit:
+                output_text = "tungtungtung"
+            
+            elif "echo" in input_text.lower():
+                output_text = event.message.text.lower().replace("echo", "", 1).strip()
         
         else:
-            output_text = f"I received '{input_text}'. Please try 'assignments', 'activities', or 'echo [your text]'."
+            output_text = f"I received '{input_text}'. Please try something else."
 
 
         # --- v3 Replying ---
@@ -255,6 +264,18 @@ def getpass(string):
             else:
                 pword += string[i]
     return pword 
+
+
+def classify():
+    classifier = pipeline("zero-shot-classification")
+
+    res = classifier(
+        "I wnat to check my homwork deadlines",
+        candidate_labels = ["homework", "activities", "other", "politics", "youtube", "echo"]
+    )
+
+    largest = reduce(max, res)
+    return res["labels"][largest]
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
