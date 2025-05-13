@@ -110,17 +110,11 @@ def handle_text_message(event: MessageEvent):
 
         # all input messages will be processed here
         shit = classify(input_text)
-        if "homework" == shit:
+        if "assignments" == shit:
             output_text = "you have 3 remaining assignments"
 
         elif "activities" == shit:
             output_text = "you have 5 activities next week"
-
-        elif "politics" == shit:
-            output_text = "indo goblok"
-        
-        elif "youtube" == shit:
-            output_text = "tungtungtung"
         
         elif "echo" in input_text.lower():
             output_text = event.message.text.lower().replace("echo", "", 1).strip()
@@ -278,7 +272,7 @@ def getpass(string):
 def classify(line):
     res = classifier(
         line,
-        candidate_labels = ["homework", "activities", "other", "politics", "youtube", "echo"]
+        candidate_labels = ["homework", "activities", "other", "echo"]
     )
 
     largest = reduce(max, res["scores"])
