@@ -1,7 +1,8 @@
-import os
+import os   # app.py
 import logging
 import schedule as s
 
+from page_scraping import *
 from functools import reduce
 from dotenv import load_dotenv
 load_dotenv()
@@ -40,6 +41,12 @@ from linebot.v3.messaging import (
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
+
+classifier = pipeline("zero-shot-classification")
+
+key: str = os.environ.get("FKEY")
+key_bytes = key.encode('utf-8')
+cypher = Fernet(key_bytes) 
 
 configuration = Configuration(access_token=os.getenv("CHANNEL_ACCESS_TOKEN"))
 api_client = ApiClient(configuration=configuration)
@@ -102,26 +109,21 @@ def handle_text_message(event: MessageEvent):
         app.logger.info(f"Handling text message: '{input_text}' with token {event.reply_token[:10]}...")
 
         # all input messages will be processed here
-        if event.source.user_id in newusers:
-            handle_new_user(event)
-        
-        elif event:
-            shit = classify(input_text)
-            if "homework" == shit:
-                output_text = "you have 3 remaining assignments"
+        shit = classify(input_text)
+        if "homework" == shit:
+            output_text = "you have 3 remaining assignments"
 
-            elif "activities" == shit:
-                output_text = "you have 5 activities next week"
+        elif "activities" == shit:
+            output_text = "you have 5 activities next week"
 
-            elif "politics" == shit:
-                output_text = "indo goblok"
-            
-            elif "youtube" == shit:
-                output_text = "tungtungtung"
-            
-            elif "echo" in input_text.lower():
-                output_text = event.message.text.lower().replace("echo", "", 1).strip()
+        elif "politics" == shit:
+            output_text = "indo goblok"
         
+        elif "youtube" == shit:
+            output_text = "tungtungtung"
+        
+        elif "echo" in input_text.lower():
+            output_text = event.message.text.lower().replace("echo", "", 1).strip()
         else:
             output_text = f"I received '{input_text}'. Please try something else."
 
@@ -149,7 +151,7 @@ def handle_follow_event(event: FollowEvent):
 
     print("Bot has been added by:", userid)
     #push greeting message
-    output_text = "Hello, I am testBot25.\nPlease state your portal id and pass each in one different message with the following format;\n\nstudent id: 1123xxx\npassword: 123xx" 
+    output_text = "Hello, I am testBotN.\nPlease state your portal id and pass each in one different message with the following format;\n\nstudent id: 1123xxx\npassword: 123xx" 
 
     push_request = PushMessageRequest(
         to = userid,
@@ -186,40 +188,47 @@ def handle_new_user(event):
         else:
             response = "Could not extract password. Try: 'password: abc123'"
     
+
     # After both are collected
     if newusers[user_id]["id"] and newusers[user_id]["pass"]:
-        app.logger.info(f"User {user_id} registered with ID: {user_data['id']} and pass: {user_data['pass']}")
-        
-        try:
-            datatobeinserted = {
-                "LineID": f"s{user_id}",
-                "StID": user_data['id'],
-                "Ps": user_data['pass']
-            }
+        if attempt_login(user_data['id'], user_data['pass']) == True:
+            app.logger.info(f"User {user_id} registered with ID: {user_data['id']} and pass: {user_data['pass']}")
+            
+            encpass = enkrip(user_data['pass'])
+            try:
+                datatobeinserted = {
+                    "LineID": f"s{user_id}",
+                    "StID": user_data['id'],
+                    "Ps": encpass
+                }
 
-            response = (
-                supabase.table("Login data")
-                .insert(datatobeinserted)
-                .execute()
-            )
+                response = (
+                    supabase.table("Login data")
+                    .insert(datatobeinserted)
+                    .execute()
+                )
 
-            if response.data:
-                print(f"Successfully inserted data into supa: {response}")
-            else:
-                print("Insert failed.")
-                if hasattr(response, 'error') and response.error:
-                    print(f"Error details: {response.error.message}")
+                if response.data:
+                    print(f"Successfully inserted data into supa: {response}")
+                else:
+                    print("Insert failed.")
+                    if hasattr(response, 'error') and response.error:
+                        print(f"Error details: {response.error.message}")
 
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            if hasattr(e, 'json') and callable(e.json):
-                try:
-                    print(f"APIError details: {e.json()}")
-                except:
-                    pass
+            except Exception as e:
+                print(f"An error occurred: {e}")
+                if hasattr(e, 'json') and callable(e.json):
+                    try:
+                        print(f"APIError details: {e.json()}")
+                    except:
+                        pass
 
-        response = f"Registration complete. You can now use commands like 'assignments', 'schedule' or 'echo'."
-        del newusers[user_id]
+            response = f"Registration complete. You can now use commands like 'assignments', 'schedule' or 'echo'."
+            del newusers[user_id]
+        else:
+            response = "Failed to login with current StudentID and Password, please recheck and try again."
+            newusers[user_id]['id'] = None
+            newusers[user_id]['pass'] = None
 
     # Reply
     reply_request = ReplyMessageRequest(
@@ -266,16 +275,22 @@ def getpass(string):
     return pword 
 
 
-def classify():
-    classifier = pipeline("zero-shot-classification")
-
+def classify(line):
     res = classifier(
-        "I wnat to check my homwork deadlines",
+        line,
         candidate_labels = ["homework", "activities", "other", "politics", "youtube", "echo"]
     )
 
-    largest = reduce(max, res)
-    return res["labels"][largest]
+    largest = reduce(max, res["scores"])
+    for i in range (0, len(res["labels"]), 1):
+        if res["scores"][i] == largest:
+            hasil = res["labels"][i]
+    print(hasil)
+    return hasil
+
+def enkrip(password):
+    token = cypher.encrypt(password) 
+    return token
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
