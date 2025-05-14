@@ -2,7 +2,7 @@ import os   # app.py
 import logging
 import schedule as s
 
-from page_scraping import *
+from scrapper2 import * # tanya gemini bsk ini maksudnya paa apakah semuanya jadi ke run gt
 from functools import reduce
 from dotenv import load_dotenv
 load_dotenv()
@@ -152,13 +152,13 @@ def handle_follow_event(event: FollowEvent):
         messages = [TextMessage(text = output_text)]
     )
 
-    line_bot_api.push_message(push_request)
-    app.logger.info(f"Successfully sent: '{output_text}'")
+    #line_bot_api.push_message(push_request)
+    #app.logger.info(f"Successfully sent: '{output_text}'")
     
 
 def handle_new_user(event):
     user_id = event.source.user_id
-    text = event.message.text.lower()
+    text = event.message.text
     portalid = ""
     portalpass = ""
 
@@ -170,29 +170,31 @@ def handle_new_user(event):
         portalid = getid(text)
         if portalid:
             newusers[user_id]["id"] = portalid
-            response = f"Student ID received.\n{portalid}"
+            response = f"Student ID received.\n({portalid})"
         else:
             response = "Could not extract ID. Please use the format: 'student id: 1123xxx'"
 
     if user_data["pass"] is None and ("pass" in text or "password" in text):
         portalpass = getpass(text)
+        app.logger.info(f"portalpass adalah: {portalpass}")
         if portalpass:
             newusers[user_id]["pass"] = portalpass
             response = f"Password received.\n({portalpass})"
+            app.logger.info(f"portalpass adalah: {newusers[user_id]["pass"]}")
         else:
             response = "Could not extract password. Try: 'password: abc123'"
     
 
     # After both are collected
     if newusers[user_id]["id"] and newusers[user_id]["pass"]:
+        app.logger.info(f"User {user_id} registering with ID: {user_data['id']} and pass: {user_data['pass']}")
         if attempt_login(user_data['id'], user_data['pass']) == True:
-            app.logger.info(f"User {user_id} registered with ID: {user_data['id']} and pass: {user_data['pass']}")
             
             encpass = enkrip(user_data['pass'])
             try:
                 datatobeinserted = {
-                    "LineID": f"s{user_id}",
-                    "StID": user_data['id'],
+                    "LineID": user_id,
+                    "StID": f"s{user_data['id']}",
                     "Ps": encpass
                 }
 
@@ -283,8 +285,9 @@ def classify(line):
     return hasil
 
 def enkrip(password):
+    password = password.encode()
     token = cypher.encrypt(password) 
-    return token
+    return str(token)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

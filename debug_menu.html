@@ -1,0 +1,2788 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>
+	元智大學個人portal
+</title><link rel="icon" href="../Images/Icons/favicon.ico" type="image/x-icon">   
+  
+    <!--Mircrosoft Clarity 分析工具-->
+    
+
+    <style>
+        .myDatepicker {
+            font: 75% "Trebuchet MS", sans-serif;
+        }
+
+        /*main style*/
+        td.TDBlockLeft, td.TDBlockRight, div.boardContents td {
+            font-size: 14px;
+            font-family: Helvetica,Microsoft JhengHei,"微軟正黑體",pmingliu;
+        }
+
+        td.TDBlockLeft {
+            width: 24px;
+        }
+
+        td.TDBlockRight {
+            padding: 10px;
+        }
+
+        div.boardContents table {
+            width: 96%;
+        }
+
+        div.boardContents td {
+            padding: 5px;
+            line-height: 18px;
+        }
+
+        div.boardContents tr:hover td:nth-child(1) {
+            color: #fff;
+        }
+        /*div.boardContents tr:hover td:nth-child(1){ color:#fff;}*/
+        div.boardContents td:nth-child(2) {
+            color: #F80;
+        }
+
+        div.boardContents tr:hover td:nth-child(2) {
+            color: #fff;
+        }
+
+        div.boardContents * {
+            border-collapse: collapse;
+        }
+
+        div.boardContents td:nth-child(1) {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            width: 120px;
+        }
+
+        div.boardContents td:nth-child(4) {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            /*font-weight:bold;*/
+        }
+
+        div.boardContents td a {
+            color: #555;
+        }
+
+
+        div.boardContents tr:hover > td, div.boardContents tr:hover > td > a {
+            color: #fff;
+        }
+
+        /*color style*/
+        .vanilla-Green td.TDBlockLeft {
+            background-color: #8A8;
+        }
+
+        .vanilla-Green div.boardContents tr:hover {
+            color: #fff;
+            background-color: #8A8;
+        }
+
+        .vanilla-Green td.TDBlockRight {
+            padding: 10px;
+            background-color: #EFE;
+            border: 1px solid #DED;
+        }
+
+        .vanilla-Green div.boardContents td:nth-child(1) {
+            color: #8A8;
+        }
+
+        .gray-blue td.TDBlockLeft {
+            background-color: #79A;
+        }
+
+        .gray-blue div.boardContents tr:hover {
+            color: #fff;
+            background-color: #79A;
+        }
+
+        .gray-blue td.TDBlockRight {
+            padding: 10px;
+            background-color: #EFF;
+            border: 1px solid #DED;
+        }
+
+        .gray-blue div.boardContents td:nth-child(1) {
+            color: #79A;
+        }
+
+        .wine-red td.TDBlockLeft {
+            background-color: #C67;
+        }
+
+        .wine-red div.boardContents tr:hover {
+            color: #fff;
+            background-color: #C67;
+        }
+
+        .wine-red td.TDBlockRight {
+            padding: 10px;
+            background-color: #FEE;
+            border: 1px solid #EDD;
+        }
+
+        .wine-red div.boardContents td:nth-child(1) {
+            color: #C67;
+        }
+
+        .gold-yellow td.TDBlockLeft {
+            background-color: #DA4;
+        }
+
+        .gold-yellow div.boardContents tr:hover {
+            color: #fff;
+            background-color: #DA4;
+        }
+
+        .gold-yellow td.TDBlockRight {
+            padding: 10px;
+            background-color: #FFE;
+            border: 1px solid #EED;
+        }
+
+        .gold-yellow div.boardContents td:nth-child(1) {
+            color: #DA4;
+        }
+
+
+        .TDBlockLeft {
+            width: 120px;
+            vertical-align: middle;
+            margin: 0px 0px 0px 0px;
+            padding: 5px 0px 5px 0px;
+            text-align: center;
+            /*font-size: 16px;*/
+            font-weight: bold;
+            /*font-family: MingLiU;*/
+            color: white;
+            
+            /*圖角*/
+            /*-moz-border-bottom-left-radius: 10px; 
+            -moz-border-top-left-radius: 10px; 
+            -webkit-border-bottom-left-radius: 10px; 
+            -webkit-border-top-left-radius: 10px; 
+            border-bottom-left-radius: 10px;
+            border-top-left-radius: 10px;*/ 
+        }
+
+        .TDBlockRight {
+            margin: 0px 0px 0px 0px;
+            padding: 5px 0px 5px 0px;
+            text-align: left;
+            /*font-size: 15px;*/
+            /*font-family: MingLiU;*/
+            /*color: #4D4D4D;*/
+            /*圖角*/
+            /*-moz-border-bottom-right-radius: 10px; 
+            -moz-border-top-right-radius: 10px; 
+            -webkit-border-bottom-right-radius: 10px; 
+            -webkit-border-top-right-radius: 10px; 
+            border-bottom-right-radius: 10px; 
+            border-top-right-radius: 10px;*/ 
+        }
+
+            .TDBlockRight a {
+                color: darkslateblue;
+            }
+
+                .TDBlockRight a:hover {
+                    color: darkviolet;
+                    text-decoration: underline;
+                }
+
+        .divScroll {
+            /*max-height: 300px;*/
+            /*overflow-x: hidden;*/
+            /*overflow-y: auto;*/
+        }
+
+        .PostAttachmentImg {
+            max-width: 400px;
+            max-height: 350px;
+        }
+
+        a.LinkMoreB {
+            font-family: 微軟正黑體;
+            border: 1px solid darkgray;
+            font-size: 13px;
+            color: white;
+            background-color: #79A;
+            text-decoration: none;
+            padding-left: 5px;
+            padding-right: 5px;
+            /*島圓角*/
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+            a.LinkMoreB:hover {
+                background-color: #79A;
+                color: white;
+            }
+
+        a.LinkMoreR {
+            font-family: 微軟正黑體;
+            border: 1px solid darkgray;
+            font-size: 13px;
+            color: white;
+            background-color: #C67;
+            text-decoration: none;
+            padding-left: 5px;
+            padding-right: 5px;
+            /*島圓角*/
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+            a.LinkMoreR:hover {
+                background-color: #C67;
+                color: white;
+            }
+
+        a.LinkMoreY {
+            font-family: 微軟正黑體;
+            border: 1px solid darkgray;
+            font-size: 13px;
+            color: white;
+            background-color: #DA4;
+            text-decoration: none;
+            padding-left: 5px;
+            padding-right: 5px;
+            /*島圓角*/
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+            a.LinkMoreY:hover {
+                background-color: #DA4;
+                color: white;
+            }
+
+        a.LinkMoreG {
+            font-family: 微軟正黑體;
+            border: 1px solid darkgray;
+            font-size: 13px;
+            color: white;
+            background-color: #8A8;
+            text-decoration: none;
+            padding-left: 5px;
+            padding-right: 5px;
+            /*島圓角*/
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+            a.LinkMoreG:hover {
+                background-color: #8A8;
+                color: white;
+            }
+
+        .calendar_mark_green {
+            background-image: url(../Images/Icons/calendar_mark_green.png);
+            background-repeat: no-repeat;
+            background-position: right top;
+        }
+
+        .calendar_mark_blue {
+            background-image: url(../Images/Icons/calendar_mark_blue.png);
+            background-repeat: no-repeat;
+            background-position: right top;
+        }
+
+        .CalendarItemTable /*(連結)*/ {
+            /*BorderStyle="Solid" BorderWidth="1.5px" BorderColor="Black"*/
+            font-size: 14px;
+            font-family: 微軟正黑體;
+            color: darkgreen;
+            text-decoration: none;
+            margin-bottom: 3px;
+        }
+
+            .CalendarItemTable a /*(連結)*/ {
+                /* 英文單字自動換行 IE ONLY*/
+                /*word-wrap: break-word;*/
+                /* 正常避頭尾 */
+                /*word-break: normal;*/
+                /*強制不換行*/
+                white-space: nowrap;
+                font-size: 12px;
+                font-family: 微軟正黑體;
+                color: darkgreen;
+                text-decoration: none;
+            }
+
+                .CalendarItemTable a:hover /*(連結)*/ {
+                    background-color: lightgoldenrodyellow;
+                }
+
+
+        .CalendarSmallClassSub {
+            margin: 2px 0 1px 0;
+            background-color: #CCFFCC;
+            font-weight: bold;
+            font-family: 微軟正黑體;
+            color: darkgreen;
+            text-decoration: none;
+            border: 0px;
+            cursor: pointer;
+        }
+
+        .CalendarSmallClassSubHover {
+            margin: 2px 0 1px 0;
+            background-color: lightyellow;
+            font-weight: bold;
+            font-family: 微軟正黑體;
+            color: green;
+            text-decoration: none;
+            border: 0px;
+            cursor: pointer;
+        }
+
+        .StatisticLevelSel {
+            width: 10px;
+            height: 10px;
+            background-color: #CCFFCC;
+            border: solid 1px gray;
+        }
+
+        .StatisticLevel {
+            width: 10px;
+            height: 10px;
+            border: solid 1px gray;
+        }
+
+        .LeftDays {
+            border: 1px solid #C67;
+            /*padding-left:2px;
+    padding-right:2px;*/
+            /*島圓角*/
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+        }
+
+        .DayFormat {
+            color: #4D4D4D;
+        }
+
+            .DayFormat a {
+                color: #4D4D4D;
+            }
+
+                .DayFormat a:hover {
+                    color: #DA4;
+                }
+    </style>
+<link href="/PortalSocialVB/WebResource.axd?d=_0Z2hUmRLwbAmRpTyfGDDCqeVnBHLHLd6Ebnjag5BTWYJQFjuhMrOOjN5_DUGUM2tzyll68kZBGIaTYWx0KjMP9UVAI_CXL3L4OzGiqkjDIsdnE3K_s2Cd9CidV-1QtlOOt3uA2&amp;t=636994894809143317" type="text/css" rel="stylesheet" class="Telerik_stylesheet"><link href="/PortalSocialVB/WebResource.axd?d=_6P7V1-x5zLZzVM8rxZR4eGXx8kRKOM03eXM7Hmpn9p1YT6W4HEWousumNj8ek-cslvyp_4QbJ5zIe4j1ShKoJRmKH1zih6lZlLWvBGhg3lk6Jr2OyUdGgU3O72kQU1ifuXVTVu3fh-Jftf94qMo4bh2_fc1&amp;t=636994894809143317" type="text/css" rel="stylesheet" class="Telerik_stylesheet"><link href="/PortalSocialVB/WebResource.axd?d=bmyF6JgTnyc8rnWAiDmqJqguEfd88wvRlAWeq1I_MPhxOVeJtN3qL-o58ihRQK2TyJA-AzPZGLmV9fceQePmWtIZbRwxNtl8GP3IZ0CPUN9jYR6pz9Kv6lo2U1_Psb9RfS6HupCkqgk_Jc6ppfZmrhij3YY1&amp;t=636994894797713155" type="text/css" rel="stylesheet" class="Telerik_stylesheet"></head>
+<body style="">
+    <form method="post" action="./DefaultPage.aspx?Menu=Default&amp;LogExcute=Y" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEyMDI0NjU5NTcPZBYCAgMPZBYIAgMPZBYUAgcPDxYEHghJbWFnZVVybAVEaHR0cHM6Ly9wb3J0YWx4Lnl6dS5lZHUudHcvUG9ydGFsU29jaWFsVkIvSW1hZ2VzL0ljb25zL1ZlcnNpb25FTi5wbmceB1Rvb2xUaXAFDOS4reaWh+eJiOacrGRkAgkPZBYCAgEPZBYCZg9kFgICAQ8PFgIfAQULTXkgQ2FsZW5kYXJkZAILDxYCHglpbm5lcmh0bWwFCHMxMTIzNTQyZAINDxYCHwIFB0RlZmF1bHRkAg8PFgIfAgUCRU5kAhMPDxYEHwEFDlN5c3RlbSBTZXJ2aWNlHgRUZXh0BQnpmbPpjKbms4lkZAIVDw8WAh8DBQRIb21lZGQCFw8PFgIfAwUGTG9nb3V0ZGQCGw8PFgIfAQUPQWNjb3VudCBTZXR0aW5nZGQCHQ8PFgIfAQUSU3lzdGVtIEluZm9ybWF0aW9uFgIeB29uY2xpY2sFEFNob3dPbkxpbmVNc2coKTtkAgcPZBYEAgUPZBYIAgEPZBYCAgEPDxYCHwMFC1F1aWNrIExpbmtzZGQCBQ9kFgICAQ8PFgIfAwUQQWZmaWxpYXRlZCBQYWdlc2RkAgsPZBYCAgEPDxYCHwMFEFN1YnNjcmliZWQgUGFnZXNkZAIRD2QWAgIBDw8WAh8DBRNBcHBsaWNhdGlvbiBTeXN0ZW1zZGQCBw8WAh8CBQhzMTEyMzU0MmQCFw9kFgICAQ9kFgJmD2QWBAIDD2QWAgIBDw8WAh8DBQtNeSBTY2hlZHVsZWRkAgcPZBYCAgEPDxYCHwMFDFlaVSBTY2hlZHVsZWRkAhkPZBYCAgEPFCsAAhQrAAMPFgIeF0VuYWJsZUFqYXhTa2luUmVuZGVyaW5naGRkZBAWAWYWARQrAAMPFgQeCUJlaGF2aW9ycwspd1RlbGVyaWsuV2ViLlVJLldpbmRvd0JlaGF2aW9ycywgVGVsZXJpay5XZWIuVUksIFZlcnNpb249MjAxMy4yLjcxNy40NSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0LB8FaGRkZA8WAWYWAQVxVGVsZXJpay5XZWIuVUkuUmFkV2luZG93LCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDEzLjIuNzE3LjQ1LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTEyMWZhZTc4MTY1YmEzZDQWAmYPFCsAAw8WBB8GCysELB8FaGRkZGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgUFFU1haW5CYXIkaWJuUG9ydGFsTG9nbwUYTWFpbkJhciRpYm5DaGFuZ2VWZXJzaW9uBRNNYWluQmFyJGltZ0J0bk15Q2FsBRFSYWRXaW5kb3dNYW5hZ2VyMgUQTXlSYWRXaW5kb3dTbWFsbHZLrLAsNkbVyVrhEKDeBvO+A+vd">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/PortalSocialVB/WebResource.axd?d=sZlJY1ZjwgaxPeDmNSYGxfOaIhsRXW6VX65_3Jxy7CDQTK1RlNcUpP8en3PXmK703KNI0MjORTwgf3y4IpXouhOV8DA1&amp;t=638568892371266408" type="text/javascript"></script>
+
+
+<script src="/PortalSocialVB/ScriptResource.axd?d=F-voXqvqMNJAxDvQW0g-4Emg_A5fsXngQLZRw0jdbhobhgRBmlxnhqv4GZ8kaXCNW6FIpoWz_Cqgtq2Dqg4-rzFSfGhJowL4FkxNy2eJ4i57IE3oi02Hfqxd2nk206daZ9phZQ2&amp;t=7a2ecbb7" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=4e51KAZ0JoQQT7YalxyPDzpZbW3d7XBczorZrvWv_CxZ12LsRJaltQkiTC89lhAL-DWMTG3-fTflTVDTrSGP6cUcwTBVjsjRFWvgiXV22vTGgj5ab3N0gXhq_ZnnUQlD_mvVfg2&amp;t=7a2ecbb7" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=UkN6bd8xpFz5UqG0FGwuNxvrC_5AKn6u-J5hi4JOxd9S1pMhNTbldVjPTtEdSxeM15MMH8uIrtOzSeP_tqXGQDrtHZQzQTD_FOjqS7GNXQidHOIcuUKFuFoagWkIvk9ZmoozuQ2&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=-ErybogwPwPP4Olxk6oeZaje7dFQvx3t4GkZwTsrBbm8dDIvapNpCdwD2eiHalCrBLFcsLlKitysqQJ1QqkG1VP5q8CdpSZOKDlubQcZOnnGUVFRRA_LqxiCtC47uBM4CvZEwDfA4O0H3ZblTfod6A4nsJ41&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=UJeAFhWfAZpi81h48eYgQJOgH9Ov35vuUS3b211Vew0p6-WeyHQGLgvy0rFwukU_Fe1drjMzipzoUQFTCB_tX0OfxUDuci4TCrguAowD3hXfvG1_BiEmKPB0cEvC_Z8ThVpR0vt5H7nlsNTewXBvFcrRWBs1&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=F4lpparuCtS8bc9lffOtKRbOaE7pwztbSZYnsLtkwfkbkPaTST78gBZPdIgMyhH38Q-fu3lexpCDh9XMjGfgQDCMhJuozcb8wpQeYKxnZnRTCuLJwWoTb2hcpBqaYEcDhwlbwl0jWkJIlGbMkUZuq5EDhpY1&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=QTMLPFu9k_-BA5dsvxc75rQwQMgldrEYA8Wp65qG37uD1n_0_KewwNJ3Ueym0XjNGvgZmlvovCbPDZk1imxNXYoDWIgTV5nJLpVMjz3aksrvlZTEM6fsXM2Vh6iaCTNMtH5mUXMaaiPiZqDAk5-l43pdyrM1&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=bJ8h9IvQgvB2W2b3530d4GTwwoUvnmb0LHJJaE9rmpua5g4MxhlISS97j8i5MsjUD42JfRUq3hfsDBVeOFxoiTW2LLg5fEBGccElxjf8fMEDDEQQWiXQv9qUtVqS64o3okHfRI0RReIUzBCrPYE3SUk6h5c1&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=zNJtW70rQmdw8GLntxFN3NHs_bPHYRn02NClUYr4dA4CvLLgU6kNMhjB7jxQLHgI-OIY-imA1i1h8_ZvAlDGUUt9UM3sZei9s2kCii6A-zw2YZDCx7sRDuS-vDFXi7iG51l3ZhCcThXvVm4Q8lix4wDU8qw8By0M0UF-cEQuDkV54Im20&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=5KDGNCrXlBddKHuyr0RXipRu49MVf2-N2uoNnf74mcUQAr6WX95RjP59icK7f62cb6SXg4s9WbUmysB-W3v95w2j_X-7zCwpkhwVzbg9aPJ0pSF7vuDjZ8IebYc6LyYc_gNyXzmNgStW_UWKq7XpiLVpqLo1&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=I7YRgFPGPZ-YR_kv1M91mmpHf6DXzbyIAq0oNp8jdK_4PaQiCYBd27JOBkv3JTRDAhQvf6SZMEQ5XZjSumx0Mgy-qTXnnuEPBd5oisZtxWVWJvds2ut_f_QFQfDYkvHG4u3xq_Vt1dbDw4-kNmhJ9Ff77Sk1&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+<script src="/PortalSocialVB/ScriptResource.axd?d=oEPo5E-oYcqWnUYx7U2Rlhv7INbIHY2F0R5XX7_kLQW1OE9cBap3JaIlSoIjcWMM5qKvVZy5i429yFbjG_gIkFMzt-auBI2L62abA9nIimYGqeiKzKCb45BTIHz-9UUqdP5CJeEbgBt_LWQWGyU7UN2U1d81&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var PageMethods = function() {
+PageMethods.initializeBase(this);
+this._timeout = 0;
+this._userContext = null;
+this._succeeded = null;
+this._failed = null;
+}
+PageMethods.prototype = {
+_get_path:function() {
+ var p = this.get_path();
+ if (p) return p;
+ else return PageMethods._staticInstance.get_path();},
+InsertClickMenuLog:function(type,succeededCallback, failedCallback, userContext) {
+return this._invoke(this._get_path(), 'InsertClickMenuLog',false,{type:type},succeededCallback,failedCallback,userContext); }}
+PageMethods.registerClass('PageMethods',Sys.Net.WebServiceProxy);
+PageMethods._staticInstance = new PageMethods();
+PageMethods.set_path = function(value) { PageMethods._staticInstance.set_path(value); }
+PageMethods.get_path = function() { return PageMethods._staticInstance.get_path(); }
+PageMethods.set_timeout = function(value) { PageMethods._staticInstance.set_timeout(value); }
+PageMethods.get_timeout = function() { return PageMethods._staticInstance.get_timeout(); }
+PageMethods.set_defaultUserContext = function(value) { PageMethods._staticInstance.set_defaultUserContext(value); }
+PageMethods.get_defaultUserContext = function() { return PageMethods._staticInstance.get_defaultUserContext(); }
+PageMethods.set_defaultSucceededCallback = function(value) { PageMethods._staticInstance.set_defaultSucceededCallback(value); }
+PageMethods.get_defaultSucceededCallback = function() { return PageMethods._staticInstance.get_defaultSucceededCallback(); }
+PageMethods.set_defaultFailedCallback = function(value) { PageMethods._staticInstance.set_defaultFailedCallback(value); }
+PageMethods.get_defaultFailedCallback = function() { return PageMethods._staticInstance.get_defaultFailedCallback(); }
+PageMethods.set_enableJsonp = function(value) { PageMethods._staticInstance.set_enableJsonp(value); }
+PageMethods.get_enableJsonp = function() { return PageMethods._staticInstance.get_enableJsonp(); }
+PageMethods.set_jsonpCallbackParameter = function(value) { PageMethods._staticInstance.set_jsonpCallbackParameter(value); }
+PageMethods.get_jsonpCallbackParameter = function() { return PageMethods._staticInstance.get_jsonpCallbackParameter(); }
+PageMethods.set_path("DefaultPage.aspx");
+PageMethods.InsertClickMenuLog= function(type,onSuccess,onFailed,userContext) {PageMethods._staticInstance.InsertClickMenuLog(type,onSuccess,onFailed,userContext); }
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CE067DB8">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAArTdqm0yzNYdyBH+xO41jKk89Sn90b2hcjuuxer7JYaeZYQx3H4fpxtk+4q+dmSq7Jak0qkCAZ1CWfyYkvfuOeR1pWCwq5Rz85enGUU2+K3fr6zMuJkT/7MtlA3ODWW+y8TvSdU/xAgu9fJyyy8po3mO0E9B50xPeUDFM2j/OzAv6Gvy9hQe1PpPg4lb7YMC1RwBAdIt/XjNVwvUsxsOBrqVAhzFvf5skNCKyIsAQMDX97+Xs4=">
+</div>
+
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', ['tMainBar$UpdatePanel1','MainBar_UpdatePanel1','tUpdatePanel1','UpdatePanel1'], [], [], 90, '');
+//]]>
+</script>
+
+        
+
+<!--use jquery--><!--阿忠說不再用1.8.3-->
+<!--
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+-->
+
+<link rel="stylesheet" href="../CssCode/jquery-ui.css">
+<script src="../JS/jquery-1.8.3.js"></script>
+<script src="../JS/jquery-ui.min.js"></script>
+
+<style>
+        body
+        {
+            margin: 0px 0px 0px 0px;
+            height: 100%;
+        }
+
+        html
+        {
+            height: 100%;
+        }
+
+        .TRHeader
+        {
+            width: 100%;
+            height: 37px;
+            background-color: #4D4D4D;
+            /*background-image: url(/Images/Icons/bar_37.png);
+            background-repeat: repeat;*/
+        }
+
+        .hyperlinktop
+        {
+            /*YuanZe*/
+            font-size: 24px;
+            font-family: Arial;
+            font-weight: bolder;
+            color: #ffffff;
+            vertical-align: middle;
+            font-family: 微軟正黑體;
+            text-align: left;
+        }
+
+            .hyperlinktop a
+            {
+                /*user,首頁,登出*/
+                font-size: medium;
+                color: #ffffff;
+                text-decoration: none;
+            }
+
+        .divFloat
+        {
+            margin-left: 5px;
+            /*width: 25px;*/
+            /*height: 25px;*/
+            float: left;
+            background-repeat: no-repeat;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .divFloat a
+            {
+                /*-moz-border-radius:2px;
+                -webkit-border-radius:2px;
+                border-radius:2px;
+                position:relative;
+                right:-5px;
+                top:-10px;
+                background-color:red; 
+                color: white;*/
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 12px;
+            }
+
+        .divMyNotify
+        {
+            position: fixed;
+            top: 37px;
+            left: 220px;
+            z-index: 2013;
+            background-color: white;
+        }
+
+        .divMyNotifyList
+        {
+            font-size: 14px;
+            padding: 2px 5px 2px 5px;
+            border-top: 1px solid gray;
+            border-left: 1px solid gray;
+            border-right: 1px solid gray;
+        }
+
+        .lbnRScount
+        {
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .divMainBar
+        {
+            width: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            z-index: 99999;
+        }
+
+        .imgInfo
+        {
+            width: 16px;
+            position: relative;
+            top: 2px;
+            cursor: pointer;
+            vertical-align:initial;
+        }
+
+        .ibnPortalLogo
+        {
+            border:0px;
+            position:relative;
+            top: 3px;
+            vertical-align:initial;
+        }
+
+    #MainBar_lbnChangeVersion
+    {
+        color:white;
+        text-decoration:none;
+    }
+    #MainBar_UpdatePanel1
+    {
+        height: 37px;
+   }
+    </style>
+
+<div id="MainBar_divOnLineMsg"></div>
+<div id="MainBar_divMyNotify" class="divMyNotify" style="visibility: hidden;"><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">蔡侑庭</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1037471">【教材】8 - In...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=26807">機率與統計</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">IHSAN ULLAH(伊桑)</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1037468">【作業】submit...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=31221">作業系統概論</a></div><div class="divMyNotifyList">公告動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1037242">圖書館暑假開館時間/...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=3301">圖書館</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">蔡侑庭</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1037021">【最新消息】Exer...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=26807">機率與統計</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">蔡侑庭</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1037020">【最新消息】Exer...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=26807">機率與統計</a></div><div class="divMyNotifyList">公告動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1036995">圖書館研討室關閉公告...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=3301">圖書館</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">IHSAN ULLAH(伊桑)</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1036957">【作業】submit...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=31221">作業系統概論</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">范祥偉</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1036941">【最新消息】Ther...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=30437">演算法概論</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">IHSAN ULLAH(伊桑)</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1036871">【教材】Virtua...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=31221">作業系統概論</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">葉志良</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1036781">【最新消息】Curr...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=26811">資訊隱私</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">葉志良</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1036776">【教材】sample...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=26811">資訊隱私</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">葉志良</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1036775">【教材】202505...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=26811">資訊隱私</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">林榮彬</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1036569">【最新消息】Home...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=28726">組合語言與計算機組織</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">林榮彬</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1036567">【作業】Bit st...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=28726">組合語言與計算機組織</a></div><div class="divMyNotifyList"><a target="_parent" href="../FMain/PostWall.aspx?Menu=User">黎國俊(LE QUOC TUAN)</a>&nbsp;發佈了動態「<a target="_parent" href="../FMain/PostWall.aspx?Menu=Default&amp;PostID=1036374">【教材】Data f...</a>」在<a target="_parent" href="../FPage/FirstToPage.aspx?PageID=30262">Python程式設計</a></div><div class="divMyNotifyList" style="border-bottom:1px solid gray;"><a target="_parent" href="../FUser/UserNotify.aspx?Menu=User&amp;UserAccount=s1123542">所有通知...</a></div></div>
+
+    <table style="border-collapse: collapse; width: 100%; height: 37px; min-width: 600px;">
+        <tbody><tr class="TRHeader">
+            <td style="width: 20px"></td>
+            <td style="width: 200px">
+                <a href="http://www.yzu.edu.tw"><img class="ibnPortalLogo" src="https://portalx.yzu.edu.tw/PortalSocialVB/Images/yzlogo30.png"></a>
+                <input type="image" name="MainBar$ibnPortalLogo" id="MainBar_ibnPortalLogo" class="ibnPortalLogo" src="https://portalx.yzu.edu.tw/PortalSocialVB/Images/portal25.png">&nbsp;
+                <input type="image" name="MainBar$ibnChangeVersion" id="MainBar_ibnChangeVersion" title="中文版本" class="ibnPortalLogo" src="https://portalx.yzu.edu.tw/PortalSocialVB/Images/Icons/VersionEN.png">
+            </td>
+            <td style="width: 110px;">
+                <div id="MainBar_divIcon">
+                    <div id="MainBar_UpdatePanel1">
+	
+                        <img id="imgBtnMyNotify" style="margin-top: 6px;cursor: pointer;vertical-align:initial;" src="../Include/ShowUnreadImage.aspx?backcolor=red&amp;fileName=../Images/Icons/icon_msg.png&amp;num=100" onclick="ShowParentDivHtml();" title="我的通知">&nbsp;
+                                              
+                        <input type="image" name="MainBar$imgBtnMyCal" id="MainBar_imgBtnMyCal" title="My Calendar" src="https://portalx.yzu.edu.tw/PortalSocialVB/Images/Icons/icon_calendar25.png" style="margin-top: 6px;vertical-align:initial;">&nbsp;
+                    
+</div>
+                </div>
+            </td>
+            <td style="width: auto;">
+                <div id="MainBar_divUserID" style="display:none">s1123542</div>
+                <div id="MainBar_divLeftMenu" style="display:none">Default</div>
+                <div id="MainBar_divLangVersion" style="display:none">EN</div>
+            </td>
+            <td style="font-size: 20px; width: auto; text-align: center;">
+                <span id="MainBar_lblLocationName" style="color:White;font-family:微軟正黑體;font-weight:bold;"></span>
+            </td>
+            <td class="hyperlinktop" style="width: 550px; text-align: right;">
+                <a id="MainBar_lbnUserName" title="System Service" href="javascript:__doPostBack('MainBar$lbnUserName','')">陳錦泉</a>
+                
+                <a id="MainBar_lbnLogOut" href="javascript:__doPostBack('MainBar$lbnLogOut','')">Logout</a>
+                <a id="MainBar_lbnPassword" href="javascript:__doPostBack('MainBar$lbnPassword','')"></a>
+                
+                
+            </td>
+            <td style="width: 40px">&nbsp;</td>
+        </tr>
+    </tbody></table>
+
+
+
+<script>
+    var myNotifyRS = 0;
+    var UserAccount;
+    $(document).ready(function () {
+        UserAccount = $('#MainBar_divUserID').text();
+        //$('#MainBar_linkWebMail').html("<img style='margin-top: 6px;border:none;vertical-align:initial;' src='/PortalSocialVB/ExchangeMailHandler.ashx' />");
+        if (UserAccount != '') {
+            //我的最新通知
+            $.ajax({
+                url: '../Include/MainBarRequest.ashx',
+                data: JSON.stringify({ RequestType: 'MyNewNotify' }),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (rets) {
+                    var html = '';
+                    myNotifyRS = rets.length;
+                    $.each(rets, function (idx, ret) {
+                        if (idx < 15) {
+                            html += "<div class='divMyNotifyList'>";
+                            if (ret.NotifyType == "ReflectDelete") {
+                                html += "您的留言「";
+                                html += ret.PostDesc.toString().trim();
+                                html += "」已遭專頁管理員刪除";
+                            }
+                            else {
+                                var AuthorAccount = '';
+                                var AuthorName = '';
+                                var items = ret.AuthorXML.toString().substring(1).split("^");
+                                for (i = 0; i < items.length; i++) {
+                                    if (i < 3) {
+                                        AuthorAccount = items[i].substring(0, items[i].indexOf(","));
+                                        AuthorName = items[i].substring(items[i].indexOf(",") + 1); //javascript的substring只要給start，預設就取到最後一個字元
+                                        if (ret.NotifyType.toString().trim() == "ReplyPost") {
+                                            //html += "<a target='_parent' href='../FMain/PostWall.aspx?Menu=User&UserAccount=" + AuthorAccount + "'>";                                            
+                                            html += "<a target='_parent' href='../FMain/PostWall.aspx?Menu=User'>";     
+                                            html += AuthorName.trim();
+                                            html += "</a>&nbsp;";
+                                        }
+                                    }
+                                }
+                                if (ret.NotifyType.toString().trim() == "ReplyPost") {
+                                    if (items.length > 3) {
+                                        html += "&nbsp;....&nbsp;";
+                                    }
+                                    html += "也回應了動態「";
+                                    if (ret.ExistPostID.toString().trim() == "-1") {
+                                        html += ret.PostDesc.toString().trim();
+                                    }
+                                    else {
+                                        html += "<a target='_parent' href='../FMain/PostWall.aspx?Menu=Default&PostID=" + ret.PostID.toString() + "'>";
+                                        html += ret.PostDesc.toString().trim();
+                                        html += "</a>";
+                                    }
+                                }
+                                if (ret.NotifyType.toString().trim() == "NewPost") {
+                                    if (ret.ShareType.toString().trim() == "A") {
+                                        html += "公告動態「";
+                                    }
+                                    else {
+                                        if (ret.ShowAuthor.toString().toLowerCase().trim() == "true") {
+                                            //html += "<a target='_parent' href='../FMain/PostWall.aspx?Menu=User&UserAccount=" + AuthorAccount + "'>";
+                                              html += "<a target='_parent' href='../FMain/PostWall.aspx?Menu=User'>";
+                                            html += AuthorName.trim();
+                                            html += "</a>&nbsp;";
+                                            html += "發佈了動態「";
+                                        }
+                                        else {
+                                            html += "公開動態「";
+                                        }
+                                    }
+                                    if (ret.ExistPostID.toString().trim() == "-1") {
+                                        html += ret.PostDesc.toString().trim();
+                                    }
+                                    else {
+                                        html += "<a target='_parent' href='../FMain/PostWall.aspx?Menu=Default&PostID=" + ret.PostID.toString() + "'>";
+                                        html += ret.PostDesc.toString().trim();
+                                        html += "</a>";
+                                    }
+                                    html += "」在";
+                                    html += "<a target='_parent' href='../FPage/FirstToPage.aspx?PageID=" + ret.PageID.toString() + "'>";
+                                    html += ret.PageName.toString().trim();
+                                    html += "</a>";
+                                }
+                                if (ret.NotifyType.toString().trim() == "CustomNotify") {
+                                    html += ret.CustomNotifyBody.toString().trim();
+                                }
+                            }
+                            html += "</div>";
+                        }
+                    });
+                    html += "<div class='divMyNotifyList' style='border-bottom:1px solid gray;'>";                    
+                    html += "<a target='_parent' href='../FUser/UserNotify.aspx?Menu=User&UserAccount=" + UserAccount + "'>";
+                    html += "所有通知...</a>";
+                    html += "</div>";
+
+                    if (html != '') {
+                        document.getElementById("MainBar_divMyNotify").innerHTML = html;
+                    }
+                    //本次登入若已經點過，應該要是灰色。除非又有新通知，才又變紅色。用cookie控制
+                    if (myNotifyRS > 0) {
+                        $('#imgBtnMyNotify').attr("src", "../Include/ShowUnreadImage.aspx?backcolor=red&fileName=../Images/Icons/icon_msg.png&num=" + myNotifyRS.toString().trim());
+                        if (getCookie('myNotifyRS') != null) {
+                            var arr = getCookie('myNotifyRS').split(',');
+                            if (arr[0].toLowerCase() == UserAccount.toLowerCase()) {
+                                if (myNotifyRS <= parseInt(arr[1])) {
+                                    $('#imgBtnMyNotify').attr("src", "../Include/ShowUnreadImage.aspx?backcolor=gray&fileName=../Images/Icons/icon_msg.png&num=" + myNotifyRS.toString().trim());
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            var lang = $('#divLangVersion').text();
+            if (lang == 'EN') {
+                $('#imgBtnMyNotify').attr("title", "My Notify");
+            }
+            else {
+                $('#imgBtnMyNotify').attr("title", "我的通知");
+            }
+        }
+
+    });
+    //顯示mainbar我的通知div
+    function ShowParentDivHtml() {
+        if (document.getElementById('MainBar_divMyNotify').style.visibility == 'visible') {
+            document.getElementById('MainBar_divMyNotify').style.visibility = 'hidden';
+            document.getElementById('MainBar_divMyNotify').style.height = '0px';
+        }
+        else {
+            document.getElementById('MainBar_divMyNotify').style.visibility = 'visible';
+            document.getElementById('MainBar_divMyNotify').style.height = 'auto';
+            //寫入點擊我的通知
+            $.ajax({
+                url: '../Include/MainBarRequest.ashx',
+                data: JSON.stringify({ RequestType: 'MyNotifyClick' }),
+                type: 'POST',
+                contentType: 'text/plain; charset=utf-8',
+                dataType: 'text',
+                success: function (txt) {
+                    SetCookie('myNotifyRS', UserAccount + ',' + myNotifyRS.toString().trim());
+                    //數字背景變灰色
+                    if (myNotifyRS > 0) {
+                        $('#imgBtnMyNotify').attr("src", "../Include/ShowUnreadImage.aspx?backcolor=gray&fileName=../Images/Icons/icon_msg.png&num=" + myNotifyRS.toString().trim());
+                    }
+                }
+
+            });
+        }
+
+    }
+
+    function ShowOnLineMsg() {
+        //var msg;
+        //msg = document.getElementById('lblOnLineMsg').value;
+        //alert(msg);
+
+        try {
+            //IE9不支援FormData，IE11則不能在相容性檢視下執行
+            var fd = new FormData();
+            var uri = "../Include/GetOnLineUser.ashx";
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("POST", uri, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    //成功了
+                    CallSuccessOnLine(xhr.responseText);
+                }
+            };
+
+            // Initiate a multipart/form-data upload
+            xhr.send(fd);
+        }
+        catch (e) {
+            alert('無法查詢目前線上人數！');
+        }
+    }
+    function CallSuccessOnLine(res) {
+        alert(res);
+    }
+
+
+
+</script>
+<script>
+    function SetCookie(name, value)//两个参数，一个是cookie的名子，一个是值
+    {
+        var Days = 1; //此 cookie 将被保存 1 天
+        var exp = new Date();    //new Date("December 31, 9998");
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/;";
+    }
+    function getCookie(name)//取cookies函数        
+    {
+        var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+        if (arr != null) return unescape(arr[2]); return null;
+
+    }
+    function delCookie(name)//删除cookie
+    {
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        var cval = getCookie(name);
+        if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+    }
+</script>
+        <div id="divBodyHead" style="height: 37px;"></div>
+        <input type="hidden" name="SSOarea" id="SSOarea">
+
+
+        <table style="min-width: 800px; width: 100%; height: 100%; position: absolute; top: 37px;">
+            <tbody><tr style="height: 100%;">
+                <td style="vertical-align: top; text-align: left; padding-left: 5px; width: 200px;">
+                    
+
+<link href="../CssCode/LeftMenu.css" rel="stylesheet" type="text/css">
+<!--舊表格css-->
+<link href="../CssCode/nav.css" rel="stylesheet" type="text/css">
+<!--jQuery Autocomplete 套件
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet" />    
+<script type="text/javascript" src="../JS/jquery-ui.min.js"></script>
+<link href="../CssCode/jquery-ui.css" rel="stylesheet" />
+-->
+
+<style>
+    a {
+        color: #669900;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #FF9900;
+        }
+    /*應用系統分類*/
+    .menuleftClassSub {
+        margin: 2px 0 1px 0;
+        background-color: #CCFFCC;
+        font-weight: bold;
+        font-family: 微軟正黑體;
+        color: darkgreen;
+        text-decoration: none;
+        border: 0px;
+        cursor: pointer;
+    }
+
+    .menuleftClassSubHover {
+        margin: 2px 0 1px 0;
+        background-color: lightyellow;
+        font-weight: bold;
+        font-family: 微軟正黑體;
+        color: green;
+        text-decoration: none;
+        border: 0px;
+        cursor: pointer;
+    }
+
+    .tdLeftMenu {
+        width: 100%;
+        border-bottom: 1px solid #bfbfbf;
+        padding: 3px 3px 3px 3px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #666666;
+        background-color: #ffffff;
+    }
+
+    .tdLeftMenuSel {
+        width: 100%;
+        border-bottom: 1px solid #bfbfbf;
+        padding: 3px 3px 3px 3px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: #666666;
+    }
+
+    .DIVUserPic {
+        text-align: center;
+    }
+
+    .ImgUserPic {
+        max-width: 200px;
+        max-height: 200px;
+    }
+
+    .DIVUserData {
+        max-width: 300px;
+        position: absolute;
+        top: 60px;
+        left: 150px;
+        visibility: hidden;
+        z-index: 999;
+        border: 1px solid gray;
+        text-align: left;
+        background-color: lightgoldenrodyellow;
+        padding: 10px 10px 10px 10px;
+        /*島圓角*/
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    .SpanUserData {
+        width: 100%;
+        float: left;
+        /* 英文單字自動換行 IE ONLY*/
+        word-wrap: break-word;
+        /* 正常避頭尾 */
+        word-break: normal;
+        /*強制不換行*/
+        /*white-space:nowrap;*/
+        /*使連續空白 換行字 長行換行*/
+        white-space: pre-wrap;
+    }
+
+    .ModalPopup {
+        width: 100%;
+        height: 100%;
+        border: 1px solid gray;
+        background-color: lightgoldenrodyellow;
+    }
+
+        .ModalPopup td.title_line {
+            width: 80px;
+            text-align: center;
+            color: darkred;
+            padding: 5px 5px 1px 5px;
+        }
+
+        .ModalPopup td.body_line {
+            padding: 5px 8px 1px 5px;
+        }
+
+    .ibnEditUserBasic {
+        width: 20px;
+        position: relative;
+        top: 5px;
+    }
+
+    .lbnUserName {
+        color: white;
+    }
+
+    .imgLapSearch {
+        position: relative;
+        top: 3px;
+        border: none;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+</style>
+
+<input type="hidden" name="MainLeftMenu$SSOarea" id="MainLeftMenu_SSOarea" value="dlVLGnU79JuWjtjC9//QM76WhsslMiyTYI/ZuqiYmRsDv89x4n+r4UJiMsKYj/NKjbfXiTCKCepE1t7aMBvFet/xr/UVfkpZIB5uLdjlcB92Tdt2yYu16DlbTwrxbnc/AUITlMlTiz0nUaDgZEMQ1td6ncxPEQGZ3D4FLnmCh/1VEPczEp9+Tw==">
+<!--個人左側主選單-->
+<div id="MainLeftMenu_divPanelUser" style="display: none;">
+    <div id="divUserImg" onmouseover="overVisible('divShowUserBasic');" onmouseout="outHidden('divShowUserBasic');" class="DIVUserPic">
+        <img id="MainLeftMenu_ImgUserPicture" class="ImgUserPic" src="">
+    </div>
+    <div id="divShowUserBasic" onmouseover="overVisible('divShowUserBasic');" onmouseout="outHidden('divShowUserBasic');" class="DIVUserData">
+        <div style="float: left; margin-bottom: 5px;">
+            <span id="MainLeftMenu_lblUserNameInDiv"></span>
+        </div>
+        <span id="MainLeftMenu_lblUserDescInDiv" class="SpanUserData"></span>
+    </div>
+
+    <div id="divLeftMenuUserName" class="menuleftClass">
+    </div>
+
+    <div id="MainLeftMenu_divUserBasic" style="display: normal;">
+        <table style="border-spacing: 0px; width: 100%;">
+            <tbody><tr>
+                <td id="tdUBpost" class="tdLeftMenu" style="display: none;" onmouseover="divMouseUser('tdUBpost','hover');" onmouseout="divMouseUser('tdUBpost','out');" onclick="javascript:GoToURL('MyPost','');">
+                                        
+                        Feed
+                    
+                </td>
+
+            </tr>
+            <tr>
+                <td id="tdUBnotify" class="tdLeftMenu" style="display: none;" onmouseover="divMouseUser('tdUBnotify','hover');" onmouseout="divMouseUser('tdUBnotify','out');" onclick="javascript:GoToURL('MyNotify','');">
+                    
+                        Notification
+                     
+                </td>
+            </tr>
+            <tr>
+                <td id="tdUBsetting" class="tdLeftMenu" style="display: none;" onmouseover="divMouseUser('tdUBsetting','hover');" onmouseout="divMouseUser('tdUBsetting','out');" onclick="javascript:parent.location='../FUser/SettingAccount.aspx?Menu=User';">
+                    
+                        Facebook Account
+                    
+                </td>
+            </tr>
+            
+            <tr>
+                <td id="tdUBUCAN" class="tdLeftMenu" style="display: none;" onmouseover="divMouseUser('tdUBUCAN','hover');" onmouseout="divMouseUser('tdUBUCAN','out');" onclick="javascript:parent.location='../FMain/SSO.aspx?SYS=UCAN'">UCAN職涯測評</td>
+            </tr>
+            
+        </tbody></table>
+    </div>
+
+    <div id="MainLeftMenu_divUserApplicationP"></div>
+    <div id="MainLeftMenu_divUserApplicationS"></div>
+    <div id="MainLeftMenu_divUserApplicationT"></div>
+
+</div>
+<!--首頁左側主選單-->
+<div id="MainLeftMenu_PanelMain">
+	
+    <!--快速連結-->
+    <div id="MainLeftMenu_L1" class="menuleftClass">
+        <span id="MainLeftMenu_lblMenu1">Quick Links</span>
+    </div>
+    <div id="MainLeftMenu_divMyFavorite"></div>
+    <!--我的專頁-->
+    <div id="MainLeftMenu_L2" class="menuleftClass">
+        <span id="MainLeftMenu_lblMenu2">Affiliated Pages</span>
+    </div>
+    <div id="MainLeftMenu_divMyPage"><table style="border-spacing:0px; width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgPage0','tdPage0');0"><a href="../FMain/AddMyFavorite.aspx?LinkType=P&amp;PageID=30262" title="加入快速連結"><img id="ImgPage0" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdPage0" class="tdLeftMenu" onmouseout="divMouseOut('ImgPage0','tdPage0');" onmouseover="divMouseHover('ImgPage0','tdPage0');" onclick="javascript:GoToPage('30262','tdPage0');">Python Programming</td></tr></tbody></table><table style="border-spacing:0px; width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgPage1','tdPage1');0"><a href="../FMain/AddMyFavorite.aspx?LinkType=P&amp;PageID=31221" title="加入快速連結"><img id="ImgPage1" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdPage1" class="tdLeftMenu" onmouseout="divMouseOut('ImgPage1','tdPage1');" onmouseover="divMouseHover('ImgPage1','tdPage1');" onclick="javascript:GoToPage('31221','tdPage1');">Introduction to Operating System</td></tr></tbody></table><table style="border-spacing:0px; width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgPage2','tdPage2');0"><a href="../FMain/AddMyFavorite.aspx?LinkType=P&amp;PageID=28726" title="加入快速連結"><img id="ImgPage2" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdPage2" class="tdLeftMenu" onmouseout="divMouseOut('ImgPage2','tdPage2');" onmouseover="divMouseHover('ImgPage2','tdPage2');" onclick="javascript:GoToPage('28726','tdPage2');">Assembly Language and Computer Organization</td></tr></tbody></table><table style="border-spacing:0px; width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgPage3','tdPage3');0"><a href="../FMain/AddMyFavorite.aspx?LinkType=P&amp;PageID=590" title="加入快速連結"><img id="ImgPage3" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdPage3" class="tdLeftMenu" onmouseout="divMouseOut('ImgPage3','tdPage3');" onmouseover="divMouseHover('ImgPage3','tdPage3');" onclick="javascript:GoToPage('590','tdPage3');">Mandarin Chinese(III)</td></tr></tbody></table><table style="border-spacing:0px; width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgPage4','tdPage4');0"><a href="../FMain/AddMyFavorite.aspx?LinkType=P&amp;PageID=26811" title="加入快速連結"><img id="ImgPage4" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdPage4" class="tdLeftMenu" onmouseout="divMouseOut('ImgPage4','tdPage4');" onmouseover="divMouseHover('ImgPage4','tdPage4');" onclick="javascript:GoToPage('26811','tdPage4');">Information Privacy</td></tr></tbody></table><table style="border-spacing:0px; width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgPage5','tdPage5');0"><a href="../FMain/AddMyFavorite.aspx?LinkType=P&amp;PageID=30437" title="加入快速連結"><img id="ImgPage5" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdPage5" class="tdLeftMenu" onmouseout="divMouseOut('ImgPage5','tdPage5');" onmouseover="divMouseHover('ImgPage5','tdPage5');" onclick="javascript:GoToPage('30437','tdPage5');">Introduction to Algorithms</td></tr></tbody></table><table style="border-spacing:0px; width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgPage6','tdPage6');0"><a href="../FMain/AddMyFavorite.aspx?LinkType=P&amp;PageID=26807" title="加入快速連結"><img id="ImgPage6" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdPage6" class="tdLeftMenu" onmouseout="divMouseOut('ImgPage6','tdPage6');" onmouseover="divMouseHover('ImgPage6','tdPage6');" onclick="javascript:GoToPage('26807','tdPage6');">Probability and Statistics</td></tr></tbody></table><table style="border-spacing:0px; width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgPage7','tdPage7');0"><a href="../FMain/AddMyFavorite.aspx?LinkType=P&amp;PageID=30124" title="加入快速連結"><img id="ImgPage7" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdPage7" class="tdLeftMenu" onmouseout="divMouseOut('ImgPage7','tdPage7');" onmouseover="divMouseHover('ImgPage7','tdPage7');" onclick="javascript:GoToPage('30124','tdPage7');">International Bachelor Program in Informatics112A</td></tr></tbody></table><table style="border-spacing:0px; width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgPage8','tdPage8');0"><a href="../FMain/AddMyFavorite.aspx?LinkType=P&amp;PageID=27367" title="加入快速連結"><img id="ImgPage8" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdPage8" class="tdLeftMenu" onmouseout="divMouseOut('ImgPage8','tdPage8');" onmouseover="divMouseHover('ImgPage8','tdPage8');" onclick="javascript:GoToPage('27367','tdPage8');">International Bachelor Program in Informatics</td></tr></tbody></table></div>
+    <div id="MainLeftMenu_divMore1"><table class="menuMore"><tbody><tr><td><a class="linkMenuMore" href="javascript:GoToURL('MyPage','');">▶more...</a></td></tr></tbody></table></div>
+    <!--訂閱專頁-->
+    <div id="MainLeftMenu_L3" class="menuleftClass">
+        <span id="MainLeftMenu_lblMenu3">Subscribed Pages</span>
+    </div>
+    <div id="MainLeftMenu_divMyOrder"></div>
+    <div id="MainLeftMenu_divMore2"></div>
+    <!--應用系統-->
+    <div id="MainLeftMenu_L4" class="menuleftClass">
+        <span id="MainLeftMenu_lblMenu4">Application Systems</span>
+
+
+        <span id="spanSearchBox" style="display: none;">
+            <input id="auto1" type="text" class="ui-autocomplete-input" autocomplete="off" style="width: 120px; position: relative; top: -3px;" onkeypress="return CallSearchSysURL(event);">
+            <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+        </span>
+        <img src="../Images/Icons/magnifier.png" class="imgLapSearch" onclick="javascript:ShowSearchSysBox();">
+
+    </div>
+    <div id="divSearchSysResult"></div>
+    
+    <div id="MainLeftMenu_divMyApplicationP"></div>
+    <div id="MainLeftMenu_divMyApplicationS"></div>
+    <div id="MainLeftMenu_divMyApplicationT"></div>
+    <div id="MainLeftMenu_divMyApplicationA"><div id="divSystemA" class="menuleftClassSub" onclick="unfold('SystemA')" onmouseover="hoverAppSys('divSystemA',1)" onmouseout="hoverAppSys('divSystemA',0)"><div style="float:right;"><img id="imgSystemA" src="../Images/Icons/002_minus.gif"></div><div>Office of Academic Affairs</div></div><div id="SystemA" style="display: normal"><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA0','tdA0');" onmouseout="divMouseOut('ImgA0','tdA0');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A01" title="加入快速連結"><img id="ImgA0" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA0" class="tdLeftMenu" onmouseout="divMouseOut('ImgA0','tdA0');" onmouseover="divMouseHover('ImgA0','tdA0');" onclick="javascript:GoToURL('App_','A01');">University Curriculum</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA1','tdA1');" onmouseout="divMouseOut('ImgA1','tdA1');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A02" title="加入快速連結"><img id="ImgA1" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA1" class="tdLeftMenu" onmouseout="divMouseOut('ImgA1','tdA1');" onmouseover="divMouseHover('ImgA1','tdA1');" onclick="javascript:GoToURL('App_','A02');">Course Selection</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA2','tdA2');" onmouseout="divMouseOut('ImgA2','tdA2');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A04" title="加入快速連結"><img id="ImgA2" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA2" class="tdLeftMenu" onmouseout="divMouseOut('ImgA2','tdA2');" onmouseover="divMouseHover('ImgA2','tdA2');" onclick="javascript:GoToURL('App_','A04');">Enrollment Online</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA3','tdA3');" onmouseout="divMouseOut('ImgA3','tdA3');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A05" title="加入快速連結"><img id="ImgA3" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA3" class="tdLeftMenu" onmouseout="divMouseOut('ImgA3','tdA3');" onmouseover="divMouseHover('ImgA3','tdA3');" onclick="javascript:GoToURL('App_','A05');">Graduation Clearance</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA4','tdA4');" onmouseout="divMouseOut('ImgA4','tdA4');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A08" title="加入快速連結"><img id="ImgA4" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA4" class="tdLeftMenu" onmouseout="divMouseOut('ImgA4','tdA4');" onmouseover="divMouseHover('ImgA4','tdA4');" onclick="javascript:GoToURL('App_','A08');">New Course Survey</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA5','tdA5');" onmouseout="divMouseOut('ImgA5','tdA5');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A10" title="加入快速連結"><img id="ImgA5" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA5" class="tdLeftMenu" onmouseout="divMouseOut('ImgA5','tdA5');" onmouseover="divMouseHover('ImgA5','tdA5');" onclick="javascript:GoToURL('App_','A10');">Five-categorical Studies Registration</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA6','tdA6');" onmouseout="divMouseOut('ImgA6','tdA6');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A11" title="加入快速連結"><img id="ImgA6" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA6" class="tdLeftMenu" onmouseout="divMouseOut('ImgA6','tdA6');" onmouseover="divMouseHover('ImgA6','tdA6');" onclick="javascript:GoToURL('App_','A11');">Service-Learning</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA7','tdA7');" onmouseout="divMouseOut('ImgA7','tdA7');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A12" title="加入快速連結"><img id="ImgA7" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA7" class="tdLeftMenu" onmouseout="divMouseOut('ImgA7','tdA7');" onmouseover="divMouseHover('ImgA7','tdA7');" onclick="javascript:GoToURL('App_','A12');">Clubs &amp; Activities</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA8','tdA8');" onmouseout="divMouseOut('ImgA8','tdA8');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A13" title="加入快速連結"><img id="ImgA8" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA8" class="tdLeftMenu" onmouseout="divMouseOut('ImgA8','tdA8');" onmouseover="divMouseHover('ImgA8','tdA8');" onclick="javascript:GoToURL('App_','A13');">Accommodation Application</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA9','tdA9');" onmouseout="divMouseOut('ImgA9','tdA9');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A14" title="加入快速連結"><img id="ImgA9" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA9" class="tdLeftMenu" onmouseout="divMouseOut('ImgA9','tdA9');" onmouseover="divMouseHover('ImgA9','tdA9');" onclick="javascript:GoToURL('App_','A14');">Leave Request</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA10','tdA10');" onmouseout="divMouseOut('ImgA10','tdA10');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A15" title="加入快速連結"><img id="ImgA10" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA10" class="tdLeftMenu" onmouseout="divMouseOut('ImgA10','tdA10');" onmouseover="divMouseHover('ImgA10','tdA10');" onclick="javascript:GoToURL('App_','A15');">Workstudy System</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA11','tdA11');" onmouseout="divMouseOut('ImgA11','tdA11');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A16" title="加入快速連結"><img id="ImgA11" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA11" class="tdLeftMenu" onmouseout="divMouseOut('ImgA11','tdA11');" onmouseover="divMouseHover('ImgA11','tdA11');" onclick="javascript:GoToURL('App_','A16');">Student Voting</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA12','tdA12');" onmouseout="divMouseOut('ImgA12','tdA12');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A22" title="加入快速連結"><img id="ImgA12" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA12" class="tdLeftMenu" onmouseout="divMouseOut('ImgA12','tdA12');" onmouseover="divMouseHover('ImgA12','tdA12');" onclick="javascript:GoToURL('App_','A22');">Residence Maintenance</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA13','tdA13');" onmouseout="divMouseOut('ImgA13','tdA13');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A23" title="加入快速連結"><img id="ImgA13" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA13" class="tdLeftMenu" onmouseout="divMouseOut('ImgA13','tdA13');" onmouseover="divMouseHover('ImgA13','tdA13');" onclick="javascript:GoToURL('App_','A23');">Subsidies for the Disadvantaged</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgA14','tdA14');" onmouseout="divMouseOut('ImgA14','tdA14');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=A30" title="加入快速連結"><img id="ImgA14" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdA14" class="tdLeftMenu" onmouseout="divMouseOut('ImgA14','tdA14');" onmouseover="divMouseHover('ImgA14','tdA14');" onclick="javascript:GoToURL('App_','A30');">Certificate of Diverse Achievements</td></tr></tbody></table></div> </div>
+    <div id="MainLeftMenu_divMyApplicationC"><div id="divSystemC" class="menuleftClassSub" onclick="unfold('SystemC')" onmouseover="hoverAppSys('divSystemC',1)" onmouseout="hoverAppSys('divSystemC',0)"><div style="float:right;"><img id="imgSystemC" src="../Images/Icons/002_minus.gif"></div><div>R&amp;D / Cooperative Education</div></div><div id="SystemC"><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgC0','tdC0');" onmouseout="divMouseOut('ImgC0','tdC0');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=C03" title="加入快速連結"><img id="ImgC0" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdC0" class="tdLeftMenu" onmouseout="divMouseOut('ImgC0','tdC0');" onmouseover="divMouseHover('ImgC0','tdC0');" onclick="javascript:GoToURL('App_','C03');">Daily Sign-in for Contract Assistant</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgC1','tdC1');" onmouseout="divMouseOut('ImgC1','tdC1');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=C04" title="加入快速連結"><img id="ImgC1" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdC1" class="tdLeftMenu" onmouseout="divMouseOut('ImgC1','tdC1');" onmouseover="divMouseHover('ImgC1','tdC1');" onclick="javascript:GoToURL('App_','C04');">Student Research Assistant Application Review System</td></tr></tbody></table></div></div>
+    <div id="MainLeftMenu_divMyApplicationD"><div id="divSystemD" class="menuleftClassSub" onclick="unfold('SystemD')" onmouseover="hoverAppSys('divSystemD',1)" onmouseout="hoverAppSys('divSystemD',0)"><div style="float:right;"><img id="imgSystemD" src="../Images/Icons/002_minus.gif"></div><div>Administration</div></div><div id="SystemD"><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgD0','tdD0');" onmouseout="divMouseOut('ImgD0','tdD0');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=D40" title="加入快速連結"><img id="ImgD0" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdD0" class="tdLeftMenu" onmouseout="divMouseOut('ImgD0','tdD0');" onmouseover="divMouseHover('ImgD0','tdD0');" onclick="javascript:GoToURL('App_','D40');">Campus Environment Maintenance</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgD1','tdD1');" onmouseout="divMouseOut('ImgD1','tdD1');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=D43" title="加入快速連結"><img id="ImgD1" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdD1" class="tdLeftMenu" onmouseout="divMouseOut('ImgD1','tdD1');" onmouseover="divMouseHover('ImgD1','tdD1');" onclick="javascript:GoToURL('App_','D43');">Cashier Payments</td></tr></tbody></table></div></div>
+    <div id="MainLeftMenu_divMyApplicationES"><div id="divSystemES" class="menuleftClassSub" onclick="unfold('SystemES')" onmouseover="hoverAppSys('divSystemES',1)" onmouseout="hoverAppSys('divSystemES',0)"><div style="float:right;"><img id="imgSystemES" src="../Images/Icons/002_minus.gif"></div><div>Undefined</div></div><div id="SystemES"><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgES0','tdES0');" onmouseout="divMouseOut('ImgES0','tdES0');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=G" title="加入快速連結"><img id="ImgES0" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdES0" class="tdLeftMenu" onmouseout="divMouseOut('ImgES0','tdES0');" onmouseover="divMouseHover('ImgES0','tdES0');" onclick="javascript:GoToURL('App_','G');">Customer Services</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgES1','tdES1');" onmouseout="divMouseOut('ImgES1','tdES1');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=H" title="加入快速連結"><img id="ImgES1" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdES1" class="tdLeftMenu" onmouseout="divMouseOut('ImgES1','tdES1');" onmouseover="divMouseHover('ImgES1','tdES1');" onclick="javascript:GoToURL('App_','H');">Facilities Reservation</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgES2','tdES2');" onmouseout="divMouseOut('ImgES2','tdES2');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=I" title="加入快速連結"><img id="ImgES2" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdES2" class="tdLeftMenu" onmouseout="divMouseOut('ImgES2','tdES2');" onmouseover="divMouseHover('ImgES2','tdES2');" onclick="javascript:GoToURL('App_','I');">Venue Reservation</td></tr></tbody></table><table style="border-spacing:0px;width:100%;"><tbody><tr><td onmouseover="divMouseHover('ImgES3','tdES3');" onmouseout="divMouseOut('ImgES3','tdES3');"><a href="../FMain/AddMyFavorite.aspx?LinkType=S&amp;SysCode=J" title="加入快速連結"><img id="ImgES3" src="../Images/Icons/001_plus.png" style="width:14px;border:0px;visibility:hidden;"></a></td><td id="tdES3" class="tdLeftMenu" onmouseout="divMouseOut('ImgES3','tdES3');" onmouseover="divMouseHover('ImgES3','tdES3');" onclick="javascript:GoToURL('App_','J');">Easy Test</td></tr></tbody></table></div></div>
+
+    
+
+</div>
+<div id="MainLeftMenu_divQueryUser" style="display: none">s1123542</div>
+
+<script type="text/javascript">
+
+    var SystemList = [];
+
+    $(document).ready(function () {
+
+        var LeftMenu = $('#MainBar_divLeftMenu').text();
+        var UserAccount = $('#MainBar_divUserID').text();
+        var QueryUserAccount = $('#MainLeftMenu_divQueryUser').text();
+        var Version = $('#MainBar_divLangVersion').text();
+        if (LeftMenu != 'Special' && LeftMenu != 'User') {
+            //快速連結
+            $.ajax({
+                url: '../Include/MainLeftMenuRequest.ashx',
+                data: JSON.stringify({ RequestType: 'MyFavorite', UserAccount: UserAccount }),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (rets) {
+                    if (rets.length > 0) {
+                        var html = GetFavoriteHTML(rets, 'Favorite');
+                        $('#MainLeftMenu_divMyFavorite').html(html);
+                    }
+                    else {
+                        $('#MainLeftMenu_L1').attr('style', 'display:none');
+                    }
+                }
+            });
+            //我的專頁
+            $.ajax({
+                url: '../Include/MainLeftMenuRequest.ashx',
+                data: JSON.stringify({ RequestType: 'MyPage', UserAccount: UserAccount }),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (rets) {
+                    var obj = $.grep(rets, function (element, index) {
+                        return element.DefaultPage == true;
+                    });
+                    if (obj.length > 0) {
+                        $('#MainLeftMenu_divMore1').html("<table class='menuMore'><tr><td><a class='linkMenuMore' href=javascript:GoToURL('MyPage','');>▶more...</a></td></tr></table>");
+                        var html = GetPageMenuHTML(obj, 'Page');
+                        $('#MainLeftMenu_divMyPage').html(html);
+                    }
+                    else {
+                        $('#MainLeftMenu_L2').attr('style', 'display:none');
+                    }
+                }
+            });
+            //訂閱專頁、訪客熱門專頁
+            $.ajax({
+                url: '../Include/MainLeftMenuRequest.ashx',
+                data: JSON.stringify({ RequestType: 'MyOrder', UserAccount: UserAccount }),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (rets) {
+                    if (rets.length > 0) {
+                        if (rets[0].MenuType == 'Visitor') {    //訪客改熱門專頁
+                            $('#MainLeftMenu_lblMenu3').text('熱門專頁');
+                            $('#MainLeftMenu_divMore2').append("<table class='menuMore'><tr><td><a class='linkMenuMore' href=javascript:GoToURL('AllPage','');>▶more...</a></td></tr></table>");
+                        }
+                        else {
+                            $('#MainLeftMenu_divMore2').append("<table class='menuMore'><tr><td><a class='linkHotPage' href=javascript:GoToURL('HotPage','');>▶hot...</a>&nbsp;&nbsp;<a class='linkMenuMore' href=javascript:GoToURL('AllPage');>▶all...</a></td></tr></table>");
+                        }
+                        var html = GetPageMenuHTML(rets, 'Order');
+                        $('#MainLeftMenu_divMyOrder').html(html);
+                    }
+                    else {
+                        //未有訂閱訂閱者也要顯示訂閱專頁
+                        $('#MainLeftMenu_divMore2').append("<table class='menuMore'><tr><td><a class='linkHotPage' href=javascript:GoToURL('HotPage','');>▶hot...</a>&nbsp;&nbsp;<a class='linkMenuMore' href=javascript:GoToURL('AllPage');>▶all...</a></td></tr></table>");
+                    }
+                }
+            });
+        }
+        else {
+            $('#MainLeftMenu_L1').attr('style', 'display:none');
+            $('#MainLeftMenu_L2').attr('style', 'display:none');
+            $('#MainLeftMenu_L3').attr('style', 'display:none');
+        }
+        if (LeftMenu == 'User' && QueryUserAccount != UserAccount) {
+            //看他人資料
+            $('#MainLeftMenu_L4').attr('style', 'display:none');
+        }
+        else {
+            if (QueryUserAccount == UserAccount) {
+                //應用系統P(個人檔案、學習檔案、教學檔案)
+                $.ajax({
+                    url: '../Include/MainLeftMenuRequest.ashx',
+                    data: JSON.stringify({ RequestType: 'MyApplicationP', UserAccount: UserAccount }),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (rets) {
+                        $.each(rets, function (i, ret) {
+                            SystemList.push(ret);
+                        });
+                        var obj = $.grep(rets, function (element, index) {
+                            return element.ParentSysCode != element.SysCode;
+                        });
+                        if (obj.length > 0) {
+                            //個人檔案
+                            var returnP = $.grep(obj, function (element, index) {
+                                return element.ParentSysCode == 'P';
+                            });
+                            if (returnP.length > 0) {
+                                $('#MainLeftMenu_divMyApplicationP').append("<div id='divSystemP' class='menuleftClassSub' ></div>");
+                                $('#divSystemP').attr("onclick", "unfold('SystemP')");
+                                $('#divSystemP').attr("onmouseover", "hoverAppSys('divSystemP',1)");
+                                $('#divSystemP').attr("onmouseout", "hoverAppSys('divSystemP',0)");
+                                if (Version == 'EN') {
+                                    $('#divSystemP').append("<div style='float:right;'></div><div>Personal Profile</div>");
+                                } else {
+                                    $('#divSystemP').append("<div style='float:right;'></div><div>個人檔案</div>");
+                                }
+
+
+                                $('#MainLeftMenu_divMyApplicationP').append("<div id='SystemP'></div>");
+                                $('#SystemP').append(GetSysMenuHTML(returnP, 'P'));
+
+                                if (getCookie("SystemP") == "none") {
+                                    $('#divSystemP div:first').append("<img id='imgSystemP' src='../Images/Icons/002_plus.gif' />");
+                                    $('#SystemP').attr("style", "display: none");
+                                }
+                                else {
+                                    $('#divSystemP div:first').append("<img id='imgSystemP' src='../Images/Icons/002_minus.gif' />");
+                                    $('#SystemP').attr("style", "display: normal");
+                                }
+                            }
+                            else {
+                                $('#MainLeftMenu_divMyApplicationP').attr('style', 'display:none');
+                            }
+                            //學習檔案
+                            var returnS = $.grep(obj, function (element, index) {
+                                return element.ParentSysCode == 'S';
+                            });
+                            if (returnS.length > 0) {
+                                $('#MainLeftMenu_divMyApplicationS').append("<div id='divSystemS' class='menuleftClassSub' ></div>");
+                                $('#divSystemS').attr("onclick", "unfold('SystemS')");
+                                $('#divSystemS').attr("onmouseover", "hoverAppSys('divSystemS',1)");
+                                $('#divSystemS').attr("onmouseout", "hoverAppSys('divSystemS',0)");
+                                if (Version == 'EN') {
+                                    $('#divSystemS').append("<div style='float:right;'></div><div>Learning Profile</div>");
+                                }
+                                else {
+                                    $('#divSystemS').append("<div style='float:right;'></div><div>學習檔案</div>");
+                                }
+
+
+                                $('#MainLeftMenu_divMyApplicationS').append("<div id='SystemS'></div>");
+                                $('#SystemS').append(GetSysMenuHTML(returnS, 'S'));
+
+                                if (getCookie("SystemS") == "none") {
+                                    $('#divSystemS div:first').append("<img id='imgSystemS' src='../Images/Icons/002_plus.gif' />");
+                                    $('#SystemS').attr("style", "display: none");
+                                }
+                                else {
+                                    $('#divSystemS div:first').append("<img id='imgSystemS' src='../Images/Icons/002_minus.gif' />");
+                                    $('#SystemS').attr("style", "display: normal");
+                                }
+                            }
+                            else {
+                                $('#MainLeftMenu_divMyApplicationS').attr('style', 'display:none');
+                            }
+                            //教學檔案
+                            var returnT = $.grep(obj, function (element, index) {
+                                return element.ParentSysCode == 'T';
+                            });
+                            if (returnT.length > 0) {
+                                $('#MainLeftMenu_divMyApplicationT').append("<div id='divSystemT' class='menuleftClassSub' ></div>");
+                                $('#divSystemT').attr("onclick", "unfold('SystemT')");
+                                $('#divSystemT').attr("onmouseover", "hoverAppSys('divSystemT',1)");
+                                $('#divSystemT').attr("onmouseout", "hoverAppSys('divSystemT',0)");
+                                if (Version == 'EN') {
+                                    $('#divSystemT').append("<div style='float:right;'></div><div>Teaching Profile</div>");
+                                }
+                                else {
+                                    $('#divSystemT').append("<div style='float:right;'></div><div>教學檔案</div>");
+                                }
+                                $('#MainLeftMenu_divMyApplicationT').append("<div id='SystemT'></div>");
+                                $('#SystemT').append(GetSysMenuHTML(returnT, 'T'));
+
+                                if (getCookie("SystemT") == "none") {
+                                    $('#divSystemT div:first').append("<img id='imgSystemT' src='../Images/Icons/002_plus.gif' />");
+                                    $('#SystemT').attr("style", "display: none");
+                                }
+                                else {
+                                    $('#divSystemT div:first').append("<img id='imgSystemT' src='../Images/Icons/002_minus.gif' />");
+                                    $('#SystemT').attr("style", "display: normal");
+                                }
+                            }
+                            else {
+                                $('#MainLeftMenu_divMyApplicationT').attr('style', 'display:none');
+                            }
+                        }
+                        else {
+                            $('#MainLeftMenu_divMyApplicationP').attr('style', 'display:none');
+                            $('#MainLeftMenu_divMyApplicationS').attr('style', 'display:none');
+                            $('#MainLeftMenu_divMyApplicationT').attr('style', 'display:none');
+                        }
+                    }
+                });
+            }
+            if (LeftMenu != 'User') {
+                //應用系統A(教學務、研發建教、行政事務、其他)
+                $.ajax({
+                    url: '../Include/MainLeftMenuRequest.ashx',
+                    data: JSON.stringify({ RequestType: 'MyApplicationA', UserAccount: UserAccount }),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (obj) {
+                        $.each(obj, function (i, ret) {
+                            SystemList.push(ret);
+                        });
+                        if (obj.length > 0) {
+                            //教學務
+                            var returnA = $.grep(obj, function (element, index) {
+                                return (element.ParentSysCode == 'A' && element.SysCode != 'A');
+                            });
+                            if (returnA.length > 0) {
+                                $('#MainLeftMenu_divMyApplicationA').append("<div id='divSystemA' class='menuleftClassSub' ></div>");
+                                $('#divSystemA').attr("onclick", "unfold('SystemA')");
+                                $('#divSystemA').attr("onmouseover", "hoverAppSys('divSystemA',1)");
+                                $('#divSystemA').attr("onmouseout", "hoverAppSys('divSystemA',0)");
+                                if (Version == 'EN') {
+                                    $('#divSystemA').append("<div style='float:right;'></div><div>Office of Academic Affairs</div>");
+                                } else {
+                                    $('#divSystemA').append("<div style='float:right;'></div><div>教學務</div>");
+                                }
+                                $('#MainLeftMenu_divMyApplicationA').append("<div id='SystemA'></div> ");
+                                $('#SystemA').append(GetSysMenuHTML(returnA, 'A'));
+
+                                if (getCookie("SystemA") == "none") {
+                                    $('#divSystemA div:first').append("<img id='imgSystemA' src='../Images/Icons/002_plus.gif' />");
+                                    $('#SystemA').attr("style", "display: none");
+                                }
+                                else {
+                                    $('#divSystemA div:first').append("<img id='imgSystemA' src='../Images/Icons/002_minus.gif' />");
+                                    $('#SystemA').attr("style", "display: normal");
+                                }
+
+                            }
+                            else {
+                                $('#MainLeftMenu_divMyApplicationA').attr('style', 'display:none');
+                            }
+                            //研發建教
+                            var returnC = $.grep(obj, function (element, index) {
+                                return (element.ParentSysCode == 'C' && element.SysCode != 'C');
+                            });
+                            if (returnC.length > 0) {
+                                var html = '';
+                                html += "<div id='divSystemC' class='menuleftClassSub' >";
+                                html += "<div style='float:right;'>";
+                                if (getCookie("SystemC") == "none") {
+                                    html += "<img id='imgSystemC' src='../Images/Icons/002_plus.gif' />";
+                                }
+                                else {
+                                    html += "<img id='imgSystemC' src='../Images/Icons/002_minus.gif' />";
+                                }
+                                html += "</div>";
+                                //html += "<div style='float:right;'><img id='imgSystemC' src='../Images/Icons/002_minus.gif' /></div>";
+                                if (Version == 'EN') {
+                                    html += "<div>R&D / Cooperative Education</div>";
+                                }
+                                else {
+                                    html += "<div>研發建教</div>";
+                                }
+
+                                html += "</div>";
+                                $('#MainLeftMenu_divMyApplicationC').append(html);
+                                $('#divSystemC').attr("onclick", "unfold('SystemC')");
+                                $('#divSystemC').attr("onmouseover", "hoverAppSys('divSystemC',1)");
+                                $('#divSystemC').attr("onmouseout", "hoverAppSys('divSystemC',0)");
+
+                                html = "<div id='SystemC' ";
+                                if (getCookie("SystemC") == "none") {
+                                    html += " style='display: none;'";
+                                }
+                                html += ">";
+                                html += GetSysMenuHTML(returnC, 'C');
+                                html += "</div>";
+                                $('#MainLeftMenu_divMyApplicationC').append(html);
+                            }
+                            else {
+                                $('#MainLeftMenu_divMyApplicationC').attr('style', 'display:none');
+                            }
+                            //行政事務
+                            var returnD = $.grep(obj, function (element, index) {
+                                return (element.ParentSysCode == 'D' && element.SysCode != 'D');
+                            });
+                            if (returnD.length > 0) {
+                                var html = '';
+                                html += "<div id='divSystemD' class='menuleftClassSub' >";
+                                html += "<div style='float:right;'>";
+                                if (getCookie("SystemD") == "none") {
+                                    html += "<img id='imgSystemD' src='../Images/Icons/002_plus.gif' />";
+                                }
+                                else {
+                                    html += "<img id='imgSystemD' src='../Images/Icons/002_minus.gif' />";
+                                }
+                                html += "</div>";
+                                //html += "<div style='float:right;'><img id='imgSystemD' src='../Images/Icons/002_minus.gif' /></div>";
+                                if (Version == 'EN') {
+                                    html += "<div>Administration</div>";
+                                } else {
+                                    html += "<div>行政事務</div>";
+                                }
+
+                                html += "</div>";
+                                $('#MainLeftMenu_divMyApplicationD').append(html);
+                                $('#divSystemD').attr("onclick", "unfold('SystemD')");
+                                $('#divSystemD').attr("onmouseover", "hoverAppSys('divSystemD',1)");
+                                $('#divSystemD').attr("onmouseout", "hoverAppSys('divSystemD',0)");
+
+                                html = "<div id='SystemD' ";
+                                if (getCookie("SystemD") == "none") {
+                                    html += " style='display: none;'";
+                                }
+                                html += ">";
+                                html += GetSysMenuHTML(returnD, 'D');
+                                html += "</div>";
+                                $('#MainLeftMenu_divMyApplicationD').append(html);
+                            }
+                            else {
+                                $('#MainLeftMenu_divMyApplicationD').attr('style', 'display:none');
+                            }
+                            //其他
+                            var returnES = $.grep(obj, function (element, index) {
+                                return (element.ParentSysCode != 'A' && element.ParentSysCode != 'C' && element.ParentSysCode != 'D');
+                            });
+                            if (returnES.length > 0) {
+                                var html = '';
+                                html += "<div id='divSystemES' class='menuleftClassSub' >";
+                                html += "<div style='float:right;'>";
+                                if (getCookie("SystemES") == "none") {
+                                    html += "<img id='imgSystemES' src='../Images/Icons/002_plus.gif' />";
+                                }
+                                else {
+                                    html += "<img id='imgSystemES' src='../Images/Icons/002_minus.gif' />";
+                                }
+                                html += "</div>";
+                                //html += "<div style='float:right;'><img id='imgSystemES' src='../Images/Icons/002_minus.gif' /></div>";
+                                if (Version == 'EN') {
+                                    html += "<div>Undefined</div>";
+                                } else {
+                                    html += "<div>其他</div>";
+                                }
+
+                                html += "</div>";
+                                $('#MainLeftMenu_divMyApplicationES').append(html);
+                                $('#divSystemES').attr("onclick", "unfold('SystemES')");
+                                $('#divSystemES').attr("onmouseover", "hoverAppSys('divSystemES',1)");
+                                $('#divSystemES').attr("onmouseout", "hoverAppSys('divSystemES',0)");
+
+                                html = "<div id='SystemES' ";
+                                if (getCookie("SystemES") == "none") {
+                                    html += " style='display: none;'";
+                                }
+                                html += ">";
+                                html += GetSysMenuHTML(returnES, 'ES');
+                                html += "</div>";
+                                $('#MainLeftMenu_divMyApplicationES').append(html);
+                            }
+                            else {
+                                $('#MainLeftMenu_divMyApplicationES').attr('style', 'display:none');
+                            }
+                        }
+                        else {
+                            $('#MainLeftMenu_divMyApplicationA').attr('style', 'display:none');
+                            $('#MainLeftMenu_divMyApplicationC').attr('style', 'display:none');
+                            $('#MainLeftMenu_divMyApplicationD').attr('style', 'display:none');
+                            $('#MainLeftMenu_divMyApplicationES').attr('style', 'display:none');
+                        }
+                    }
+                });
+            }
+        }
+        if (LeftMenu == 'User' && QueryUserAccount != '') {
+            //個人大頭照
+            $.ajax({
+                url: '../Include/MainLeftMenuRequest.ashx',
+                data: JSON.stringify({ RequestType: 'UserPicture', UserAccount: UserAccount, QueryUserAccount: QueryUserAccount }),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (rets) {
+                    if (rets.length > 0) {
+                        $('#divLeftMenuUserName').text(rets[0].UserName.toString().trim());
+                        $('#MainLeftMenu_lblUserNameInDiv').text(rets[0].UserName.toString().trim());
+                        $('#MainLeftMenu_lblUserDescInDiv').text(rets[0].UserDesc.toString().trim());
+                        //$('#MainLeftMenu_ImgUserPicture').attr("src", "../Include/ShowImage.aspx?ShowType=UserPic&UserAccount=" + QueryUserAccount + "&UserPictureName=" + rets[0].UserPictureName.toString().trim());
+                        $('#MainLeftMenu_ImgUserPicture').attr("src", "../Include/ShowImage.aspx?ShowType=UserPic&UserPictureName= " + rets[0].UserPictureName.toString().trim());
+                    }
+                }
+            });
+            $('#MainLeftMenu_divPanelUser').show();
+            if (QueryUserAccount == UserAccount) {  //本人時，才show某些功能
+                $('#tdUBpost').attr('style', 'display:normal');   //看別人的動態時有問題
+                $('#tdUBnotify').attr('style', 'display:normal');
+                $('#tdUBsetting').attr('style', 'display:normal');
+                $('#tdUBUCAN').attr('style', 'display:normal');
+                $('#MainLeftMenu_lbnUserName').attr('Enabled', 'true');
+                //$('#tdUBsetting').css('display', 'normal');
+            }
+        }
+    });
+
+    function GetPageMenuHTML(obj, BlockType) {
+        var html = '';
+        $.each(obj, function (i, ret) {
+            html += "<table style='border-spacing:0px; width:100%;'><tr>";
+            if (ret.MenuType != 'User' && ret.MenuType != 'Special' && ret.MenuType != 'Visitor') {   //選單是否有加入快速連結功能
+                html += "<td";
+                html += " onmouseover=divMouseHover('Img" + BlockType + i.toString().trim() + "','td" + BlockType + i.toString().trim() + "');";
+                html += " onmouseout=divMouseOut('Img" + BlockType + i.toString().trim() & "','td" + BlockType + i.toString().trim() + "'); ";
+                html += ">";
+                html += "<a href='../FMain/AddMyFavorite.aspx?LinkType=P&PageID=" + ret.PageID.toString().trim() + "' title='加入快速連結'>";
+                html += "<Img id='Img" + BlockType + i.toString().trim() + "' src='../Images/Icons/001_plus.png' style='width:14px;border:0px;visibility:hidden;' />";
+                html += "</a>";
+                html += "</td>";
+                html += "<td id='td" + BlockType + i.toString().trim() + "'";
+                if (ret.CurrentTag == ret.PageID.toString().trim()) {
+                    html += " class='tdLeftMenuSel' ";
+                }
+                else {
+                    html += " class='tdLeftMenu' ";
+                    html += " onmouseout=divMouseOut('Img" + BlockType + i.toString().trim() + "','td" + BlockType + i.toString().trim() + "'); ";
+                }
+                html += " onmouseover=divMouseHover('Img" + BlockType + i.toString().trim() + "','td" + BlockType + i.toString().trim() + "'); ";
+            }
+            else {
+                html += "<td id='td" + BlockType + i.toString().trim() + "' style='padding-left:10px;' ";
+                if (ret.CurrentTag == ret.PageID.toString().trim()) {
+                    html += " class='tdLeftMenuSel' ";
+                }
+                else {
+                    html += " class='tdLeftMenu' ";
+                    html += " onmouseout=divMouseUser('td" + BlockType + i.toString().trim() + "','out');";
+                }
+                html += " onmouseover=divMouseUser('td" + BlockType + i.toString().trim() + "','hover');";
+            }
+            html += " onclick=javascript:GoToPage('" + ret.PageID.toString().trim() + "','td" + BlockType + i.toString().trim() + "');"
+            html += " >";
+            html += ret.PageName.toString();
+            html += "</td>";
+
+            html += "</tr></table>";
+        });
+        return html;
+    }
+    function GetSysMenuHTML(obj, ParentSysCode) {
+        var html = '';
+        $.each(obj, function (i, ret) {
+            if (ret.SysName.toString() != "") { //有些系統沒英文版，故傳回空白的SysName
+                html += "<table style='border-spacing:0px;width:100%;'><tr>";
+                if (ret.MenuType != 'User' && ret.MenuType != 'Special' && ret.MenuType != 'Visitor') {   //選單是否有加入快速連結功能
+                    html += "<td ";
+                    html += " onmouseover=divMouseHover('Img" + ParentSysCode + i.toString().trim() + "','td" + ParentSysCode + i.toString().trim() + "');";
+                    html += " onmouseout=divMouseOut('Img" + ParentSysCode + i.toString().trim() + "','td" + ParentSysCode + i.toString().trim() + "');";
+                    html += " >";
+                    html += "<a href='../FMain/AddMyFavorite.aspx?LinkType=S&SysCode=" + ret.SysCode.toString().trim() + "' title='加入快速連結'>";
+                    html += "<Img id='Img" + ParentSysCode + i.toString().trim() + "' src='../Images/Icons/001_plus.png' style='width:14px;border:0px;visibility:hidden;' />";
+                    html += "</a>";
+                    html += "</td>";
+                    html += "<td id='td" + ParentSysCode + i.toString().trim() + "'";
+                    if (ret.CurrentTag == ret.SysCode.toString().trim()) {
+                        html += " class='tdLeftMenuSel' ";
+                    }
+                    else {
+                        html += " class='tdLeftMenu' ";
+                        html += " onmouseout=divMouseOut('Img" + ParentSysCode + i.toString().trim() + "','td" + ParentSysCode + i.toString().trim() + "'); ";
+                    }
+                    html += " onmouseover=divMouseHover('Img" + ParentSysCode + i.toString().trim() + "','td" + ParentSysCode + i.toString().trim() + "'); ";
+                }
+                else {
+                    html += "<td id='td" + ParentSysCode + i.toString().trim() + "' style='padding-left:10px;' ";
+                    if (ret.CurrentTag == ret.SysCode.toString().trim()) {
+                        html += " class='tdLeftMenuSel' ";
+                    }
+                    else {
+                        html += " class='tdLeftMenu' ";
+                        html += " onmouseout=divMouseUser('td" + ParentSysCode + i.toString().trim() + "','out');";
+                    }
+                    html += " onmouseover=divMouseUser('td" + ParentSysCode + i.toString().trim() + "','hover');";
+                }
+                //*edit by lfc 2019-09-19 直接開啟新視窗連去課務查詢
+                //if (ret.SysCode.toString().trim() == "A01") {
+                //    html += "onclick=javascript:window.open('https://portalfun.yzu.edu.tw/cosSelect/index.aspx?D=G','_blank')";
+                //}
+
+                //if (ret.SysCode.toString().trim() == "D05") {  //D05行政校務會議記錄是網媒網頁(是http的，不能嵌在https)
+                //    html += " onclick=javascript:OpenWin('YZMEET','joeyshia');>";
+                //}
+                //else {
+                html += " onclick=javascript:GoToURL('App_','" + ret.SysCode.toString().trim() + "'); >";
+                //}
+                html += ret.SysName.toString();
+                html += "</td>";
+                html += "</tr></table>";
+            }
+        });
+
+        return html;
+    }
+    function GetFavoriteHTML(obj, BlockType) {
+        var html = '';
+        $.each(obj, function (i, ret) {
+            if (ret.LinkName.toString() != "") { //有些系統沒英文版，故傳回空白的SysName
+                html += "<table style='border-spacing:0px; width:100%;'><tr>";
+
+                html += "<td onmouseover=divMouseHover('Img" + BlockType + i.toString().trim() + "','td" + BlockType + i.toString().trim() + "');";
+                html += " onmouseout=divMouseOut('Img" + BlockType + i.toString().trim() + "','td" + BlockType + i.toString().trim() + "'); >"
+                if (ret.LinkType == "P") {
+                    html += "<a href='../FMain/AddMyFavorite.aspx?ActiveType=DEL&LinkType=P&PageID=" + ret.PageID.toString().trim() + "' title='刪除快速連結'>";
+                }
+                else {
+                    html += "<a href='../FMain/AddMyFavorite.aspx?ActiveType=DEL&LinkType=S&SysCode=" + ret.SysCode.toString().trim() + "' title='刪除快速連結'>";
+                }
+                html += "<Img id='Img" + BlockType + i.toString().trim() + "' src='../Images/Icons/001_delete.png' style='width:14px;border:0px;visibility:hidden;' />";
+                html += "</a>";
+                html += "</td>";
+                html += "<td id='td" + BlockType + i.toString().trim() + "'";
+                //if (ret.CurrentTag == ret.PageID.toString().trim() || ret.CurrentTag == ret.SysCode.toString().trim()) {
+                //    html += " class='tdLeftMenuSel' ";
+                //}
+                //else {
+                html += " class='tdLeftMenu' ";
+                //}
+                html += " onmouseover=divMouseHover('Img" + BlockType + i.toString().trim() + "','td" + BlockType + i.toString().trim() + "');";
+                html += " onmouseout=divMouseOut('Img" + BlockType + i.toString().trim() + "','td" + BlockType + i.toString().trim() + "'); ";
+                if (ret.LinkType == 'S') {
+                    html += " onclick=javascript:GoToURL('App_','" + ret.SysCode.toString().trim() + "');";
+                }
+                else {
+                    html += " onclick=javascript:GoToPage('" + ret.PageID.toString().trim() + "','td" + BlockType + i.toString().trim() + "');"
+                }
+                html += " >";
+                html += ret.LinkName.toString();
+                html += "</td>";
+
+                html += "</tr></table>";
+            }
+
+        });
+        return html;
+    }
+
+</script>
+<script type="text/javascript">
+    //搜尋功能(應用系統)--切換搜尋框
+    function ShowSearchSysBox() {
+        if (document.getElementById('spanSearchBox').style.display == 'none') {
+            var sys_name = [];
+            $.each(SystemList, function (i, ret) {
+                if (ret.SysURL != '') {
+                    sys_name.push(ret.SysName)
+                }
+            });
+
+            $("#auto1").autocomplete({ source: sys_name });
+            $("#ui-id-1").attr('style', 'font-size:14px');
+            $("#ui-id-1").click(function () {
+                SearchSysURL();
+            });
+
+            document.getElementById('spanSearchBox').style.display = 'inline';
+            document.getElementById('MainLeftMenu_lblMenu4').style.display = 'none';
+        }
+        else {
+            document.getElementById('spanSearchBox').style.display = 'none';
+            document.getElementById('MainLeftMenu_lblMenu4').style.display = 'inline';
+            document.getElementById('divSearchSysResult').innerHTML = '';
+        }
+        $("#ui-id-1").attr('style', 'display:none;font-size:14px');
+    }
+    //搜尋功能(應用系統)--搜尋框按下enter
+    function CallSearchSysURL(e) {
+        e = e || window.event;
+        var keynum = e.keyCode || e.which;
+        if (keynum == 13) {
+            SearchSysURL();
+            return false;
+        }
+    }
+    //搜尋功能(應用系統)--比對搜尋框字串
+    function SearchSysURL() {
+        var obj = $.grep(SystemList, function (element, index) {
+            return element.SysName.indexOf(document.getElementById('auto1').value) >= 0;    //中間有包含關鍵字即可
+        });
+
+        if (obj.length > 0) {
+            document.getElementById('divSearchSysResult').innerHTML = GetSysMenuHTML(obj, 'SR');
+        }
+        else {
+            document.getElementById('divSearchSysResult').innerHTML = '查無結果';
+        }
+        $("#ui-id-1").attr('style', 'display:none;font-size:14px');
+    }
+
+    function overVisible(objID) { document.getElementById(objID).style.visibility = 'visible'; }
+    function outHidden(objID) { document.getElementById(objID).style.visibility = 'hidden'; }
+
+    function hoverAppSys(divid, type) {
+        if (type == 0) {
+            document.getElementById(divid).className = 'menuleftClassSub';
+        }
+        else {
+            document.getElementById(divid).className = 'menuleftClassSubHover';
+        }
+
+    }
+    function unfold(n) {
+
+        var s = document.getElementById(n).style;
+        s.display = (s.display == 'none') ? '' : 'none';
+
+        var imgid;
+        imgid = 'img' + n;
+        if (document.getElementById(n).style.display == 'none') {
+            document.getElementById(imgid).src = '../Images/Icons/002_plus.gif';
+            SetCookie(n, 'none');
+        }
+        else {
+            document.getElementById(imgid).src = '../Images/Icons/002_minus.gif';
+            SetCookie(n, 'display');
+        }
+
+    }
+    function divMouseUser(tdID, mousetype) {
+        if (mousetype == "hover") {
+            document.getElementById(tdID).className = 'tdLeftMenuSel';
+        }
+        else {
+            document.getElementById(tdID).className = 'tdLeftMenu';
+        }
+
+    }
+    function divMouseHover(imgID, tdID) {
+        document.getElementById(imgID).style.visibility = 'visible';
+        document.getElementById(tdID).className = 'tdLeftMenuSel';
+    }
+    function divMouseOut(imgID, tdID) {
+        document.getElementById(imgID).style.visibility = 'hidden';
+        document.getElementById(tdID).className = 'tdLeftMenu';
+        //var TagID;
+        //TagID = document.getElementById('currentTag').value;
+        ////alert(document.getElementById('currentTag').value);
+        //if (TagID != tdID) {
+
+        //}
+    }
+    function divMouseHoverHot(tdID) {
+        document.getElementById(tdID).className = 'tdLeftMenuSel';
+    }
+    function divMouseOutHot(tdID) {
+        document.getElementById(tdID).className = 'tdLeftMenu';
+        //var TagID;
+        //TagID = document.getElementById('currentTag').value;
+        //if (TagID != tdID) {
+        //    document.getElementById(tdID).className = 'tdLeftMenu';
+        //}
+    }
+    function GoToPage(PageID, tdID) {
+        //var last = getCookie(PageID);
+        //var end = Date.now();
+        ////alert(end - last);
+        //if (end - last <= 1000)    //搞不懂，10000好像約6秒吧
+        //{
+        //    alert('請勿連續點擊專頁！');
+        //}
+        //SetCookie(PageID, end);
+        parent.location = "../FPage/FirstToPage.aspx?PageID=" + PageID;
+    }
+    function GoToURL(type, SysCode) {
+        //alert(SysCode);
+        parent.location = "../FMain/ClickMenuLog.aspx?type=" + type + "&SysCode=" + SysCode;
+    }
+    //function OpenWin(type) {
+    //    var uid = $('#MainBar_divUserID').text();
+    //    //alert(uid);
+    //    if (type == 'YZMEET') {
+    //        //因為非https的無法嵌在portal裡
+    //        window.open("http://websrv.yzu.edu.tw/info/portal/meetings/checkacct.asp?w=_portal@&staffid=" + uid + "&disp=111111111111111111")
+    //    }
+    //    //if (uid == '') {
+    //    //    alert('請先登入portal！');
+    //    //}
+    //    //else {
+    //    //    if (type == 'YZMEET') {
+    //    //        //因為非https的無法嵌在portal裡
+    //    //        window.open("http://websrv.yzu.edu.tw/info/portal/meetings/checkacct.asp?w=_portal@&staffid=" + uid + "&disp=111111111111111111")
+    //    //    }
+    //    //    if (type == 'CityCard') {
+    //    //        window.open("../Other/Statement.aspx")
+    //    //    }
+    //    //}
+
+    //}
+</script>
+
+
+
+                </td>
+                <td style="min-width: 10px;"></td>
+                <td style="min-width: 10px; border-left: 1px solid #cccccc;"></td>
+                <td style="vertical-align: top; min-width: 600px;">
+                    <!--右牆內容-->
+                    <table style="min-width: 800px; width: 100%; height: 100%; border-spacing: 0px;">
+                        <tbody><tr style="height: 100%;">
+                            <td style="vertical-align: top; min-width: 600px;">
+                                <!--專頁封面menu-->
+                                <div id="divPageHead">
+                                    <span id="Label1"></span>
+                                </div>
+                                <!--專頁封面menu-->
+                                <!--區塊動態牆內容-->
+                                <br>
+                                <div id="divBlock1" class="wine-red" style="margin-top: 10px; display: none;">
+                                    <table style="width: 100%; border-spacing: 0px 0px;">
+                                        <tbody><tr>
+                                            <td class="TDBlockLeft"><span id="MyTasks">待辦提醒</span></td>
+                                            </tr>
+                                            <tr>
+                                            <td class="TDBlockRight">
+                                                <div id="divTasks" class="divScroll boardContents"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </div>
+
+                                <div id="divBlockMA" class="gray-blue" style="margin-top: 10px;">
+                                    <table style="width: 100%; border-spacing: 0px 0px;">
+                                        <tbody><tr>
+                                            <td class="TDBlockLeft"><span id="MyMA">My Courses</span></td>
+                                            </tr>
+                                        <tr>
+                                            <td class="TDBlockRight">
+                                                <div id="divMA" class="divScroll boardContents"><table style="width:100%;padding:0px 10px 0px 10px;"><tbody><tr><td><a href="../FPage/FirstToPage.aspx?PageID=26807">Probability and Statistics</a></td><td style="vertical-align:top;width:65px;">2025.05.13</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=MA&amp;PostID=1037471">【教材】8 - Introduction to Statistics</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"></td></tr><tr><td><a href="../FPage/FirstToPage.aspx?PageID=31221">Introduction to Operating System</a></td><td style="vertical-align:top;width:65px;">2025.05.13</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=MA&amp;PostID=1037468">【作業】submit Class HandNotes</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"></td></tr><tr style="font-weight:bold;"><td><a href="../FPage/FirstToPage.aspx?PageID=30437">Introduction to Algorithms</a></td><td style="vertical-align:top;width:65px;">2025.05.12</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=MA&amp;PostID=1036941">【最新消息】There is no class on this Wednesday</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"></td></tr><tr style="font-weight:bold;"><td><a href="../FPage/FirstToPage.aspx?PageID=26811">Information Privacy</a></td><td style="vertical-align:top;width:65px;">2025.05.12</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=MA&amp;PostID=1036781">【最新消息】Current status of final report groups</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"><a href="../FPage/FirstToPage.aspx?PageID=26811">▶2   message…</a></td></tr><tr style="font-weight:bold;"><td><a href="../FPage/FirstToPage.aspx?PageID=28726">Assembly Language and Computer Organization</a></td><td style="vertical-align:top;width:65px;">2025.05.10</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=MA&amp;PostID=1036569">【最新消息】Homework 2 posted</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"></td></tr><tr style="font-weight:bold;"><td><a href="../FPage/FirstToPage.aspx?PageID=30262">Python Programming</a></td><td style="vertical-align:top;width:65px;">2025.05.09</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=MA&amp;PostID=1036374">【教材】Data files for study and exercises</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"><a href="../FPage/FirstToPage.aspx?PageID=30262">▶3   message…</a></td></tr></tbody></table><div style="padding:5px 10px 0px 0px;"><a class="LinkMoreB" href="javascript:GoBlockPost('MA');">▶More...</a></div></div>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </div>
+                                <div id="divBlockMB" class="gray-blue" style="margin-top: 10px; display: none;">
+                                    <table style="width: 100%; border-spacing: 0px 0px;">
+                                        <tbody><tr>
+                                            <td class="TDBlockLeft"><span id="MyMB">我的單位</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="TDBlockRight">
+                                                <div id="divMB" class="divScroll boardContents"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </div>
+                                <div id="divBlockMC" class="gray-blue" style="margin-top: 10px; display: none;">
+                                    <table style="width: 100%; border-spacing: 0px 0px;">
+                                        <tbody><tr>
+                                            <td class="TDBlockLeft"><span id="MyMC">我的社團</span></td>
+                                            </tr>
+                                        <tr>
+                                            <td class="TDBlockRight">
+                                                <div id="divMC" class="divScroll boardContents"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </div>
+
+                                <div id="divBlockEP" class="gold-yellow" style="margin-top: 10px;">
+                                    <table style="width: 100%; border-spacing: 0px 0px;">
+                                        <tbody><tr>
+                                            <td class="TDBlockLeft"><span id="MyEP">Announcement</span></td>
+                                            </tr>
+                                            <tr>
+                                            <td class="TDBlockRight">
+                                                <div id="divEP" class="divScroll boardContents"><table style="width:100%;padding:0px 10px 0px 10px;"><tbody><tr style="font-weight:bold;"><td><a href="../FPage/FirstToPage.aspx?PageID=3301">Library</a></td><td style="vertical-align:top;width:65px;">2025.05.13</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=EP&amp;PostID=1037242">圖書館暑假開館時間/借期彈性展延公告 Summer 2025Library Hours / Extension of Loan Periods</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"><a href="../FPage/FirstToPage.aspx?PageID=3301">▶12   message…</a></td></tr><tr><td colspan="4" style="text-align:center"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=EP&amp;PostID=1037242"><img class="PostAttachmentImg" src="../Include/ShowImage.aspx?AttachmentID=120979&amp;AttachmentFileName=6d172be13d624410a2e615b22164bedb.jpg"></a></td></tr><tr style="font-weight:bold;"><td><a href="../FPage/FirstToPage.aspx?PageID=16">Office of Academic Affairs</a></td><td style="vertical-align:top;width:65px;">2025.05.08</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=EP&amp;PostID=1036093">【選課訊息】1141學期選課第一階段電腦抽籤課程公告（僅限有優先選課資格同學參加） （1141 Stage I computer random-selection schedule and notification.)</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"><a href="../FPage/FirstToPage.aspx?PageID=16">▶1   message…</a></td></tr><tr style="font-weight:bold;"><td><a href="../FPage/FirstToPage.aspx?PageID=17">School of Lifelong Education</a></td><td style="vertical-align:top;width:65px;">2025.04.29</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=EP&amp;PostID=1033248">元智大學終身教育部｜職場達人AI工具應用</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"></td></tr></tbody></table><div style="padding:5px 10px 0px 0px;"><a class="LinkMoreY" href="javascript:GoBlockPost('EP');">▶More...</a></div></div>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </div>
+
+                                <div id="divBlockEA" class="vanilla-Green" style="margin-top: 10px;">
+                                    <table style="width: 100%; border-spacing: 0px 0px;">
+                                        <tbody><tr>
+                                            <td class="TDBlockLeft"><span id="MyEA">Campus Activities</span></td>
+                                            </tr>
+                                        <tr>
+                                            <td class="TDBlockRight">
+                                                <div id="divEA" class="divScroll boardContents"><table style="width:100%;padding:0px 10px 0px 10px;"><tbody><tr style="font-weight:bold;"><td><a href="../FPage/FirstToPage.aspx?PageID=17">School of Lifelong Education</a></td><td style="vertical-align:top;width:65px;">2025.05.29</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=EA&amp;PostID=1035378">職場達人AI工具應用進階必修課(請自備筆電上課)</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"><a href="../FPage/FirstToPage.aspx?PageID=17">▶1   message…</a></td></tr><tr><td colspan="4" style="text-align:center"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=EA&amp;PostID=1035378"><img class="PostAttachmentImg" src="../Include/ShowImage.aspx?AttachmentID=120691&amp;AttachmentFileName=ffd541acf7ea46eca03ca9144c357883.jpg"></a></td></tr><tr style="font-weight:bold;"><td><a href="../FPage/FirstToPage.aspx?PageID=77">International Language and Culture Center</a></td><td style="vertical-align:top;width:65px;">2025.05.28</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=EA&amp;PostID=1034947">114/5/28(三)12:00-14:00-邀請參與「翻轉教學現場：讓學生愛上自主學習」教師講座活動（歡迎學生參與）</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"><a href="../FPage/FirstToPage.aspx?PageID=77">▶1   message…</a></td></tr><tr style="font-weight:bold;"><td><a href="../FPage/FirstToPage.aspx?PageID=23">Environmental Protection and Sanitation Office</a></td><td style="vertical-align:top;width:65px;">2025.05.21</td><td style="vertical-align:top;"><a href="../FMain/PostWall.aspx?Menu=Default&amp;PageType=EA&amp;PostID=1029925">114/5/21 (三) 13:00舉辦複合式防災教育及消防演習The "Comprehensive Disaster Prevention Training and Fire Drill" course in the first half of 2025 is scheduled to be implemented from 13:00 to 16:00 hrs on May 21, 2025 (Wednesday).</a></td><td style="vertical-align:top;text-align:right;white-space: nowrap;"></td></tr></tbody></table><div style="padding:5px 10px 0px 0px;"><a class="LinkMoreG" href="javascript:GoBlockPost('EA');">▶More...</a></div></div>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </div>
+
+                                <br>
+                                <!--區塊動態牆內容-->
+                            </td>
+                            <td style="min-width: 10px; vertical-align: top;">
+                                <div id="divSmallCalendar" style="height: 100%;">
+                                    <table style="border-spacing: 0px; height: 100%;">
+                                        <tbody><tr>
+                                            <td style="min-width: 10px;"></td>
+                                            <td style="min-width: 10px; border-left: 1px solid #cccccc;"></td>
+                                            <td style="vertical-align: top; min-width: 200px;">
+
+                                                <div id="datepicker" class="myDatepicker"></div>
+
+                                                <!--小行事曆-->
+                                                <div id="UpdatePanel1">
+	
+
+                                                        <table style="width: 230px; margin-top: 2px;">
+                                                            <tbody><tr>
+                                                                <td class="menuMore">
+                                                                    <a id="lbnToBigCal" class="linkMenuMore" href="javascript:__doPostBack('lbnToBigCal','')">▶more...</a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="background-color: #CCFFCC; text-align: center;">
+                                                                    <div id="divDateFormat" style="color: green;"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <!--待辦事項-->
+                                                                    
+                                                                    <!--我的行程-->
+                                                                    <div id="divCalList2" onclick="unfold('CalList2');" class="CalendarSmallClassSub" onmouseover="hoverCalendarSmall('divCalList2',1);" onmouseout="hoverCalendarSmall('divCalList2',0);">
+                                                                        <div style="float: right;">
+                                                                            <img id="imgCalList2" src="../Images/Icons/002_minus.gif">
+                                                                        </div>
+                                                                        <div>
+                                                                            <span id="lblItem2">My Schedule</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="CalList2" style="display: normal;">
+                                                                        <div id="divItemMySchedule" class="CalendarItemTable"></div>
+                                                                        <table id="Item_Table2" class="CalendarItemTable">
+
+	</table>
+                                                                    </div>
+                                                                    <!--全校行事曆-->
+                                                                    <div id="divCalList3" onclick="unfold('CalList3');" class="CalendarSmallClassSub" onmouseover="hoverCalendarSmall('divCalList3',1);" onmouseout="hoverCalendarSmall('divCalList3',0);">
+                                                                        <div style="float: right;">
+                                                                            <img id="imgCalList3" src="../Images/Icons/002_minus.gif">
+                                                                        </div>
+                                                                        <div>
+                                                                            <span id="lblItem3">YZU Schedule</span>
+                                                                            <img id="imgSchCalendar" src="../Images/Icons/401.png" onclick="javascript:window.location='../Calendar/YzuCalendarAdd.aspx';" style="display: none;">
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="CalList3" style="display: normal;">
+                                                                        <div id="divItemSchCalendar" class="CalendarItemTable"></div>
+                                                                        <table id="Item_Table3" class="CalendarItemTable">
+
+	</table>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+
+                                                    
+</div>
+
+                                                <!--小行事曆-->
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody></table>
+
+                    <div id="divRadWindow">
+                        <div id="RadWindowManager2" style="display:none;">
+	<!-- 2013.2.717.45 --><div id="MyRadWindowSmall" style="display:none;">
+		<div id="MyRadWindowSmall_C" style="display:none;">
+			
+                                        <div id="divMyRadWindowSmall"></div>
+                                    
+		</div><input id="MyRadWindowSmall_ClientState" name="MyRadWindowSmall_ClientState" type="hidden" autocomplete="off">
+	</div><div id="RadWindowManager2_alerttemplate" style="display:none;">
+		<div class="rwDialogPopup radalert">			
+			<div class="rwDialogText">
+			{1}				
+			</div>
+			
+			<div>
+				<a onclick="$find('{0}').close(true);" class="rwPopupButton" href="javascript:void(0);">
+					<span class="rwOuterSpan">
+						<span class="rwInnerSpan">##LOC[OK]##</span>
+					</span>
+				</a>				
+			</div>
+		</div>
+		</div><div id="RadWindowManager2_prompttemplate" style="display:none;">
+		 <div class="rwDialogPopup radprompt">			
+			    <div class="rwDialogText">
+			    {1}				
+			    </div>		
+			    <div>
+				    <script type="text/javascript">
+				    function RadWindowprompt_detectenter(id, ev, input)
+				    {							
+					    if (!ev) ev = window.event;                
+					    if (ev.keyCode == 13)
+					    {															        
+					        var but = input.parentNode.parentNode.getElementsByTagName("A")[0];					        
+					        if (but)
+						    {							
+							    if (but.click) but.click();
+							    else if (but.onclick)
+							    {
+							        but.focus(); var click = but.onclick; but.onclick = null; if (click) click.call(but);							 
+							    }
+						    }
+					       return false;
+					    } 
+					    else return true;
+				    }	 
+				    </script>
+				    <input title="Enter Value" onkeydown="return RadWindowprompt_detectenter('{0}', event, this);" type="text" class="rwDialogInput" value="{2}">
+			    </div>
+			    <div>
+				    <a onclick="$find('{0}').close(this.parentNode.parentNode.getElementsByTagName('input')[0].value);" class="rwPopupButton" href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[OK]##</span></span></a>
+				    <a onclick="$find('{0}').close(null);" class="rwPopupButton" href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[Cancel]##</span></span></a>
+			    </div>
+		    </div>				       
+		</div><div id="RadWindowManager2_confirmtemplate" style="display:none;">
+		<div class="rwDialogPopup radconfirm">			
+			<div class="rwDialogText">
+			{1}				
+			</div>						
+			<div>
+				<a onclick="$find('{0}').close(true);" class="rwPopupButton" href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[OK]##</span></span></a>
+				<a onclick="$find('{0}').close(false);" class="rwPopupButton" href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[Cancel]##</span></span></a>
+			</div>
+		</div>		
+		</div><input id="RadWindowManager2_ClientState" name="RadWindowManager2_ClientState" type="hidden">
+</div>
+                    </div>
+                    <!--右牆內容-->
+                </td>
+            </tr>
+        </tbody></table>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadWindow, {"_dockMode":true,"behaviors":44,"clientStateFieldID":"MyRadWindowSmall_ClientState","formID":"form1","iconUrl":"","left":"300px","minimizeIconUrl":"","modal":true,"name":"MyRadWindowSmall","skin":"Hay","top":"300px","visibleStatusbar":false}, null, null, $get("MyRadWindowSmall"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadWindowManager, {"clientStateFieldID":"RadWindowManager2_ClientState","formID":"form1","iconUrl":"","minimizeIconUrl":"","name":"RadWindowManager2","skin":"Default","windowControls":"['MyRadWindowSmall']"}, null, {"child":"MyRadWindowSmall"}, $get("RadWindowManager2"));
+});
+//]]>
+</script>
+</form>
+
+
+
+<link href="../JS/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="../JS/jquery-1.10.2.js"></script>
+<script src="../JS/jquery-ui-1.10.4.custom.js"></script>
+<!--jQuery Autocomplete 套件(由mainbar的1.8.3換成1.10.2後，必須再加一次Autocomplete，不然會不行run)-->
+<script type="text/javascript" src="../JS/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var UserAccount = $('#MainBar_divUserID').text();
+
+        //檢查要alert的訊息
+        var GoOtherPage = '';
+        $.ajax({
+            url: './DefaultPageRequest.ashx',
+            data: JSON.stringify({ RequestType: 'LoginAlertMsg', UserAccount: UserAccount }),
+            type: 'POST',
+            contentType: 'text/plain; charset=utf-8',
+            dataType: 'text',
+            success: function (rets) {
+                if (rets != '') {
+                    alert(rets);
+                    if (rets.indexOf('課程問卷未填答') > 0) {
+                        GoOtherPage = '../FMain/ClickMenuLog.aspx?type=App_&SysCode=A08';
+                    }
+                }
+            }
+        }).complete(function () {
+            if (GoOtherPage != '') {
+                window.location = GoOtherPage;
+            }
+            else {
+                //取得PostBlock
+                loadBlockPost(UserAccount);
+
+                //取得spActivityQueryByAccount
+                var Today = new Date();
+                var strDay = Today.getFullYear().toString() + "/" + FullofTimeStr(Today.getMonth() + 1) + "/" + FullofTimeStr(Today.getDate());
+                loadMyScheduleDataTable(UserAccount, strDay, true);
+
+                //是否可設定全校行事曆，及顯示今日行事曆事件
+                SchoolCalendarUserSet(UserAccount);
+            }
+        });
+    });
+
+    //取得區塊動態消息
+    function loadBlockPost(UserAccount) {
+        var Version = $('#MainBar_divLangVersion').text();
+        $.ajax({
+            url: './DefaultPageRequest.ashx',
+            data: JSON.stringify({ RequestType: 'loadBlockPost', UserAccount: UserAccount }),
+            type: 'POST',   //JSON形態用GET方法，會被弱掃出中風險
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (rets) {
+                var returnM = $.grep(rets, function (element, index) {
+                    return element.BlockType == 'M';
+                });
+                //處理MA我的課程
+                var returnMA = $.grep(returnM, function (element, index) {
+                    return element.PageType == 'A';
+                });
+                if (returnMA.length > 0) {
+                    var Rhtml = GetDivPostBlockHtml(returnMA, 'MA');
+                    $('#divMA').append(Rhtml);
+                    if (Version == 'EN') {
+                        $('#MyMA').text('My Courses');
+                    } else {
+                        $('#MyMA').text('我的課程');
+                    }
+                }
+                else {
+                    $('#divBlockMA').css('display', 'none');
+                }
+                //處理MB我的單位(和班級)
+                var returnMB = $.grep(returnM, function (element, index) {
+                    return element.PageType == 'B'; //ret.PageType的B，已包含單位和班級專頁
+                });
+                if (returnMB.length > 0) {
+                    var Rhtml = GetDivPostBlockHtml(returnMB, 'MB');
+                    $('#divMB').append(Rhtml);
+                    if (Version == 'EN') {
+                        $('#MyMB').text('My Department');
+                    } else {
+                        $('#MyMB').text('我的單位');
+                    }
+                    
+                }
+                else {
+                    $('#divBlockMB').css('display', 'none');
+                }
+                //處理MC我的社團
+                var returnMC = $.grep(returnM, function (element, index) {
+                    return element.PageType == 'C';
+                });
+                if (returnMC.length > 0) {
+                    var Rhtml = GetDivPostBlockHtml(returnMC, 'MC');
+                    $('#divMC').append(Rhtml);
+                     if (Version == 'EN') {
+                        $('#MyMC').text('My Clubs');
+                    } else {
+                        $('#MyMC').text('我的社團');
+                    }
+                }
+                else {
+                    $('#divBlockMC').css('display', 'none');
+                }
+
+                var returnE = $.grep(rets, function (element, index) {
+                    return element.BlockType == 'E';
+                });
+                //處理EP校內公告
+                var returnEP = $.grep(returnE, function (element, index) {
+                    return element.PostSource != 'A';
+                });
+                if (returnEP.length > 0) {
+                    var Rhtml = GetDivPostBlockHtml(returnEP, 'EP');
+                    $('#divEP').append(Rhtml);
+                     if (Version == 'EN') {
+                        $('#MyEP').text('Announcement');
+                    } else {
+                        $('#MyEP').text('校內公告');
+                    }
+                }
+                else {
+                    $('#divBlockEP').css('display', 'none');
+                }
+                //處理EA校園活動
+                var returnEA = $.grep(returnE, function (element, index) {
+                    return element.PostSource == 'A';
+                });
+                if (returnEA.length > 0) {
+                    var Rhtml = GetDivPostBlockHtml(returnEA, 'EA');
+                    $('#divEA').append(Rhtml);
+                    if (Version == 'EN') {
+                        $('#MyEA').text('Campus Activities');
+                    } else {
+                        $('#MyEA').text('校園活動');
+                    }
+                }
+                else {
+                    $('#divBlockEA').css('display', 'none');
+                }
+            },
+            error: function () {
+                //alert('無法查詢區塊動態！');
+            }
+        });
+    }
+    function GetDivPostBlockHtml(obj, BlockType) {
+        var Version = $('#MainBar_divLangVersion').text();
+        var Html = '';
+        var rets = obj.sort(function (a, b) { return b.CreateDate - a.CreateDate; });   //a-b升序;b-a降序
+        var ShowImg = false;
+        if (BlockType == "EP" || BlockType == "EA") {
+            ShowImg = true; //校內公告、校園活動整個block只要顯示一張圖就好
+        }
+        var LastPageID = [];
+        $.each(rets, function (i, ret) {
+            if (LastPageID.indexOf(ret.PageID) < 0) {
+                LastPageID[i] = ret.PageID;
+                var MaxPostTime = new Date(parseInt(ret.MaxPostTime.substr(6)));
+                var MaxClickTime = new Date(parseInt(ret.MaxClickTime.substr(6)));
+                if (Date.parse(MaxPostTime).valueOf() >= Date.parse(MaxClickTime).valueOf()) {
+                    Html += "<tr style='font-weight:bold;'>";
+                }
+                else {
+                    Html += "<tr>";
+                }
+                Html += "<td>";
+                Html += "<a href='../FPage/FirstToPage.aspx?PageID=" + ret.PageID.toString() + "'>" + ret.PageName.toString() + "</a>";
+                Html += "</td>";
+
+                Html += "<td style='vertical-align:top;width:65px;'>";
+                var CreateDate = new Date(parseInt(ret.CreateDate.substr(6)));
+                Html += CreateDate.getFullYear().toString() + "." + FullofTimeStr(CreateDate.getMonth() + 1) + "." + FullofTimeStr(CreateDate.getDate());
+                Html += "</td>";
+
+                Html += "<td style='vertical-align:top;'>";
+                Html += "<a href='../FMain/PostWall.aspx?Menu=Default&PageType=" + BlockType + "&PostID=" + ret.ParentPostID.toString().trim() + "'>" + ret.Title.toString().trim() + "</a>";
+                Html += "</td>";
+
+                Html += "<td style='vertical-align:top;text-align:right;white-space: nowrap;'>";
+                var returnPagePost = $.grep(rets, function (element, index) {
+                    return element.PageID == ret.PageID;
+                });
+                var PagePostNew = $.grep(returnPagePost, function (element, index) {
+                    return element.MaxPostTime >= element.MaxClickTime;
+                });
+                if (PagePostNew.length > 1) {
+                    Html += "<a href='../FPage/FirstToPage.aspx?PageID=" + ret.PageID.toString().trim() + "'>";
+                    if (Version == 'EN') {
+                        Html += "▶" + (PagePostNew.length - 1).toString().trim() + "   message…";
+                    }
+                    else {
+                        Html += "▶其他" + (PagePostNew.length - 1).toString().trim() + "則…";
+                    }
+
+                    Html += "</a>";
+                }
+                Html += "</td>";
+                Html += "</tr>";
+                if (ShowImg == true) {
+                    var i = ret.AttachmentFileName.toString().lastIndexOf(".");
+                    if (i > 0) {
+                        var l = ret.AttachmentFileName.toString().length;
+                        var s = ret.AttachmentFileName.toString().substr(i, l - i).toLowerCase();
+                        if (s == ".jpg" || s == ".png" || s == ".gif" || s == ".bmp" || s == ".jepg") {
+                            Html += "<tr>";
+                            Html += "<td colspan=4 style='text-align:center'>";
+                            Html += "<a href='../FMain/PostWall.aspx?Menu=Default&PageType=" + BlockType + "&PostID=" + ret.ParentPostID.toString().trim() + "'>";
+                            Html += "<img class='PostAttachmentImg' src='../Include/ShowImage.aspx?AttachmentID=" + ret.AttachmentID.toString().trim() + "&AttachmentFileName=" + ret.AttachmentFileName.toString().trim() + "' />";
+                            Html += "</a>";
+                            Html += "</td>";
+                            Html += "</tr>";
+                            ShowImg = false;
+                        }
+                    }
+                }
+            }
+            //LastPageID = ret.PageID.toString().trim();
+        });
+
+        var Rhtml = "<table style='width:100%;padding:0px 10px 0px 10px;'>";
+        Rhtml = Rhtml + Html;
+        Rhtml = Rhtml + "</table>";
+
+        Rhtml = Rhtml + "<div style='padding:5px 10px 0px 0px;'>";
+        if (BlockType == "MA") {
+            Rhtml = Rhtml + "<a class='LinkMoreB' href=javascript:GoBlockPost('" + BlockType + "');>";
+            if (Version == 'EN') {
+                Rhtml = Rhtml + "▶More...";
+            } else {
+                Rhtml = Rhtml + "▶更多課程動態...";
+            }
+
+        } else if (BlockType == "MB") {
+            Rhtml = Rhtml + "<a class='LinkMoreB' href=javascript:GoBlockPost('" + BlockType + "');>";
+            if (Version == 'EN') {
+                Rhtml = Rhtml + "▶More...";
+            } else {
+                Rhtml = Rhtml + "▶更多單位動態...";
+            }
+
+        } else if (BlockType == "MC") {
+            Rhtml = Rhtml + "<a class='LinkMoreB' href=javascript:GoBlockPost('" + BlockType + "');>";
+            if (Version == 'EN') {
+                Rhtml = Rhtml + "▶More...";
+            } else {
+                Rhtml = Rhtml + "▶更多社團動態...";
+            }
+        } else if (BlockType == "EP") {
+            Rhtml = Rhtml + "<a class='LinkMoreY' href=javascript:GoBlockPost('" + BlockType + "');>";
+            if (Version == 'EN') {
+                Rhtml = Rhtml + "▶More...";
+            } else {
+                Rhtml = Rhtml + "▶更多校內公告...";
+            }
+        } else if (BlockType == "EA") {
+            Rhtml = Rhtml + "<a class='LinkMoreG' href=javascript:GoBlockPost('" + BlockType + "');>";
+            if (Version == 'EN') {
+                Rhtml = Rhtml + "▶More...";
+            } else {
+                Rhtml = Rhtml + "▶更多校園活動...";
+            }
+        }
+        Rhtml = Rhtml + "</a>";
+        Rhtml = Rhtml + "</div>";
+
+        return Rhtml;
+    }
+    function sortByKey(array, key) {
+        return array.sort(function (a, b) {
+            var x = a[key]; var y = b[key];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+    }
+
+    //取得待辦事項，及顯示今日行事曆事件
+    function loadMyScheduleDataTable(UserAccount, strDay, IsToday) {
+          var Version = $('#MainBar_divLangVersion').text();
+        $.ajax({
+            url: './DefaultPageRequest.ashx',
+            data: JSON.stringify({ RequestType: 'loadMyScheduleDataTable', TheDay: strDay, UserAccount: UserAccount }),
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (rets) {
+                if (IsToday == true) {
+                    //顯示待辦提醒區塊
+                    var Tasks = GetDivTaskHtml(rets);
+                    if (Tasks != '') {
+                        document.getElementById('divTasks').innerHTML = Tasks;
+                        document.getElementById('divBlock1').style.display = 'inline';
+                    }
+                    if (Version == 'EN') {
+                        $('#MyTasks').text('To-Do List');
+                    } else {
+                        $('#MyTasks').text('待辦提醒');
+                    }
+                    //顯示行事曆下方的行程(當日)
+                    var Today = new Date();
+                    GetDaySchedule(rets, Today);
+                }
+                //我的行事曆顏色
+                SetDatePicker(rets);
+            },
+            error: function () {
+                //alert('無法查詢我的行事曆！');
+            }
+        }).complete(function () {
+            var splits = strDay.split('/');
+            var FormatDate = splits[0] + '年' + splits[1] + '月' + splits[2] + '日';
+            $('#divDateFormat').html(FormatDate);
+        });
+    }
+    function SetDatePicker(rets) {
+        var UserAccount = $('#MainBar_divUserID').text();
+        var opt = {
+            dayNames: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+            dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
+            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            prevText: "上月",
+            nextText: "次月",
+            weekHeader: "週",
+            showMonthAfterYear: true,
+            dateFormat: "yy-mm-dd"
+        };
+        $("#datepicker").datepicker({
+            dateFormat: "yy/mm/dd",
+            onSelect: function (dateText, inst) {
+                //alert(dateText);
+                var theday = new Date(Date.parse(dateText));
+                loadMyScheduleDataTable(UserAccount, dateText, false);  //一定要再一次load，才不會日期顏色在點擊之後就不見.......可是為什麼不是呼叫SetDatePicker(rets);就好?
+                //顯示行事曆下方的行程
+                GetDaySchedule(rets, theday);
+            },
+            onChangeMonthYear: function (year, month, inst) {
+                var strDay = year.toString() + "/" + FullofTimeStr(month) + "/01";
+                loadMyScheduleDataTable(strDay, false);
+            },
+            beforeShowDay: function (d) {
+                var theday = d.getFullYear().toString() + "/" + FullofTimeStr(d.getMonth() + 1) + "/" + FullofTimeStr(d.getDate());
+                return [true, "", theday];
+            }
+        }).after(function () {
+            //datepicker的顏色要改
+            SetMySmallCalendar(rets);
+        });
+    }
+    function GetDivTaskHtml(obj) {
+        var Version = $('#MainBar_divLangVersion').text();
+        var Tasks = '';
+        var showMore = true;
+        var LastTypeCode = "";
+        $.each(obj, function (i, ret) {
+            if (ret.TypeCode == 'ZZ') {
+                return '';
+            }
+            var divHtml = '';
+            var _start = new Date(parseInt(ret.StartDate.substr(6)));
+            var _end = new Date(parseInt(ret.EndDate.substr(6)));
+            var _start1 = new Date(parseInt(ret.StartDate.substr(6)));
+            var _end1 = new Date(parseInt(ret.EndDate.substr(6)));
+            console.log(ret.StartDate + '--' + ret.EndDate);
+            if (ret.TypeCode == 'A3') {
+                divHtml = "<table><tr><td style='width:100%;'>"; //這是為了讓css的島角正常
+                //作業要顯示倒數日期只計算天數時，改版後要顯示天：時：分
+                var Today = new Date();
+                //var Compare = Date.parse(_end.toString()) - Date.parse(Today.toString()); //相差毫秒數
+                //var LeftDays = Math.floor(Compare / (1000 * 60 * 24 * 60)); //相差天數
+                //var spanLeftDay = "<span class='LeftDays'"
+                //if (LeftDays < 0) {
+                //    spanLeftDay += " style='color:red;'";
+                //}
+                //spanLeftDay += ">" + LeftDays.toString().trim() + "天</span>"
+
+                //作業截止時間要顯示到天：時：分
+                // get total seconds between the times
+
+                var delta = Math.abs(Date.parse(_end.toString()) - Date.parse(Today.toString())) / 1000;//相差秒數
+                // 相差天數
+                var days = Math.floor(delta / 86400);
+                delta -= days * 86400;
+                // 相差時數
+                var hours = Math.floor(delta / 3600) % 24;
+                delta -= hours * 3600;
+                // 相差分鐘數
+                var minutes = Math.floor(delta / 60) % 60;
+                delta -= minutes * 60;
+
+                //判斷有無超過作業繳交的截止時間
+                var deline_time = Math.floor(Date.parse(_end.toString()) - Date.parse(Today.toString())) / 1000;
+                var spanLeftDay = "<span class='LeftDays'"
+                if (deline_time < 0) {
+                    spanLeftDay += " style='color:red;'";
+                    spanLeftDay += ">-" + days.toString() + '天' + hours.toString() + '時' + minutes.toString() + '分' + "</span>"
+                } else {
+                    spanLeftDay += ">" + days.toString() + '天' + hours.toString() + '時' + minutes.toString() + '分' + "</span>"
+                }
+
+
+                //作業要轉到FirstToPage.aspx(_URL是如'../FPage/FirstToPage.aspx?)
+                divHtml += "<a target='_parent' href='" + ret.URL + "'>" + ret.Title + "</a>&nbsp;" + spanLeftDay;
+                divHtml += "</td><td></td><td></td><td></td></tr></table>";
+                //A3作業，要顯示時間、說明
+                var _date;
+                //_date = _start.getFullYear().toString() + "/" + FullofTimeStr(_start.getMonth() + 1) + "/" + FullofTimeStr(_start.getDate()) + "~";
+                //_date += _end.getFullYear().toString() + "/" + FullofTimeStr(_end.getMonth() + 1) + "/" + FullofTimeStr(_end.getDate());
+                _date = _start.getFullYear().toString() + "/" + FullofTimeStr(_start.getMonth() + 1) + "/" + FullofTimeStr(_start.getDate()) + "  " + FullofTimeStr(_start.getHours()) + ":" + FullofTimeStr(_start.getMinutes()) + "  ~  ";
+                _date += _end.getFullYear().toString() + "/" + FullofTimeStr(_end.getMonth() + 1) + "/" + FullofTimeStr(_end.getDate()) + "  " + FullofTimeStr(_end.getHours()) + ":" + FullofTimeStr(_end.getMinutes());
+                divHtml += "時間：" + _date;
+                if (ret.Remarks != '') {
+                    divHtml += "<br/>說明：" + ret.Remarks;
+                }
+                divHtml += "<br/><br/>";
+            }
+            if (ret.TypeCode.substring(0, 1) == 'B') {
+                //B2差勤、B3預算會計、B5需求管理，需合併顯示
+                if (ret.TypeCode == 'B2' || ret.TypeCode == 'B3' || ret.TypeCode == 'B5') {
+                    if (LastTypeCode == ret.TypeCode) {
+                        if (showMore == true) {
+                            showMore = false;
+                            divHtml = "<div style='padding-bottom:10px;'><a class='LinkMoreR' target='_parent' href='../IFrameSub.aspx?SysURL=" + ret.URL + "'>";
+                            if (Version == 'EN') {
+                                divHtml += "▶More…";
+                            }
+                            else {
+                                if (ret.TypeCode == 'B2') {
+                                    divHtml += "▶更多差勤待辦案件…";
+                                }
+                                if (ret.TypeCode == 'B3') {
+                                    divHtml += "▶更多會計待辦案件…";
+                                }
+                                if (ret.TypeCode == 'B5') {
+                                    divHtml += "▶更多需求管理待辦案件…";
+                                }
+                            }
+
+                            divHtml += "</a></div>";
+                        }
+                        else {
+                            divHtml = "";
+                        }
+                    }
+                    else {
+                        showMore = true;
+                        if (ret.URL == '') {
+                            divHtml = ret.Title;
+                        }
+                        else {
+                            divHtml = "<table><tr><td style='width:100%;'>"; //這是為了讓css的島角正常
+                            divHtml += "<a target='_parent' href='../IFrameSub.aspx?SysURL=" + ret.URL + "'>" + ret.Title + "</a>";
+                            divHtml += "</td><td></td><td></td><td></td></tr></table>";
+                        }
+                    }
+                }
+                else {
+                    if (ret.URL == '') {
+                        divHtml = ret.Title;
+                    }
+                    else {
+                        divHtml = "<table><tr><td style='width:100%;'>"; //這是為了讓css的島角正常
+                        if (ret.TypeCode == 'B8' || ret.TypeCode == 'B10') {
+                            //B8專頁成員審核要轉到FirstToPage.aspx(_URL是如'../FPage/FirstToPage.aspx?PageID='+rtrim(convert(char,A.PageID))+'&PassPage=PageMember')
+                            //B10免到校註冊，轉到ClickMenuLog去(_URL是如../FMain/ClickMenuLog.aspx?type=App_&SysCode=A04，必須有帶SysCode)
+                            divHtml += "<a target='_parent' href='" + ret.URL + "'>" + ret.Title + "</a>";
+                        }
+                        else {
+                            //B0教學問卷填答狀況是在webservice中特別抓，這裡直接show？
+                            divHtml += "<a target='_parent' href='../IFrameSub.aspx?SysURL=" + ret.URL + "'>" + ret.Title + "</a>";
+                        }
+                        divHtml += "</td><td></td><td></td><td></td></tr></table>";
+                    }
+                    //B1圖書館(借閱到期、預約到館)要顯示時間、地點
+                    if (ret.TypeCode == 'B1') {
+                        var _date;
+                        if (ret.Title.indexOf("閱到期】") > 0) {
+                            _date = "借閱到期日";
+                            _date += _start.getFullYear().toString() + "/" + FullofTimeStr(_start.getMonth() + 1) + "/" + FullofTimeStr(_start.getDate());
+                        }
+                        else {
+                            _date = _start.getFullYear().toString() + "/" + FullofTimeStr(_start.getMonth() + 1) + "/" + FullofTimeStr(_start.getDate()) + "~";
+                            _date += _end.getFullYear().toString() + "/" + FullofTimeStr(_end.getMonth() + 1) + "/" + FullofTimeStr(_end.getDate());
+                        }
+
+                        divHtml += "時間：" + _date;
+                        if (ret.location != "") {
+                            divHtml += "<br/>地點：" + ret.Location;
+                        }
+                        divHtml += "<br/><br/>";
+                    }
+                }
+            }
+            LastTypeCode = ret.TypeCode;
+
+            Tasks = Tasks + divHtml;
+        });
+
+        return Tasks;
+    }
+    function FullofTimeStr(Num) {
+        if (Num >= 10) {
+            return Num.toString();
+        }
+        else {
+            return '0' + Num;
+        }
+    }
+    function SetMySmallCalendar(obj) {
+        //datepicker的顏色要改
+        $.each(obj, function (i, ret) {
+            var _start = new Date(parseInt(ret.StartDate.substr(6)));   //_start.getMonth()居然是從0~11
+            var _date;
+            _date = _start.getFullYear().toString() + "/" + FullofTimeStr(_start.getMonth() + 1) + "/" + FullofTimeStr(_start.getDate());
+            $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            ////先不管cookie了，所有A和C全部標示
+            //if (ret.TypeCode.substring(0, 1) == 'A' || ret.TypeCode.substring(0, 1) == 'C') {
+            //    if (ret.TypeCode != 'A3') {
+            //        $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            //    }
+            //}
+            //if (ret.TypeCode == 'A1' && getCookie('chkMyOutlook') != false) {
+            //    $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            //}
+
+            //if (ret.TypeCode == 'A2' && getCookie('chkClasses') != false) {
+            //    $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            //}
+            ////if (ret.TypeCode == 'A3' && getCookie('chkHomework') != false) {
+            ////    $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            ////}
+            //if (ret.TypeCode == 'A4' && getCookie('chkExam') != false) {
+            //    $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            //}
+            //if (ret.TypeCode == 'A5' && getCookie('chkSocialAct') != false) {
+            //    $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            //}
+            //if (ret.TypeCode == 'A6' && getCookie('chkMeeting') != false) {
+            //    $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            //}
+            //if (ret.TypeCode == 'A7' && getCookie('chkActReg') != false) {
+            //    $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            //}
+            ////if (ret.TypeCode == 'B1' && getCookie('chkLib') != false) {
+            ////    $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            ////}
+            //if (ret.TypeCode == 'C1' && getCookie('chkAllSchool') != false) {
+            //    $("td[title='" + _date + "'] a:first").attr('style', 'color:blue');
+            //}
+        });
+    }
+    function GetDaySchedule(obj, theday) {
+        $('#divItemMySchedule').html('');
+        $('#divItemSchCalendar').html('');
+        //行事曆下方的行程
+        $.each(obj, function (i, ret) {
+            var _start = new Date(parseInt(ret.StartDate.substr(6)));
+            var _end = new Date(parseInt(ret.EndDate.substr(6)));
+            //傳入日期在行程之間才show(必須都用00:00:00秒比對)
+            var showFlag = false;
+            var startD = new Date(Date.parse(_start.getFullYear().toString() + "/" + FullofTimeStr(_start.getMonth() + 1) + "/" + FullofTimeStr(_start.getDate())));
+            var endD = new Date(Date.parse(_end.getFullYear().toString() + "/" + FullofTimeStr(_end.getMonth() + 1) + "/" + FullofTimeStr(_end.getDate())));
+            var curday = new Date(Date.parse(theday.getFullYear().toString() + "/" + FullofTimeStr(theday.getMonth() + 1) + "/" + FullofTimeStr(theday.getDate())));
+            if (Date.parse(startD).valueOf() <= Date.parse(curday).valueOf()) {
+                if (Date.parse(endD).valueOf() >= Date.parse(curday).valueOf()) {
+                    showFlag = true;
+                }
+            }
+            if (showFlag == true) {
+                var _date;
+                if (_end.getHours() == 0 && _end.getMinutes() == 0 && _end.getSeconds() == 0) {
+                    //為全天事件
+                    _date = _start.getFullYear().toString() + "/" + FullofTimeStr(_start.getMonth() + 1) + "/" + FullofTimeStr(_start.getDate()) + "~";
+                    _date += _end.getFullYear().toString() + "/" + FullofTimeStr(_end.getMonth() + 1) + "/" + FullofTimeStr(_end.getDate());
+                }
+                else {
+                    if (_start.getFullYear() == _end.getFullYear() && _start.getMonth() == _end.getMonth() && _start.getDate() == _end.getDate()) {
+                        //為單一時段事件
+                        _date = _start.getFullYear().toString() + "/" + FullofTimeStr(_start.getMonth() + 1) + "/" + FullofTimeStr(_start.getDate()) + " ";
+                        _date += FullofTimeStr(_start.getHours()) + ":" + FullofTimeStr(_start.getMinutes()) + "~";
+                        _date += FullofTimeStr(_end.getHours()) + ":" + FullofTimeStr(_end.getMinutes());
+                    }
+                    else {
+                        //為跨日事件
+                        _date = _start.getFullYear().toString() + "/" + FullofTimeStr(_start.getMonth() + 1) + "/" + FullofTimeStr(_start.getDate()) + " ";
+                        _date += FullofTimeStr(_start.getHours()) + ":" + FullofTimeStr(_start.getMinutes()) + "~";
+                        _date += _end.getFullYear().toString() + "/" + FullofTimeStr(_end.getMonth() + 1) + "/" + FullofTimeStr(_end.getDate()) + " ";
+                        _date += FullofTimeStr(_end.getHours()) + ":" + FullofTimeStr(_end.getMinutes());
+                    }
+                }
+
+                var showHtml = '';
+                var Radhmtl = ret.Title.toString();
+                if (ret.Title.length > 18) {
+                    showHtml += ret.Title.toString().substr(0, 17) + "...";
+                }
+                else {
+                    showHtml += ret.Title.toString();
+                }
+                showHtml += "<br/>" + _date;
+                Radhmtl += "<br/>" + _date;
+                if (ret.Location != '') {
+                    showHtml += "<br/>地點：" + ret.Location.toString();
+                    Radhmtl += "<br/>地點：" + ret.Location.toString();
+                }
+                if (ret.Remarks != '') {
+                    Radhmtl += "<br/>說明：" + ret.Remarks.toString();
+                }
+                ////div該放在那一分類中
+                //if (ret.TypeCode.substring(0, 1) == 'A') {
+                //    if (ret.TypeCode != 'A3') { //A3作業已在待辦區塊中
+                //        $('#divItemMySchedule').append("<div title=" + ret.TypeCode + "_" + i.toString() + "></div>");
+                //    }
+                //}
+                //if (ret.TypeCode.substring(0, 1) == 'C') {
+                //    $('#divItemSchCalendar').append("<div title=" + ret.TypeCode + "_" + i.toString() + "></div>");
+                //}
+                $('#divItemSchCalendar').append("<div title=" + ret.TypeCode + "_" + i.toString() + "></div>");
+                //div內的值
+                var arr = ["#FF6666", "#FFFF66", "#99CC66", "#FF9966"];
+                var inx = i % 4;
+                $('div[title=' + ret.TypeCode + '_' + i.toString() + ']').attr("style", "padding-left:2px;border-left:3px solid " + arr[inx]);
+                $('div[title=' + ret.TypeCode + '_' + i.toString() + ']').append("<a>" + showHtml + "</a>");
+                $('div[title=' + ret.TypeCode + '_' + i.toString() + '] a:first').attr("href", "javascript:ShowDivRadWindow('MyRadWindowSmall','" + Radhmtl + "','" + ret.URL.toString() + "');")
+            }
+        });
+    }
+
+    //是否可設定全校行事曆
+    function SchoolCalendarUserSet(UserAccount) {
+        $.ajax({
+            url: './DefaultPageRequest.ashx',
+            data: JSON.stringify({ RequestType: 'SchoolCalendarUserSet', UserAccount: UserAccount }),
+            type: 'POST',
+            contentType: 'text/plain; charset=utf-8',
+            dataType: 'text',
+            success: function (rets) {
+                if (rets == 'T') {
+                    document.getElementById('imgSchCalendar').style.display = 'inline';
+                    //$('#imgSchCalendar').attr('style', 'display:inline');
+                }
+            }
+
+        });
+    }
+
+</script>
+<script>
+    //點擊區塊的更多xxx…
+    function GoBlockPost(PageType) {
+        CallInsertClickMenuLog('Cal_ClickBlockMore');
+        window.location = '../FMain/PostWall.aspx?Menu=Default&PageType=' + PageType;
+    }
+
+    //function SetDwinHeight() {
+    //    var f = document.getElementById('iframeDayCalendar');
+    //    f.style.height = f.contentWindow.document.body.scrollHeight + 40 + 'px';
+    //    var p = parent.document.getElementById('iframeSmallCalendar');
+    //    p.style.height = p.contentWindow.document.body.scrollHeight + 40 + 'px';
+    //}
+
+    function ViewChanged(sender, eventArgs) {
+        //var f = parent.document.getElementById('iframeSmallCalendar');
+        //f.style.height = f.contentWindow.document.body.scrollHeight + 10 + 'px';  //管他的，換月份就暫時加這麼多好了
+    }
+
+    function ShowDivRadWindow(divID, _content, _URL) {
+
+        //CallInsertClickMenuLog();
+
+        if (_URL != "") {
+            _content = _content + "<br/><br/>連結：<a target='_parent' href='../IFrameSub.aspx?SysURL=" + _URL + "'>按此進入系統</a>";
+        }
+        parent.parent.document.getElementById("div" + divID).innerHTML = _content;
+        var oWindow = parent.window.radopen("", divID, "500", "300");
+
+        oWindow.setSize(500, 300);
+
+    }
+
+    //寫入點擊記錄
+    function CallInsertClickMenuLog(ClickType) {
+        // call server side method
+        PageMethods.InsertClickMenuLog(ClickType, CallSuccess, CallFailed, "");
+        //PageMethods.InsertClickMenuLog("Cal_ClickDayItem", CallSuccess, CallFailed, "");
+    }
+
+    // set the destination textbox value with the ContactName
+    function CallSuccess(res, divID) {
+        //alert(res);
+    }
+
+    // alert message on some failure
+    function CallFailed(res, destCtrl) {
+        //alert(res.get_message());
+    }
+
+    function hoverCalendarSmall(divid, type) {
+        var objid;
+        objid = divid;
+        if (type == 0) {
+            document.getElementById(objid).className = 'CalendarSmallClassSub';
+        }
+        else {
+            document.getElementById(objid).className = 'CalendarSmallClassSubHover';
+        }
+    }
+
+</script>
+
+
+</body></html>
