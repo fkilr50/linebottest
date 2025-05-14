@@ -1,5 +1,4 @@
 # Python: These lines bring in tools (libraries) the script needs to work
-import time  # Python: A built-in tool to make the script wait (like pausing for a webpage to load)
 import logging  # Python: A built-in tool to print messages so you can see what the script is doing
 import os  # Python: A built-in tool to check if files (like browser programs) exist on your computer
 from pathlib import (
@@ -39,10 +38,10 @@ from webdriver_manager.firefox import (
     GeckoDriverManager,
 )  # webdriver-manager: Downloads Firefox's driver
 
-# BeautifulSoup: This tool (installed with pip) reads webpage content (like HTML) for future data extraction
+# BeautifulSoup: This tool (installed with pip) reads webpage content (like HTML) for data extraction
 from bs4 import (
     BeautifulSoup,
-)  # BeautifulSoup: Reads the webpage's code to pull out information (not used yet)
+)  # BeautifulSoup: Reads the webpage's code to pull out information
 
 # Supabase: initialize supabase client
 from supabase import create_client, Client
@@ -56,8 +55,7 @@ supabase: Client = create_client(
 # This helps you follow what the script is doing
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-
-# Python: A custom function (like a recipe) to check which browsers are on the computer
+# Python: A custom function to check which browsers are on the computer
 # It returns a list of available browsers (e.g., ["edge", "chrome"])
 def detect_browser():
     # Python: Create paths to where browsers are usually installed on Windows
@@ -77,7 +75,6 @@ def detect_browser():
 
     # Python: Return the list of found browsers
     return browsers
-
 
 # Python: A custom function to start a browser (Edge, Chrome, or Firefox)
 # It tries each available browser and returns a "driver" (a robot that controls the browser)
@@ -105,8 +102,12 @@ def initialize_driver():
                 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edge/135.0.0.0")
                 # Selenium: Hide that we’re using a robot (makes the browser look more human)
                 options.add_argument("--disable-blink-features=AutomationControlled")
-                # Selenium: Optional - Uncomment to hide the browser window (runs in background)
-                # options.add_argument("--headless=new")
+                # Selenium: Run Edge in headless mode (no visible browser window)
+                options.add_argument("--headless=new")
+                # Selenium: Set a realistic viewport size to avoid element overlap
+                options.add_argument("--window-size=1920,1080")
+                # Python: Log that headless mode and viewport are enabled
+                logging.info("Edge will run in headless mode with 1920x1080 viewport.")
 
                 # Python: Check if the manual EdgeDriver (downloaded by you) exists
                 manual_driver_path = r"C:\Users\user\edgedriver\msedgedriver.exe"  # Python: Path to manual driver
@@ -131,6 +132,12 @@ def initialize_driver():
                 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36")
                 # Selenium: Hide automation signs
                 options.add_argument("--disable-blink-features=AutomationControlled")
+                # Selenium: Run Chrome in headless mode (no visible window)
+                options.add_argument("--headless=new")
+                # Selenium: Set a realistic viewport size
+                options.add_argument("--window-size=1920,1080")
+                # Python: Log that headless mode and viewport are enabled
+                logging.info("Chrome will run in headless mode with 1920x1080 viewport.")
                 # webdriver-manager: Download ChromeDriver and start Chrome
                 driver = webdriver.Chrome(
                     service=ChromeService(ChromeDriverManager().install()),
@@ -145,6 +152,13 @@ def initialize_driver():
                     "general.useragent.override",
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0",
                 )
+                # Selenium: Run Firefox in headless mode (no visible window)
+                options.add_argument("-headless")
+                # Selenium: Set a realistic viewport size
+                options.add_argument("--width=1920")
+                options.add_argument("--height=1080")
+                # Python: Log that headless mode and viewport are enabled
+                logging.info("Firefox will run in headless mode with 1920x1080 viewport.")
                 # webdriver-manager: Download GeckoDriver and start Firefox
                 driver = webdriver.Firefox(
                     service=FirefoxService(GeckoDriverManager().install()),
@@ -164,7 +178,6 @@ def initialize_driver():
     # Python: If no browser worked, stop the script with an error
     raise Exception("Could not start any supported browser (Edge, Chrome, Firefox).")
 
-
 # Python: Try to start the browser by calling our initialize_driver function
 try:
     # Selenium: Create a driver (the robot that controls the browser)
@@ -177,14 +190,17 @@ except Exception as e:  # Python: Catch any errors
 # Python: Define the website URL for the login page
 login_url = "https://portalx.yzu.edu.tw/PortalSocialVB/Login.aspx"  # Python: A string (text) with the website address
 
-
 # Python: A custom function to try logging into the portal
 # It returns True if login works, False if it fails
 def attempt_login(username, password):
     try:
         logging.info(f"Opening {login_url} for user {username}")
         driver.get(login_url)
-        time.sleep(2)
+        # Selenium: Wait up to 10 seconds for login page to load (username field present)
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "Txt_UserID"))
+        )
+        logging.info(f"Login page loaded for {username}.")
 
         logging.info(f"Filling in username and password for {username}...")
         username_field = driver.find_element(By.ID, "Txt_UserID")
@@ -198,16 +214,24 @@ def attempt_login(username, password):
         login_button.click()
 
         logging.info("Waiting for login to finish...")
-        time.sleep(5)
-
+        # Selenium: Wait up to 10 seconds for dashboard or alert
         try:
-            alert = Alert(driver)
-            alert_text = alert.text
-            logging.warning(f"Alert detected for {username}: {alert_text}")
-            alert.accept()
-            return False
-        except:
-            pass
+            # Check for alert (failed login) or dashboard (successful login)
+            WebDriverWait(driver, 10).until(
+                lambda d: EC.alert_is_present()(d) or
+                          EC.presence_of_element_located((By.ID, "MainBar_ibnChangeVersion"))(d)
+            )
+            # Check if alert exists
+            try:
+                alert = Alert(driver)
+                alert_text = alert.text
+                logging.warning(f"Alert detected for {username}: {alert_text}")
+                alert.accept()
+                return False
+            except:
+                logging.info(f"Dashboard loaded for {username}.")
+        except Exception as e:
+            logging.warning(f"Timeout waiting for login result for {username}: {e}")
 
         page_source = driver.page_source
         if "Login Failed" not in page_source:
@@ -217,19 +241,38 @@ def attempt_login(username, password):
             logging.error(f"Login failed for {username}. Check credentials or page content.")
             logging.debug(f"Page content: {page_source[:1000]}...")
             return False
-
     except Exception as e:
         logging.error(f"Error during login attempt for {username}: {e}")
         return False
-
 
 # Python: A custom function to click an element by ID
 def click_by_id(element_id, start_message, success_message, debug_file):
     try:
         logging.info(start_message)
-        element = driver.find_element(By.ID, element_id)
-        element.click()
-        time.sleep(3)
+        # Selenium: Wait up to 10 seconds for the element to be clickable
+        element = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, element_id))
+        )
+        # Python: Log the element's attributes for debugging
+        element_title = element.get_attribute("title") or "No title"
+        element_src = element.get_attribute("src") or "No src"
+        logging.info(f"Element '{element_id}' found with title='{element_title}', src='{element_src}'")
+
+        # Python: Special handling for language switch button
+        if element_id == "MainBar_ibnChangeVersion":
+            # Python: Check if already in English (title contains "中文" means it's English mode)
+            if "中文" in element_title or "VersionEN.png" in element_src:
+                logging.info("Page is already in English, skipping language switch.")
+                return True
+
+        # Selenium: Try regular click
+        try:
+            element.click()
+        except Exception as e:
+            # Selenium: Fallback to JavaScript click if regular click fails
+            logging.warning(f"Regular click failed for '{element_id}': {e}. Trying JavaScript click...")
+            driver.execute_script("arguments[0].click();", element)
+
         logging.info(success_message)
         return True
     except Exception as e:
@@ -238,7 +281,6 @@ def click_by_id(element_id, start_message, success_message, debug_file):
             f.write(driver.page_source)
         logging.info(f"Saved page source to {debug_file}")
         return False
-
 
 # Python: A custom function to scrape the Activity Sign-up table
 def scrape_activities(student_id):
@@ -259,6 +301,11 @@ def scrape_activities(student_id):
         logging.info(f"Current URL after navigation: {current_url}")
 
         logging.info("Scraping activity table...")
+        # Selenium: Wait up to 10 seconds for the activity table to load
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "table_1"))
+        )
+        logging.info(f"Activity table loaded for {student_id}.")
         page_source = driver.page_source
         soup = BeautifulSoup(page_source, "html.parser")
         table = soup.find("table", class_="table_1")
@@ -300,12 +347,10 @@ def scrape_activities(student_id):
         logging.warning(f"Failed to scrape activity table for {student_id}: {e}")
         return False
 
-
 # Python: A placeholder function for scraping grades (to be implemented later)
 def scrape_grades():
     logging.info("Grades scraping not implemented yet.")
     return False
-
 
 # Python: Main part of the script that runs everything
 try:
@@ -335,11 +380,15 @@ try:
                 break
             else:
                 logging.info(f"Retrying after alert or failure for {username}...")
-                time.sleep(2)
+                # No sleep needed; attempt_login's WebDriverWait handles timing
         else:
             logging.error(f"All login attempts failed for {username}.")
 
-        time.sleep(2)
+        # Selenium: Ensure browser is idle before next student
+        WebDriverWait(driver, 5).until(
+            lambda d: d.execute_script("return document.readyState") == "complete"
+        )
+        logging.info(f"Browser is idle, proceeding to next student {username}.")
 
 except Exception as e:
     logging.error(f"Something went wrong: {e}")
