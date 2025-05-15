@@ -152,8 +152,8 @@ def handle_follow_event(event: FollowEvent):
         messages = [TextMessage(text = output_text)]
     )
 
-    #line_bot_api.push_message(push_request)
-    #app.logger.info(f"Successfully sent: '{output_text}'")
+    line_bot_api.push_message(push_request)
+    app.logger.info(f"Successfully sent: '{output_text}'")
     
 
 def handle_new_user(event):
@@ -176,7 +176,7 @@ def handle_new_user(event):
 
     if user_data["pass"] is None and ("pass" in text or "password" in text):
         portalpass = getpass(text)
-        app.logger.info(f"portalpass adalah: {portalpass}")
+        #app.logger.info(f"portalpass adalah: {portalpass}")
         if portalpass:
             newusers[user_id]["pass"] = portalpass
             response = f"Password received.\n({portalpass})"
@@ -187,7 +187,7 @@ def handle_new_user(event):
 
     # After both are collected
     if newusers[user_id]["id"] and newusers[user_id]["pass"]:
-        app.logger.info(f"User {user_id} registering with ID: {user_data['id']} and pass: {user_data['pass']}")
+        #app.logger.info(f"User {user_id} registering with ID: {user_data['id']} and pass: {user_data['pass']}")
         if attempt_login(user_data['id'], user_data['pass']) == True:
             
             encpass = enkrip(user_data['pass'])
