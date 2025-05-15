@@ -110,16 +110,14 @@ def handle_text_message(event: MessageEvent):
 
         # all input messages will be processed here
         label = classify(input_text)
-        if "assignments" == label:
-            output_text = "you have 3 remaining assignments"
-
-        elif "activities" == label:
-            output_text = "you have 5 activities next week"
-        
-        elif "echo" in input_text.lower():
+        if label == "echo":
             output_text = event.message.text.lower().replace("echo", "", 1).strip()
-        else:
+        
+        elif label == "others":
             output_text = f"I received '{input_text}'. Please try something else."
+
+        else:
+            output_text = supafetch(label, event.source.user_id)
 
 
         # --- v3 Replying ---
@@ -180,14 +178,14 @@ def handle_new_user(event):
         if portalpass:
             newusers[user_id]["pass"] = portalpass
             response = f"Password received.\n({portalpass})"
-            app.logger.info(f"portalpass adalah: {newusers[user_id]["pass"]}")
+            #app.logger.info(f"portalpass adalah: {newusers[user_id]["pass"]}")
         else:
             response = "Could not extract password. Try: 'password: abc123'"
     
 
     # After both are collected
     if newusers[user_id]["id"] and newusers[user_id]["pass"]:
-        #app.logger.info(f"User {user_id} registering with ID: {user_data['id']} and pass: {user_data['pass']}")
+        app.logger.info(f"User {user_id} registering with ID: {user_data['id']}")
         if attempt_login(user_data['id'], user_data['pass']) == True:
             
             encpass = enkrip(user_data['pass'])
@@ -273,12 +271,34 @@ def classify(line):
         if res["scores"][i] == largest:
             hasil = res["labels"][i]
     print(hasil)
-    return hasil
+    return str(hasil)
 
 def enkrip(password):
     password = password.encode()
     token = cypher.encrypt(password) 
     return str(token)
+
+# feed data ini semua ke huggingface lalu huggingface return response
+def supafetch(label, userid):
+    app.logger.info(f"fetching data from thebase")
+    if label == "assignments":
+        response = (
+        supabase.table("Filtered Assignment table")
+        .select("AsName")
+        .eq("LineID", str(userid))
+        .execute()
+        )
+
+    else:
+        response = (
+        supabase.table("Filtered Activity table")
+        .select("ActName")
+        .eq("LineID", str(userid))
+        .execute()
+        )
+    
+    return str(response)
+
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

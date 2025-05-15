@@ -117,6 +117,7 @@ login_url = "https://portalx.yzu.edu.tw/PortalSocialVB/Login.aspx"
 # Attempt login
 def attempt_login(username, password):
     try:
+        logging.info(f"username adalah: {username}")
         driver.get(login_url)
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "Txt_UserID")))
         driver.refresh()
