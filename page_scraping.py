@@ -20,6 +20,18 @@ from bs4 import BeautifulSoup
 
 from supabase import create_client, Client
 
+from cryptography.fernet import Fernet 
+import os
+import ast
+from dotenv import load_dotenv
+load_dotenv()
+
+key: str = os.environ.get("FKEY")
+key_bytes = key.encode('utf-8')
+  
+# value of key is assigned to a variable 
+cypher = Fernet(key_bytes)
+
 # Initialize Supabase client
 supabase: Client = create_client(
     "https://opvnwapzljuxnncvpbrn.supabase.co",
@@ -237,7 +249,9 @@ try:
     max_attempts = 3
     for student in student_credentials:
         username = student["StID"]
-        password = student["Ps"]
+        undecryptpassword = student["Ps"]
+        undecryptpassword = ast.literal_eval(undecryptpassword)
+        password = cypher.decrypt(undecryptpassword).decode()
         logging.info(f"Processing student {username}...")
         for attempt in range(max_attempts):
             if attempt_login(username, password):
