@@ -169,7 +169,7 @@ def handle_new_user(event):
     if user_data["id"] is None and ("student" in text or "id" in text):
         portalid = getid(text)
         if portalid:
-            newusers[user_id]["id"] = portalid
+            newusers[user_id]["id"] = f"s{portalid}"
             response = f"Student ID received.\n({portalid})"
         else:
             response = "Could not extract ID. Please use the format: 'student id: 1123xxx'"
@@ -194,7 +194,7 @@ def handle_new_user(event):
             try:
                 datatobeinserted = {
                     "LineID": user_id,
-                    "StID": f"s{user_data['id']}",
+                    "StID": user_data['id'],
                     "Ps": encpass
                 }
 
@@ -250,16 +250,7 @@ def getid(string):
 
 def getpass(string):
     pword = ""
-    if "is" in string.lower():
-        x = string.find('is')
-
-        for i in range (x + 3, len(string), 1):
-            if string[i] == ' ':
-                break
-            else:
-                pword += string[i]
-
-    elif any(sep in string.lower() for sep in ["=", ":", ";"]):
+    if any(sep in string.lower() for sep in ["=", ":", ";", "is"]):
         x = string.find(':')
         if string[x + 1] == ' ':
             x += 1
