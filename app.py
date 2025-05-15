@@ -109,11 +109,11 @@ def handle_text_message(event: MessageEvent):
         app.logger.info(f"Handling text message: '{input_text}' with token {event.reply_token[:10]}...")
 
         # all input messages will be processed here
-        shit = classify(input_text)
-        if "assignments" == shit:
+        label = classify(input_text)
+        if "assignments" == label:
             output_text = "you have 3 remaining assignments"
 
-        elif "activities" == shit:
+        elif "activities" == label:
             output_text = "you have 5 activities next week"
         
         elif "echo" in input_text.lower():
@@ -219,7 +219,7 @@ def handle_new_user(event):
                     except:
                         pass
 
-            response = f"Registration complete. You can now use commands like 'assignments', 'schedule' or 'echo'."
+            response = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
             del newusers[user_id]
         else:
             response = "Failed to login with current StudentID and Password, please recheck and try again."
@@ -265,7 +265,7 @@ def getpass(string):
 def classify(line):
     res = classifier(
         line,
-        candidate_labels = ["homework", "activities", "other", "echo"]
+        candidate_labels = ["assignments", "activities", "other", "echo"]
     )
 
     largest = reduce(max, res["scores"])
