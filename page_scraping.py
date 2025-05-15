@@ -165,7 +165,7 @@ def click_by_id(element_id):
         return False
 
 # Scrape activities
-def scrape_activities(student_id):
+def scrape_activities(line_id, student_id):
     try:
         if not click_by_id("MainBar_ibnChangeVersion"):
             return False
@@ -184,7 +184,7 @@ def scrape_activities(student_id):
             date = cells[2].get_text(separator=" ", strip=True)
 
             try:
-                data = {"UserID": student_id, "ActName": subject, "ActDate": date}
+                data = {"LineID": line_id , "UserID": student_id, "ActName": subject, "ActDate": date}
                 response = supabase.table("Activity table").insert(data).execute()
                 if response.data:
                     logging.info(f"Inserted activity for {student_id}: {subject}, Date: {date}")
@@ -199,7 +199,7 @@ def scrape_activities(student_id):
         return False
 
 # Scrape assignments
-def scrape_assignments(student_id):
+def scrape_assignments(line_id, student_id):
     try:
         if not click_by_id("MainBar_ibnChangeVersion"):
             return False
@@ -225,7 +225,7 @@ def scrape_assignments(student_id):
             time_range = time_range.replace("時間：", "").strip() if time_range else "No Time Range"
             
             try:
-                data = {"UserID": student_id, "AsName": title, "AsDate": time_range}
+                data = {"LineID": line_id, "UserID": student_id, "AsName": title, "AsDate": time_range}
                 response = supabase.table("Assignment table").insert(data).execute()
                 if response.data:
                     logging.info(f"Inserted assignments for {student_id}: {title}, Duration: {time_range}")
@@ -242,12 +242,13 @@ def scrape_assignments(student_id):
 
 # Main execution
 try:
-    response = supabase.table("Login data").select("StID, Ps").execute()
+    response = supabase.table("Login data").select("LineID, StID, Ps").execute()
     if not response.data:
         raise Exception("No credentials found.")
     student_credentials = response.data
     max_attempts = 3
     for student in student_credentials:
+        lineid = student["LineID"]
         username = student["StID"]
         undecryptpassword = student["Ps"]
         undecryptpassword = ast.literal_eval(undecryptpassword)
@@ -257,8 +258,8 @@ try:
             if attempt_login(username, password):
                 option = "assignments"
                 scrapers = {
-                    "activities": lambda: scrape_activities(username),
-                    "assignments": lambda: scrape_assignments(username)
+                    "activities": lambda: scrape_activities(lineid, username),
+                    "assignments": lambda: scrape_assignments(lineid, username)
                 }
                 scraper = scrapers.get(option, lambda: logging.error("Invalid option"))
                 scraper()
