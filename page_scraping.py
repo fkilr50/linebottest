@@ -1,8 +1,9 @@
 import logging
 import os
 import time
+import re
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.edge.service import Service as EdgeService
@@ -11,35 +12,81 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-
 from bs4 import BeautifulSoup
-
 from supabase import create_client, Client
-
-from cryptography.fernet import Fernet 
-import os
+from cryptography.fernet import Fernet
 import ast
 from dotenv import load_dotenv
+import schedule
+
 load_dotenv()
 
+# Debug environment variables
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.info(f"SUPABASE_URL: {os.environ.get('SUPABASE_URL')}")
+logging.info(f"SUPABASE_KEY (partial): {os.environ.get('SUPABASE_KEY', '')[:10]}...")
+logging.info(f"FKEY: {'set' if os.environ.get('FKEY') else 'not set'}")
+
 key: str = os.environ.get("FKEY")
+if not key:
+    raise Exception("FKEY environment variable not set")
 key_bytes = key.encode('utf-8')
-  
-# value of key is assigned to a variable 
 cypher = Fernet(key_bytes)
 
 # Initialize Supabase client
-supabase: Client = create_client(
-    "https://opvnwapzljuxnncvpbrn.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wdm53YXB6bGp1eG5uY3ZwYnJuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NjY0MDAxNCwiZXhwIjoyMDYyMjE2MDE0fQ.kXweuLkjFzqTRh-dHmRHK2TTsPvKANVJFY-hW4xHBbA",
-)
+supabase_url = os.environ.get("SUPABASE_URL", "https://opvnwapzljuxnncvpbrn.supabase.co")
+supabase_key = os.environ.get("SUPABASE_KEY")
+if not supabase_key:
+    raise Exception("SUPABASE_KEY environment variable not set")
+supabase: Client = create_client(supabase_url, supabase_key)
 
-# Set up logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.getLogger('httpx').setLevel(logging.WARNING)
+logging.getLogger('WDM').setLevel(logging.WARNING)
+
+# Parse date string to timestamp
+def parse_date(date_str):
+    try:
+        end_part = date_str.split('~')[-1].strip()
+        if '.' in end_part and ('下午' in end_part or '上午' in end_part):
+            match = re.match(r'(\d{4}\.\d{2}\.\d{2}).*?(上午|下午)\s*(\d{2}:\d{2})', end_part)
+            if not match:
+                raise ValueError(f"Invalid ActDate format: {end_part}")
+            date_str, period, time_str = match.groups()
+            date = datetime.strptime(f"{date_str} {time_str}", "%Y.%m.%d %H:%M")
+            if period == '下午' and date.hour < 12:
+                date = date.replace(hour=date.hour + 12)
+            elif period == '上午' and date.hour == 12:
+                date = date.replace(hour=0)
+            date = date.replace(tzinfo=timezone(timedelta(hours=8)))
+            return date.isoformat()
+        elif '/' in end_part:
+            date = datetime.strptime(end_part.strip(), "%Y/%m/%d %H:%M")
+            date = date.replace(tzinfo=timezone(timedelta(hours=8)))
+            return date.isoformat()
+        raise ValueError(f"Unknown date format: {end_part}")
+    except Exception as e:
+        logging.warning(f"Failed to parse date '{date_str}': {e}")
+        return None
+
+# Clean old records from Supabase
+def clean_old_records():
+    try:
+        current_time = datetime.now(timezone(timedelta(hours=8))).isoformat()
+        response = supabase.table("Activity table")\
+            .delete()\
+            .lt("end_datetime", current_time)\
+            .execute()
+        logging.info(f"Deleted {len(response.data)} outdated activities.")
+        response = supabase.table("Assignment table")\
+            .delete()\
+            .lt("end_datetime", current_time)\
+            .execute()
+        logging.info(f"Deleted {len(response.data)} outdated assignments.")
+    except Exception as e:
+        logging.error(f"Failed to clean old records: {e}")
 
 # Detect available browsers
 def detect_browser():
@@ -60,7 +107,6 @@ def initialize_driver():
     browsers = detect_browser()
     if not browsers:
         raise Exception("No supported browsers found.")
-    
     for browser_name, browser_path in browsers:
         try:
             if browser_name == "edge":
@@ -77,7 +123,6 @@ def initialize_driver():
                 else:
                     driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()), options=options)
                 driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-            
             elif browser_name == "chrome":
                 options = webdriver.ChromeOptions()
                 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36")
@@ -88,7 +133,6 @@ def initialize_driver():
                 options.add_argument("--window-size=1920,1080")
                 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
                 driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-            
             elif browser_name == "firefox":
                 options = webdriver.FirefoxOptions()
                 options.set_preference("general.useragent.override", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0")
@@ -96,27 +140,16 @@ def initialize_driver():
                 options.add_argument("--width=1920")
                 options.add_argument("--height=1080")
                 driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=options)
-            
             return driver
         except Exception as e:
             logging.warning(f"Failed to start {browser_name}: {e}")
             continue
-    
     raise Exception("Could not start any browser.")
 
-# Initialize driver
-try:
-    driver = initialize_driver()
-except Exception as e:
-    logging.error(f"Failed to initialize browser: {e}")
-    raise
-
-# Login URL
-login_url = "https://portalx.yzu.edu.tw/PortalSocialVB/Login.aspx"
-
 # Attempt login
-def attempt_login(username, password):
+def attempt_login(driver, username, password):
     try:
+        login_url = "https://portalx.yzu.edu.tw/PortalSocialVB/Login.aspx"
         driver.get(login_url)
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "Txt_UserID")))
         driver.refresh()
@@ -147,7 +180,7 @@ def attempt_login(username, password):
         return False
 
 # Click element by ID
-def click_by_id(element_id):
+def click_by_id(driver, element_id):
     try:
         element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, element_id)))
         if element_id == "MainBar_ibnChangeVersion":
@@ -165,13 +198,13 @@ def click_by_id(element_id):
         return False
 
 # Scrape activities
-def scrape_activities(line_id, student_id):
+def scrape_activities(driver, line_id, student_id):
     try:
-        if not click_by_id("MainBar_ibnChangeVersion"):
+        if not click_by_id(driver, "MainBar_ibnChangeVersion"):
             return False
-        if not click_by_id("tdP4"):
+        if not click_by_id(driver, "tdP4"):
             return False
-        if not click_by_id("linkAlreadyRegistry"):
+        if not click_by_id(driver, "linkAlreadyRegistry"):
             return False
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "table_1")))
         soup = BeautifulSoup(driver.page_source, "html.parser")
@@ -182,26 +215,31 @@ def scrape_activities(line_id, student_id):
             cells = row.find_all("td")
             subject = cells[1].find("a").get_text(strip=True)
             date = cells[2].get_text(separator=" ", strip=True)
-
+            end_datetime = parse_date(date)
             try:
-                data = {"LineID": line_id , "UserID": student_id, "ActName": subject, "ActDate": date}
+                data = {
+                    "LineID": line_id,
+                    "UserID": student_id,
+                    "ActName": subject,
+                    "ActDate": date,
+                    "end_datetime": end_datetime
+                }
                 response = supabase.table("Activity table").insert(data).execute()
                 if response.data:
-                    logging.info(f"Inserted activity for {student_id}: {subject}, Date: {date}")
+                    logging.info(f"Inserted activity for {student_id}: {subject}, Date: {date}, End: {end_datetime}")
                 else:
                     logging.warning(f"Insert failed for {student_id}: {response}")
             except Exception as e:
                 logging.warning(f"Insert failed for {student_id}: {e}")
-                
         return True
     except Exception as e:
         logging.warning(f"Failed to scrape activities for {student_id}: {e}")
         return False
 
 # Scrape assignments
-def scrape_assignments(line_id, student_id):
+def scrape_assignments(driver, line_id, student_id):
     try:
-        if not click_by_id("MainBar_ibnChangeVersion"):
+        if not click_by_id(driver, "MainBar_ibnChangeVersion"):
             return False
         WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#divTasks table")))
         time.sleep(2)
@@ -223,53 +261,70 @@ def scrape_assignments(line_id, student_id):
             title = td.find("a").get_text(strip=True) if td.find("a") else "Unknown Title"
             time_range = table.find_next(string=lambda text: text and "時間：" in text)
             time_range = time_range.replace("時間：", "").strip() if time_range else "No Time Range"
-            
+            end_datetime = parse_date(time_range)
             try:
-                data = {"LineID": line_id, "UserID": student_id, "AsName": title, "AsDate": time_range}
+                data = {
+                    "LineID": line_id,
+                    "UserID": student_id,
+                    "AsName": title,
+                    "AsDate": time_range,
+                    "end_datetime": end_datetime
+                }
                 response = supabase.table("Assignment table").insert(data).execute()
                 if response.data:
-                    logging.info(f"Inserted assignments for {student_id}: {title}, Duration: {time_range}")
+                    logging.info(f"Inserted assignment for {student_id}: {title}, Duration: {time_range}, End: {end_datetime}")
                 else:
                     logging.warning(f"Insert failed for {student_id}: {response}")
             except Exception as e:
                 logging.warning(f"Insert failed for {student_id}: {e}")
-
         logging.info(f"Scraped assignments successfully for {student_id}.")
         return True
     except Exception as e:
         logging.warning(f"Failed to scrape assignments for {student_id}: {e}")
         return False
 
-# Main execution
-try:
-    response = supabase.table("Login data").select("LineID, StID, Ps").execute()
-    if not response.data:
-        raise Exception("No credentials found.")
-    student_credentials = response.data
-    max_attempts = 3
-    for student in student_credentials:
-        lineid = student["LineID"]
-        username = student["StID"]
-        undecryptpassword = student["Ps"]
-        undecryptpassword = ast.literal_eval(undecryptpassword)
-        password = cypher.decrypt(undecryptpassword).decode()
-        logging.info(f"Processing student {username}...")
-        for attempt in range(max_attempts):
-            if attempt_login(username, password):
-                option = "assignments"
-                scrapers = {
-                    "activities": lambda: scrape_activities(lineid, username),
-                    "assignments": lambda: scrape_assignments(lineid, username)
-                }
-                scraper = scrapers.get(option, lambda: logging.error("Invalid option"))
-                scraper()
-                break
-            logging.warning(f"Retrying login for {username}...")
-        else:
-            logging.warning(f"All login attempts failed for {username}.")
-        WebDriverWait(driver, 5).until(lambda d: d.execute_script("return document.readyState") == "complete")
-except Exception as e:
-    logging.error(f"Error: {e}")
-finally:
-    logging.info("Closing browser...")
-    driver.quit()
+def main():
+    logging.info("Starting page_scraping.py execution...")
+    try:
+        driver = initialize_driver()
+        try:
+            clean_old_records()
+            response = supabase.table("Login data").select("LineID, StID, Ps").execute()
+            if not response.data:
+                raise Exception("No credentials found.")
+            student_credentials = response.data
+            max_attempts = 3
+            for student in student_credentials:
+                lineid = student["LineID"]
+                username = student["StID"]
+                undecryptpassword = student["Ps"]
+                undecryptpassword = ast.literal_eval(undecryptpassword)
+                password = cypher.decrypt(undecryptpassword).decode()
+                logging.info(f"Processing student {username}...")
+                for attempt in range(max_attempts):
+                    if attempt_login(driver, username, password):
+                        option = "assignments"
+                        scrapers = {
+                            "activities": lambda: scrape_activities(driver, lineid, username),
+                            "assignments": lambda: scrape_assignments(driver, lineid, username)
+                        }
+                        scraper = scrapers.get(option, lambda: logging.error("Invalid option"))
+                        scraper()
+                        break
+                    logging.warning(f"Retrying login for {username}...")
+                else:
+                    logging.warning(f"All login attempts failed for {username}.")
+                WebDriverWait(driver, 5).until(lambda d: d.execute_script("return document.readyState") == "complete")
+        finally:
+            logging.info("Closing browser...")
+            driver.quit()
+        logging.info("Scheduler started for page_scraping.py, running every 3 minutes.")
+    except Exception as e:
+        logging.error(f"Error in page_scraping.py: {e}")
+
+if __name__ == "__main__":
+    main() 
+    schedule.every(3).minutes.do(main)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
