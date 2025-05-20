@@ -58,11 +58,11 @@ def main():
     logging.info("Starting deduplicate_tables.py execution...")
     try:
         # Deduplicate Activity table
-        activity_unique_fields = ["UserID", "ActName", "ActDate"]
+        activity_unique_fields = ["UserID", "ActivityName", "ActivityDate"]
         deduplicate_table("Activity table", activity_unique_fields)
 
         # Deduplicate Assignment table
-        assignment_unique_fields = ["UserID", "AsName", "AsDate"]
+        assignment_unique_fields = ["UserID", "AssignmentName", "AssignmentDate"]
         deduplicate_table("Assignment table", assignment_unique_fields)
         logging.info("Scheduler started for deduplicate_tables.py, running every 3 minutes.")
     except Exception as e:

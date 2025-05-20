@@ -46,48 +46,6 @@ supabase: Client = create_client(supabase_url, supabase_key)
 logging.getLogger('httpx').setLevel(logging.WARNING)
 logging.getLogger('WDM').setLevel(logging.WARNING)
 
-# Parse date string to timestamp
-def parse_date(date_str):
-    try:
-        end_part = date_str.split('~')[-1].strip()
-        if '.' in end_part and ('下午' in end_part or '上午' in end_part):
-            match = re.match(r'(\d{4}\.\d{2}\.\d{2}).*?(上午|下午)\s*(\d{2}:\d{2})', end_part)
-            if not match:
-                raise ValueError(f"Invalid ActDate format: {end_part}")
-            date_str, period, time_str = match.groups()
-            date = datetime.strptime(f"{date_str} {time_str}", "%Y.%m.%d %H:%M")
-            if period == '下午' and date.hour < 12:
-                date = date.replace(hour=date.hour + 12)
-            elif period == '上午' and date.hour == 12:
-                date = date.replace(hour=0)
-            date = date.replace(tzinfo=timezone(timedelta(hours=8)))
-            return date.isoformat()
-        elif '/' in end_part:
-            date = datetime.strptime(end_part.strip(), "%Y/%m/%d %H:%M")
-            date = date.replace(tzinfo=timezone(timedelta(hours=8)))
-            return date.isoformat()
-        raise ValueError(f"Unknown date format: {end_part}")
-    except Exception as e:
-        logging.warning(f"Failed to parse date '{date_str}': {e}")
-        return None
-
-# Clean old records from Supabase
-def clean_old_records():
-    try:
-        current_time = datetime.now(timezone(timedelta(hours=8))).isoformat()
-        response = supabase.table("Activity table")\
-            .delete()\
-            .lt("end_datetime", current_time)\
-            .execute()
-        logging.info(f"Deleted {len(response.data)} outdated activities.")
-        response = supabase.table("Assignment table")\
-            .delete()\
-            .lt("end_datetime", current_time)\
-            .execute()
-        logging.info(f"Deleted {len(response.data)} outdated assignments.")
-    except Exception as e:
-        logging.error(f"Failed to clean old records: {e}")
-
 # Detect available browsers
 def detect_browser():
     edge_path = Path("C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe")
@@ -179,6 +137,48 @@ def attempt_login(driver, username, password):
         logging.warning(f"Login failed for {username}: {e}")
         return False
 
+# Parse date string to timestamp
+def parse_date(date_str):
+    try:
+        end_part = date_str.split('~')[-1].strip()
+        if '.' in end_part and ('下午' in end_part or '上午' in end_part):
+            match = re.match(r'(\d{4}\.\d{2}\.\d{2}).*?(上午|下午)\s*(\d{2}:\d{2})', end_part)
+            if not match:
+                raise ValueError(f"Invalid ActDate format: {end_part}")
+            date_str, period, time_str = match.groups()
+            date = datetime.strptime(f"{date_str} {time_str}", "%Y.%m.%d %H:%M")
+            if period == '下午' and date.hour < 12:
+                date = date.replace(hour=date.hour + 12)
+            elif period == '上午' and date.hour == 12:
+                date = date.replace(hour=0)
+            date = date.replace(tzinfo=timezone(timedelta(hours=8)))
+            return date.isoformat()
+        elif '/' in end_part:
+            date = datetime.strptime(end_part.strip(), "%Y/%m/%d %H:%M")
+            date = date.replace(tzinfo=timezone(timedelta(hours=8)))
+            return date.isoformat()
+        raise ValueError(f"Unknown date format: {end_part}")
+    except Exception as e:
+        logging.warning(f"Failed to parse date '{date_str}': {e}")
+        return None
+
+# Clean old records from Supabase
+def clean_old_records():
+    try:
+        current_time = datetime.now(timezone(timedelta(hours=8))).isoformat()
+        response = supabase.table("Activity table")\
+            .delete()\
+            .lt("end_datetime", current_time)\
+            .execute()
+        logging.info(f"Deleted {len(response.data)} outdated activities.")
+        response = supabase.table("Assignment table")\
+            .delete()\
+            .lt("end_datetime", current_time)\
+            .execute()
+        logging.info(f"Deleted {len(response.data)} outdated assignments.")
+    except Exception as e:
+        logging.error(f"Failed to clean old records: {e}")
+
 # Click element by ID
 def click_by_id(driver, element_id):
     try:
@@ -220,8 +220,8 @@ def scrape_activities(driver, line_id, student_id):
                 data = {
                     "LineID": line_id,
                     "UserID": student_id,
-                    "ActName": subject,
-                    "ActDate": date,
+                    "ActivityName": subject,
+                    "ActivityDate": date,
                     "end_datetime": end_datetime
                 }
                 response = supabase.table("Activity table").insert(data).execute()
@@ -266,8 +266,8 @@ def scrape_assignments(driver, line_id, student_id):
                 data = {
                     "LineID": line_id,
                     "UserID": student_id,
-                    "AsName": title,
-                    "AsDate": time_range,
+                    "AssignmentName": title,
+                    "AssignmentDate": time_range,
                     "end_datetime": end_datetime
                 }
                 response = supabase.table("Assignment table").insert(data).execute()
