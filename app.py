@@ -10,6 +10,7 @@ load_dotenv()
 
 from flask import Flask, request, abort
 from cryptography.fernet import Fernet
+from mldupe import main
 from transformers import pipeline
 from supabase import create_client, Client
 
@@ -109,16 +110,12 @@ def handle_text_message(event: MessageEvent):
         app.logger.info(f"Handling text message: '{input_text}' with token {event.reply_token[:10]}...")
 
         # all input messages will be processed here
-        label = classify(input_text)
+        #label = classify(input_text)
         if "echo" in event.message.text:
             output_text = event.message.text.lower().replace("echo", "", 1).strip()
-        
-        elif label == "others":
-            output_text = f"I received '{input_text}'. Please try something else."
 
         else:
-            output_text = supafetch(label, event.source.user_id)
-
+            output_text = main(event.message.text, event.source.user_id)
 
         # --- v3 Replying ---
         try:

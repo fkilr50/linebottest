@@ -11,7 +11,8 @@ bart-finetuned/
 *.pyc
 
 totestthings.py
-reminder.py
 totestthings2.py
+
+tempCodeRunnerFile.py
 
 debug_menu.html
