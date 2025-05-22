@@ -2,7 +2,7 @@ import os   # app.py
 import logging
 import schedule as s
 
-from scrapper2 import * # tanya gemini bsk ini maksudnya paa apakah semuanya jadi ke run gt
+from page_scraping import attempt_login # tanya gemini bsk ini maksudnya paa apakah semuanya jadi ke run gt
 from functools import reduce
 from dotenv import load_dotenv
 load_dotenv()
@@ -110,7 +110,7 @@ def handle_text_message(event: MessageEvent):
 
         # all input messages will be processed here
         label = classify(input_text)
-        if label == "echo":
+        if "echo" in event.message.text:
             output_text = event.message.text.lower().replace("echo", "", 1).strip()
         
         elif label == "others":
@@ -156,43 +156,87 @@ def handle_follow_event(event: FollowEvent):
 
 def handle_new_user(event):
     user_id = event.source.user_id
-    text = event.message.text
-    portalid = ""
-    portalpass = ""
+    text = event.message.text 
 
-    user_data = newusers[user_id]
+    try:
+        response = (
+            supabase.table("temp login data")
+            .insert({"LineID": user_id})
+            .execute()
+        )
+    except Exception as e:
+                print(f"User has registered before\nerror code: {e}")
+                if hasattr(e, 'json') and callable(e.json):
+                    try:
+                        print(f"APIError details: {e.json()}")
+                    except:
+                        pass
+
+    #fetching past data
+    response = (
+        supabase.table("temp login data")
+        .select("StID", "Ps")
+        .eq("LineID", str(user_id))
+        .execute()
+    )
+    tempid =  response.data[0].get("StID") 
+    tempps =  response.data[0] .get("Ps") 
+
+    #user_data = newusers[user_id]
 
     response = "Sorry, I didn't understand. Please enter with the correct format"
 
-    if user_data["id"] is None and ("student" in text or "id" in text):
+    if tempid is None and ("student" in text or "id" in text):
         portalid = getid(text)
         if portalid:
-            newusers[user_id]["id"] = f"s{portalid}"
+            #newusers[user_id]["id"] = f"s{portalid}"
+            response = (
+                supabase.table("temp login data")
+                .update({"Ps": portalid})
+                .eq("LineID", user_id)
+                .execute()
+            )
             response = f"Student ID received.\n({portalid})"
         else:
             response = "Could not extract ID. Please use the format: 'student id: 1123xxx'"
 
-    if user_data["pass"] is None and ("pass" in text or "password" in text):
+    if tempps is None and ("pass" in text or "password" in text):
         portalpass = getpass(text)
         #app.logger.info(f"portalpass adalah: {portalpass}")
         if portalpass:
-            newusers[user_id]["pass"] = portalpass
+            #newusers[user_id]["pass"] = portalpass
+            
+            response = (
+                supabase.table("temp login data")
+                .update({"Ps": portalpass})
+                .eq("LineID", user_id)
+                .execute()
+            )
             response = f"Password received.\n({portalpass})"
             #app.logger.info(f"portalpass adalah: {newusers[user_id]["pass"]}")
         else:
             response = "Could not extract password. Try: 'password: abc123'"
-    
 
-    # After both are collected
-    if newusers[user_id]["id"] and newusers[user_id]["pass"]:
-        app.logger.info(f"User {user_id} registering with ID: {user_data['id']}")
-        if attempt_login(user_data['id'], user_data['pass']) == True:
+    #   refresh with new data
+    response = (
+        supabase.table("temp login data")
+        .select("StID", "Ps")
+        .eq("LineID", str(user_id))
+        .execute()
+    )
+    tempid =  response.data[0].get("StID") 
+    tempps =  response.data[0] .get("Ps") 
+
+    # after both are collected
+    if tempid and tempps["pass"]:
+        app.logger.info(f"User {user_id} registering with ID: {tempid}")
+        if attempt_login(tempid, tempps) == True:
             
-            encpass = enkrip(user_data['pass'])
+            encpass = enkrip(tempps)
             try:
                 datatobeinserted = {
                     "LineID": user_id,
-                    "StID": user_data['id'],
+                    "StID": tempid,
                     "Ps": encpass
                 }
 
@@ -217,12 +261,23 @@ def handle_new_user(event):
                     except:
                         pass
 
+            #response = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
+            #del newusers[user_id]
+            response = (
+                supabase.table("temp login data")
+                .delete()
+                .eq("LineID", user_id)
+                .execute()
+            )   
             response = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
-            del newusers[user_id]
         else:
+            response = (
+                supabase.table("temp login data")
+                .update({"Ps": None, "StID": None})
+                .eq("LineID", user_id)
+                .execute()
+            )
             response = "Failed to login with current StudentID and Password, please recheck and try again."
-            newusers[user_id]['id'] = None
-            newusers[user_id]['pass'] = None
 
     # Reply
     reply_request = ReplyMessageRequest(
@@ -263,9 +318,9 @@ def getpass(string):
 def classify(line):
     res = classifier(
         line,
-        candidate_labels = ["assignments", "activities", "other", "echo"]
+        candidate_labels = ["assignments", "activities", "other"]
     )
-
+    app.logger.info(f"res adalah: {res}")
     largest = reduce(max, res["scores"])
     for i in range (0, len(res["labels"]), 1):
         if res["scores"][i] == largest:
