@@ -43,8 +43,7 @@ training_data = [
     ("有哪些活動？", "activities"),
     ("列出我的作業", "assignments"),
     ("顯示我的活動", "activities"),
-    ("echo", "echo")
-    ("", "other")
+    (" ", "other")
 ]
 
 # Prepare data
@@ -202,11 +201,9 @@ def generate_ml_sentence(prompt, classification, items):
             items_text = "; ".join([f"{item['name']} due {item['date']}" for item in items])
         elif classification == "activities":
             items_text = "; ".join([f"{item['name']} from {item['date']}" for item in items])
-        #elif classification == "echo"
-         #   items_text = event.message.text.lower().replace("echo", "", 1).strip()
         else:
             items_text = "Sorry I don't understand your input"
-        
+                    
         input_text = (
             f"Summarize the {type_label_plural} in a {tone} tone for prompt '{prompt}'. "
             f"Use 24-hour time format and short sentences. List all items. "
@@ -280,13 +277,12 @@ def classify_prompt(prompt, line_id):
         logging.error(f"Failed to classify prompt '{prompt}': {e}")
         return None, None
 
-def main(lineid, string):
+def main(prompt, lineid):
     """
     Main function to test the classifier.
     """
     logging.info("Starting ml_classifier.py execution...")
     try:
-        prompt= string
         result, sentence = classify_prompt(prompt, lineid)
         if result:
             return sentence
