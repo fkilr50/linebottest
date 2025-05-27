@@ -11,7 +11,7 @@ load_dotenv()
 from flask import Flask, request, abort
 from cryptography.fernet import Fernet
 from ml_classifier import main
-from transformers import pipeline
+# from transformers import pipeline
 from supabase import create_client, Client
 
 url: str = os.environ.get("SUPABASE_URL")
@@ -43,7 +43,7 @@ from linebot.v3.messaging import (
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
-classifier = pipeline("zero-shot-classification")
+#classifier = pipeline("zero-shot-classification")
 
 key: str = os.environ.get("FKEY")
 key_bytes = key.encode('utf-8')
@@ -312,7 +312,7 @@ def getpass(string):
     return pword 
 
 
-def classify(line):
+"""def classify(line):
     res = classifier(
         line,
         candidate_labels = ["assignments", "activities", "other"]
@@ -323,7 +323,7 @@ def classify(line):
         if res["scores"][i] == largest:
             hasil = res["labels"][i]
     print(hasil)
-    return str(hasil)
+    return str(hasil)"""
 
 def enkrip(password):
     password = password.encode()
