@@ -10,7 +10,7 @@ load_dotenv()
 
 from flask import Flask, request, abort
 from cryptography.fernet import Fernet
-from mldupe import main
+from ml_classifier import main
 from transformers import pipeline
 from supabase import create_client, Client
 
