@@ -303,13 +303,13 @@ def main():
                 logging.info(f"Processing student {username}...")
                 for attempt in range(max_attempts):
                     if attempt_login(driver, username, password):
-                        option = "assignments"
                         scrapers = {
+                            "assignments": lambda: scrape_assignments(driver, lineid, username),
                             "activities": lambda: scrape_activities(driver, lineid, username),
-                            "assignments": lambda: scrape_assignments(driver, lineid, username)
                         }
-                        scraper = scrapers.get(option, lambda: logging.error("Invalid option"))
-                        scraper()
+                        for option, scraper in scrapers.items():
+                            logging.info(f"Scraping {option} for {username}...")
+                            scraper()
                         break
                     logging.warning(f"Retrying login for {username}...")
                 else:
