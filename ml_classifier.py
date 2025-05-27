@@ -454,40 +454,44 @@ def classify_prompt(prompt, line_id):
         logging.error(f"Failed to classify prompt '{prompt}': {e}")
         return None, None
 
-def main():
+def main(prompt, lineid):
     """
     Main function to test the classifier.
     """
     logging.info("Starting ml_classifier.py execution...")
     try:
-        test_line_id = "U2d05e1777e259a7a068e91b5f33c942e"
-        test_prompts = [
-            "What homework do I have?",
-            "Show me my upcoming events",
-            "Any tasks due soon?",
-            "List activities for this week",
-            "顯示我的作業",
-            "有哪些活動？",
-            "What are my HW?",
-            "What assignment has the nearest deadline?",
-            "What activity is happening soonest?",
-            "最近的作業是什麼？",
-            "最近的活動是什麼？",
-            "When is the deadline for IN208?",
-            "Due date for IN210?",
-            "演算法概論課程的作業何時到期？",
-            "組合語言與計算機組織課程的作業何時到期？",
-            "What’s the due date for IN211?",
-            "Due date for Introduction to Algorithm?",
-            "When is the deadline for Information Privacy?",
-            "作業系統導論的作業何時到期？"
-        ]
+        # test_line_id = "U2d05e1777e259a7a068e91b5f33c942e"
+        # test_prompts = [
+        #     "What homework do I have?",
+        #     "Show me my upcoming events",
+        #     "Any tasks due soon?",
+        #     "List activities for this week",
+        #     "顯示我的作業",
+        #     "有哪些活動？",
+        #     "What are my HW?",
+        #     "What assignment has the nearest deadline?",
+        #     "What activity is happening soonest?",
+        #     "最近的作業是什麼？",
+        #     "最近的活動是什麼？",
+        #     "When is the deadline for IN208?",
+        #     "Due date for IN210?",
+        #     "演算法概論課程的作業何時到期？",
+        #     "組合語言與計算機組織課程的作業何時到期？",
+        #     "What’s the due date for IN211?",
+        #     "Due date for Introduction to Algorithm?",
+        #     "When is the deadline for Information Privacy?",
+        #     "作業系統導論的作業何時到期？"
+        # ]
         
-        for prompt in test_prompts:
-            result, sentence = classify_prompt(prompt, test_line_id)
-            if not result:
-                logging.warning(f"No classification result for prompt: '{prompt}'")
-                
+        # for prompt in test_prompts:
+        #     result, sentence = classify_prompt(prompt, test_line_id)
+        #     if not result:
+        #         logging.warning(f"No classification result for prompt: '{prompt}'")
+        result, sentence = classify_prompt(prompt, lineid)
+        if result:
+            return sentence
+        else:
+            logging.warning(f"No classification result for prompt: '{prompt}'")       
     except Exception as e:
         logging.error(f"Error in ml_classifier.py: {e}")
 
