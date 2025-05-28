@@ -106,6 +106,7 @@ def initialize_driver():
 
 # Attempt login
 def attempt_login(driver, username, password):
+    logging.info(f"Logging with {username}")
     try:
         login_url = "https://portalx.yzu.edu.tw/PortalSocialVB/Login.aspx"
         driver.get(login_url)

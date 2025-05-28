@@ -2,8 +2,7 @@ import os   # app.py
 import logging
 import schedule as s
 
-from page_scraping import attempt_login # tanya gemini bsk ini maksudnya paa apakah semuanya jadi ke run gt
-from functools import reduce
+from page_scraping import attempt_login, initialize_driver # tanya gemini bsk ini maksudnya paa apakah semuanya jadi ke run gt
 from dotenv import load_dotenv
 load_dotenv()
 #print(f"load_dotenv() executed. Found and loaded .env")
@@ -36,8 +35,7 @@ from linebot.v3.messaging import (
     MessagingApi,
     ReplyMessageRequest,
     TextMessage,
-    PushMessageRequest,
-    PushMessageResponse
+    PushMessageRequest
 )
 
 app = Flask(__name__)
@@ -57,8 +55,6 @@ parser = WebhookParser(channel_secret=os.getenv("CHANNEL_SECRET"))
 @app.route("/")
 def index():
     return "LINE bot is running!"
-
-newusers = {}
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -90,11 +86,9 @@ def callback():
                 print("It's not a TextMessageContent from user")
         elif isinstance(event, FollowEvent):
             # Bot has been added, asks for id and pass
-            newusers[event.source.user_id] = {"id": None, "pass": None}
             handle_follow_event(event)
-            continue
         else:
-            print("UNhandled event)")
+            print("Unhandled event)")
 
     return 'OK'
 
@@ -102,10 +96,15 @@ def callback():
 # huggingface input and output in this function
 def handle_text_message(event: MessageEvent): 
     print("Received message:", event.message.text)
-    if event.source.user_id in newusers:
-        handle_new_user(event)
+    
+    response = (
+        supabase.table("Login data")
+        .select("LineID")
+        .eq("LineID", event.source.user_id)
+        .execute()
+    )
 
-    else:
+    if response.data:
         input_text = event.message.text
         app.logger.info(f"Handling text message: '{input_text}' with token {event.reply_token[:10]}...")
 
@@ -132,11 +131,11 @@ def handle_text_message(event: MessageEvent):
         except Exception as e:
             # Log any errors during the reply process
             app.logger.error(f"Failed to send reply for token {event.reply_token[:10]}...: {e}")
-
+    else:
+        handle_new_user(event)
 
 def handle_follow_event(event: FollowEvent):
     userid = event.source.user_id
-    newusers[event.source.user_id] = {"id": None, "pass": None}
 
     print("Bot has been added by:", userid)
     #push greeting message
@@ -181,7 +180,7 @@ def handle_new_user(event):
 
     #user_data = newusers[user_id]
 
-    response = "Sorry, I didn't understand. Please enter with the correct format"
+    output_text = "Sorry, I didn't understand. Please enter with the correct format"
 
     if tempid is None and ("student" in text or "id" in text):
         portalid = getid(text)
@@ -189,13 +188,13 @@ def handle_new_user(event):
             #newusers[user_id]["id"] = f"s{portalid}"
             response = (
                 supabase.table("temp login data")
-                .update({"Ps": portalid})
+                .update({"StID": portalid})
                 .eq("LineID", user_id)
                 .execute()
             )
-            response = f"Student ID received.\n({portalid})"
+            output_text = f"Student ID received.\n({portalid})"
         else:
-            response = "Could not extract ID. Please use the format: 'student id: 1123xxx'"
+            output_text = "Could not extract ID. Please use the format: 'student id: 1123xxx'"
 
     if tempps is None and ("pass" in text or "password" in text):
         portalpass = getpass(text)
@@ -209,10 +208,10 @@ def handle_new_user(event):
                 .eq("LineID", user_id)
                 .execute()
             )
-            response = f"Password received.\n({portalpass})"
+            output_text = f"Password received.\n({portalpass})"
             #app.logger.info(f"portalpass adalah: {newusers[user_id]["pass"]}")
         else:
-            response = "Could not extract password. Try: 'password: abc123'"
+            output_text = "Could not extract password. Try: 'password: abc123'"
 
     #   refresh with new data
     response = (
@@ -225,9 +224,10 @@ def handle_new_user(event):
     tempps =  response.data[0] .get("Ps") 
 
     # after both are collected
-    if tempid and tempps["pass"]:
+    if tempid and tempps:
         app.logger.info(f"User {user_id} registering with ID: {tempid}")
-        if attempt_login(tempid, tempps) == True:
+        driver = initialize_driver()
+        if attempt_login(driver, tempid, tempps) == True:
             
             encpass = enkrip(tempps)
             try:
@@ -266,7 +266,7 @@ def handle_new_user(event):
                 .eq("LineID", user_id)
                 .execute()
             )   
-            response = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
+            output_text = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
         else:
             response = (
                 supabase.table("temp login data")
@@ -274,12 +274,12 @@ def handle_new_user(event):
                 .eq("LineID", user_id)
                 .execute()
             )
-            response = "Failed to login with current StudentID and Password, please recheck and try again."
+            output_text = "Failed to login with current StudentID and Password, please recheck and try again."
 
     # Reply
     reply_request = ReplyMessageRequest(
         reply_token = event.reply_token,
-        messages = [TextMessage(text = response)]
+        messages = [TextMessage(text = output_text)]
     )
     line_bot_api.reply_message(reply_request)
 
@@ -292,7 +292,7 @@ def getid(string):
             y = len(string) - x
             for i in range (len(string) - y, (len(string)- y) + 7, 1):
                 stid += string[i]
-            return stid
+            return 's' + stid
         except: 
             return None
     else:
