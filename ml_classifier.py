@@ -44,7 +44,7 @@ COURSE_MAPPING = {
     },
 }
 
-# Example dataset for training
+# dataset for training
 training_data = [
     ("Show me my assignments", "assignments"),
     ("List my homework", "assignments"),
@@ -53,7 +53,6 @@ training_data = [
     ("Check my homework", "assignments"),
     ("What are my HW?", "assignments"),
     ("Show my HW", "assignments"),
-
     ("Gimme my homework", "assignments"),
     ("What activities are coming up?", "activities"),
     ("List my events", "activities"),
@@ -65,13 +64,6 @@ training_data = [
     ("What assignment has the nearest deadline?", "nearest_assignments"),
     ("Which homework is due soonest?", "nearest_assignments"),
     ("Show me my closest task", "nearest_assignments"),
-    ("Show me my closest task", "nearest_assignments"),
-    ("Show me my closest task", "nearest_assignments"),
-    ("Show me my closest task", "nearest_assignments"),
-    ("Show me my closest task", "nearest_assignments"),
-    ("Show me my closest task", "nearest_assignments"),
-    ("Show me my closest task", "nearest_assignments"),
-    ("show me my tasks", "assignments"),
     ("show me my tasks", "assignments"),
     ("What’s my next assignment?", "nearest_assignments"),
     ("What activity is happening soonest?", "nearest_activities"),
@@ -81,9 +73,6 @@ training_data = [
     ("顯示我的作業", "assignments"),
     ("有哪些活動？", "activities"),
     ("列出我的作業", "assignments"),
-    ("give me my activities", "activities"),
-    ("give me my activities", "activities"),
-    ("give me my activities", "activities"),
     ("give me my activities", "activities"),
     ("最近的作業是什麼？", "nearest_assignments"),
     ("哪個作業最快到期？", "nearest_assignments"),
@@ -107,6 +96,20 @@ training_data = [
     ("資訊隱私的作業到期日？", "course_due_date"),
     ("作業系統導論的作業何時到期？", "course_due_date"),
     ("機率與統計課程的作業到期日？", "course_due_date"),
+    # greeting prompts
+    ("hi", "greeting"),
+    ("hello", "greeting"),
+    ("who are you?", "greeting"),
+    ("what’s up?", "greeting"),
+    ("who’s this?", "greeting"),
+    ("你好", "greeting"),
+    ("你是誰？", "greeting"),
+    # other prompts
+    ("what can you do?", "capabilities"),
+    ("what do you do?", "capabilities"),
+    ("what’s your job?", "capabilities"),
+    ("你會做什麼？", "capabilities"),
+    ("可以幫我什麼？", "capabilities"),
 ]
 
 # Prepare data
@@ -266,7 +269,9 @@ def fetch_data(line_id, classification, course_id=None):
 
 def generate_ml_sentence(prompt, classification, items, course_id=None):
     """
-    Generate a natural sentence using bart-base, ensuring all items are listed.
+    Generate a natural sentence using bart-base or fixed responses, ensuring all items are listed.
+    - Greeting: Return a playful introduction for WaiZiYu.
+    - Capabilities: Describe WaiZiYu's features.
     - Assignments: Use "[name] is due on [day], [date], [time]."
     - Activities: Use "[name] on [day], [date], from [start_time] to [end_time]."
     - Nearest: Use "Your nearest [type] is [name], due on..." or "...on [day], [date], from..."
@@ -282,7 +287,7 @@ def generate_ml_sentence(prompt, classification, items, course_id=None):
             in ("assignments", "nearest_assignments", "course_due_date")
             else "activity"
         )
-        count = len(items)
+        count = len(items) if classification not in ("greeting", "capabilities") else 0
         type_label_plural = (
             type_label
             if is_nearest or is_course_due
@@ -316,6 +321,23 @@ def generate_ml_sentence(prompt, classification, items, course_id=None):
         def fix_chinese_spacing(text):
             return re.sub(r"預\s*定於", "預定於", text)
 
+        # Handle greeting classification
+        if classification == "greeting":
+            if is_chinese:
+                return fix_chinese_spacing(
+                    "嗨！我是WaiZiYu，你的元智好夥伴！為YOU而生，幫你搞定作業和活動~ 一起展現元智精神！😎 有什麼想問的？"
+                )
+            return "Hey there! I’m WaiZiYu, your YZU buddy! Made for YOU to ace your assignments and activities~ Let’s soar with YZU spirit! 😎 What’s up?"
+
+        # Handle capabilities classification
+        if classification == "capabilities":
+            if is_chinese:
+                return fix_chinese_spacing(
+                    "我是WaiZiYu，你的元智小助手！能幫你查作業、列活動、找最近的截止日期，還能回課程問題。問我吧，我超快！🚀 你需要啥？"
+                )
+            return "I’m WaiZiYu, your YZU sidekick! I can fetch your assignments, list upcoming events, find your nearest deadlines, and answer course questions. Just ask, and I’ll zip it to you! 🚀 What do you need?"
+
+        # Existing logic for other classifications
         if not items:
             if is_course_due:
                 course_name = COURSE_MAPPING.get(course_id.upper(), {}).get(
