@@ -139,7 +139,7 @@ def handle_follow_event(event: FollowEvent):
 
     print("Bot has been added by:", userid)
     #push greeting message
-    output_text = "Hello, I am testBotN.\nPlease state your portal id and pass each in one different message with the following format;\n\nstudent id: 1123xxx\npassword: 123xx" 
+    output_text = "Hello, I am testBotN.\nPlease state whether you are a \"Student\" or \"Professor\"." 
 
     push_request = PushMessageRequest(
         to = userid,
@@ -148,35 +148,182 @@ def handle_follow_event(event: FollowEvent):
 
     line_bot_api.push_message(push_request)
     app.logger.info(f"Successfully sent: '{output_text}'")
-    
 
+    
 def handle_new_user(event):
+    text = event.message.text.lower()
+    response1 = (
+        supabase.table("temp student login data")
+        .select("LineID")
+        .eq("LineID", event.source.user_id)
+        .execute()
+    )
+
+    response2 = (
+        supabase.table("temp professor login data")
+        .select("LineID")
+        .eq("LineID", event.source.user_id)
+        .execute()
+    )
+
+    if response1.data:
+        handle_new_user_student(event)
+    elif response2.data:
+        handle_new_user_professor(event)
+    else: 
+        if "student" in text:
+            response = (
+                supabase.table("temp student login data")
+                .insert({"LineID": event.source.user_id})
+                .execute()
+            )
+            output_text = "Please state your portal id and password EACH IN ONE SEPARATE MESSAGE:) with the following format;\n\nstudent id: 1123xxx\npassword: 123xx"
+
+        elif "professor" in text:
+            response = (
+                supabase.table("temp professor login data")
+                .insert({"LineID": event.source.user_id})
+                .execute()
+            )
+            output_text = output_text = "Please state your portal id and password each in one separate message with the following format;\n\nprofessor id: 1123xxx\npassword: 123xx"
+
+        else:
+            output_text = "Text not recognized.\nPlease state whether you are a \"Student\" or \"Professor\"."
+        
+        reply_request = ReplyMessageRequest(
+            reply_token = event.reply_token,     
+            messages = [TextMessage(text = output_text)] # Messages must be in a list
+        )
+        line_bot_api.reply_message(reply_request)
+        app.logger.info(f"Successfully replied: '{output_text}'")
+
+def handle_new_user_professor(event):
     user_id = event.source.user_id
     text = event.message.text 
 
-    try:
-        response = (
-            supabase.table("temp login data")
-            .insert({"LineID": user_id})
-            .execute()
-        )
-    except Exception as e:
-                print(f"User has registered before\nerror code: {e}")
+    response = (
+        supabase.table("temp professor login data")
+        .select("PrID", "Ps")
+        .eq("LineID", str(user_id))
+        .execute()
+    )
+    tempid =  response.data[0].get("PrID") 
+    tempps =  response.data[0].get("Ps") 
+
+    output_text = "Sorry, I didn't understand. Please enter with the correct format"
+
+    if tempid is None and ("professor" in text or "id" in text):
+        portalid = getpid(text)
+        if portalid:
+            response = (
+                supabase.table("temp professor login data")
+                .update({"PrID": portalid})
+                .eq("LineID", user_id)
+                .execute()
+            )
+            output_text = f"Professor ID received.\n({portalid})"
+        else:
+            output_text = "Could not extract ID. Please use the format: 'professor id: 1123xxx'"
+
+    if tempps is None and ("pass" in text or "password" in text):
+        portalpass = getpass(text)
+        #app.logger.info(f"portalpass adalah: {portalpass}")
+        if portalpass:
+            response = (
+                supabase.table("temp professor login data")
+                .update({"Ps": portalpass})
+                .eq("LineID", user_id)
+                .execute()
+            )
+            output_text = f"Password received.\n({portalpass})"
+            #app.logger.info(f"portalpass adalah: {newusers[user_id]["pass"]}")
+        else:
+            output_text = "Could not extract password. Try: 'password: abc123'"
+
+    #   refresh with new data
+    response = (
+        supabase.table("temp professor login data")
+        .select("PrID", "Ps")
+        .eq("LineID", str(user_id))
+        .execute()
+    )
+    tempid =  response.data[0].get("PrID") 
+    tempps =  response.data[0] .get("Ps") 
+
+    # after both are collected
+    if tempid and tempps:
+        app.logger.info(f"User {user_id} registering with ID: {tempid}")
+        driver = initialize_driver()
+        if attempt_login(driver, tempid, tempps) == True:
+            
+            encpass = enkrip(tempps)
+            try:
+                datatobeinserted = {
+                    "LineID": user_id,
+                    "PrID": tempid,
+                    "Ps": encpass
+                }
+
+                response = (
+                    supabase.table("Login data")
+                    .insert(datatobeinserted)
+                    .execute()
+                )
+
+                if response.data:
+                    print(f"Successfully inserted data into supa: {response}")
+                else:
+                    print("Insert failed.")
+                    if hasattr(response, 'error') and response.error:
+                        print(f"Error details: {response.error.message}")
+
+            except Exception as e:
+                print(f"An error occurred: {e}")
                 if hasattr(e, 'json') and callable(e.json):
                     try:
                         print(f"APIError details: {e.json()}")
                     except:
                         pass
 
+            #response = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
+            #del newusers[user_id]
+            response = (
+                supabase.table("temp professor login data")
+                .delete()
+                .eq("LineID", user_id)
+                .execute()
+            )   
+            output_text = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
+        else:
+            response = (
+                supabase.table("temp professor login data")
+                .update({"Ps": None, "PrID": None})
+                .eq("LineID", user_id)
+                .execute()
+            )
+            output_text = "Failed to login with current StudentID and Password.\nPlease recheck and try again."
+
+    # Reply
+    reply_request = ReplyMessageRequest(
+        reply_token = event.reply_token,
+        messages = [TextMessage(text = output_text)]
+    )
+    line_bot_api.reply_message(reply_request)
+
+
+def handle_new_user_student(event):
+    user_id = event.source.user_id
+    text = event.message.text 
+
     #fetching past data
     response = (
-        supabase.table("temp login data")
+        supabase.table("temp student login data")
         .select("StID", "Ps")
         .eq("LineID", str(user_id))
         .execute()
     )
     tempid =  response.data[0].get("StID") 
-    tempps =  response.data[0] .get("Ps") 
+    tempps =  response.data[0].get("Ps") 
 
     #user_data = newusers[user_id]
 
@@ -187,7 +334,7 @@ def handle_new_user(event):
         if portalid:
             #newusers[user_id]["id"] = f"s{portalid}"
             response = (
-                supabase.table("temp login data")
+                supabase.table("temp student login data")
                 .update({"StID": portalid})
                 .eq("LineID", user_id)
                 .execute()
@@ -203,7 +350,7 @@ def handle_new_user(event):
             #newusers[user_id]["pass"] = portalpass
             
             response = (
-                supabase.table("temp login data")
+                supabase.table("temp student login data")
                 .update({"Ps": portalpass})
                 .eq("LineID", user_id)
                 .execute()
@@ -215,7 +362,7 @@ def handle_new_user(event):
 
     #   refresh with new data
     response = (
-        supabase.table("temp login data")
+        supabase.table("temp student login data")
         .select("StID", "Ps")
         .eq("LineID", str(user_id))
         .execute()
@@ -261,7 +408,7 @@ def handle_new_user(event):
             #response = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
             #del newusers[user_id]
             response = (
-                supabase.table("temp login data")
+                supabase.table("temp student login data")
                 .delete()
                 .eq("LineID", user_id)
                 .execute()
@@ -269,12 +416,12 @@ def handle_new_user(event):
             output_text = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
         else:
             response = (
-                supabase.table("temp login data")
+                supabase.table("temp student login data")
                 .update({"Ps": None, "StID": None})
                 .eq("LineID", user_id)
                 .execute()
             )
-            output_text = "Failed to login with current StudentID and Password, please recheck and try again."
+            output_text = "Failed to login with current StudentID and Password.\nPlease recheck and try again."
 
     # Reply
     reply_request = ReplyMessageRequest(
@@ -283,6 +430,18 @@ def handle_new_user(event):
     )
     line_bot_api.reply_message(reply_request)
 
+def getpid(string):
+    prid = ""
+    if any(sep in string.lower() for sep in ["=", ":", ";", "is"]):
+        x = string.find(':')
+        if string[x + 1] == ' ':
+            x += 1
+        for i in range (x + 1, len(string), 1):
+            if string[i] == ' ':
+                break
+            else:
+                prid += string[i]
+    return prid
 
 def getid(string):
     stid = ""
@@ -329,27 +488,6 @@ def enkrip(password):
     password = password.encode()
     token = cypher.encrypt(password) 
     return str(token)
-
-# feed data ini semua ke huggingface lalu huggingface return response
-def supafetch(label, userid):
-    app.logger.info(f"fetching data from thebase")
-    if label == "assignments":
-        response = (
-        supabase.table("Filtered Assignment table")
-        .select("AsName")
-        .eq("LineID", str(userid))
-        .execute()
-        )
-
-    else:
-        response = (
-        supabase.table("Filtered Activity table")
-        .select("ActName")
-        .eq("LineID", str(userid))
-        .execute()
-        )
-    
-    return str(response)
 
 
 if __name__ == "__main__":
