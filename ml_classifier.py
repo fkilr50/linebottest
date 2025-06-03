@@ -53,6 +53,7 @@ training_data = [
     ("Check my homework", "assignments"),
     ("What are my HW?", "assignments"),
     ("Show my HW", "assignments"),
+
     ("Gimme my homework", "assignments"),
     ("What activities are coming up?", "activities"),
     ("List my events", "activities"),
@@ -80,7 +81,10 @@ training_data = [
     ("顯示我的作業", "assignments"),
     ("有哪些活動？", "activities"),
     ("列出我的作業", "assignments"),
-    ("顯示我的活動", "activities"),
+    ("give me my activities", "activities"),
+    ("give me my activities", "activities"),
+    ("give me my activities", "activities"),
+    ("give me my activities", "activities"),
     ("最近的作業是什麼？", "nearest_assignments"),
     ("哪個作業最快到期？", "nearest_assignments"),
     ("最近的活動是什麼？", "nearest_activities"),
@@ -92,7 +96,7 @@ training_data = [
     ("Due date for Introduction to Algorithm?", "course_due_date"),
     ("What’s the due date for Information Privacy?", "course_due_date"),
     (
-        "When is the deadline for Assembly Language and Computer Organization?",
+        "When is the deadline for Assembly Language and Computer Organization assignment?",
         "course_due_date",
     ),
     ("Due date for Probability and Statistics?", "course_due_date"),
