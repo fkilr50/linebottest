@@ -285,15 +285,13 @@ def handle_new_user_professor(event):
                     except:
                         pass
 
-            #response = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
-            #del newusers[user_id]
             response = (
                 supabase.table("temp professor login data")
                 .delete()
                 .eq("LineID", user_id)
                 .execute()
             )   
-            output_text = f"Registration complete. You can now use commands like 'assignments', 'activities' or 'echo'."
+            output_text = f"Registration complete. You can now inquire about your assignments, activities, or test with ''!"
         else:
             response = (
                 supabase.table("temp professor login data")
