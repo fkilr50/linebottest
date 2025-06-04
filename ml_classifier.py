@@ -324,18 +324,16 @@ def generate_ml_sentence(prompt, classification, items, course_id=None):
         # Handle greeting classification
         if classification == "greeting":
             if is_chinese:
-                return fix_chinese_spacing(
-                    "嗨！我是WaiZiYu，你的元智好夥伴！為YOU而生，幫你搞定作業和活動~ 一起展現元智精神！😎 有什麼想問的？"
-                )
-            return "Hey there! I’m WaiZiYu, your YZU buddy! Made for YOU to ace your assignments and activities~ Let’s soar with YZU spirit! 😎 What’s up?"
+                return fix_chinese_spacing("嗨！我是WaiZiYu，你的元智好夥伴😎~ ")
+            return "Hey there! I’m WaiZiYu, your YZU buddy😎~"
 
         # Handle capabilities classification
         if classification == "capabilities":
             if is_chinese:
                 return fix_chinese_spacing(
-                    "我是WaiZiYu，你的元智小助手！能幫你查作業、列活動、找最近的截止日期，還能回課程問題。問我吧，我超快！🚀 你需要啥？"
+                    "我是WaiZiYu，你的元智小助手！能幫你查作業、列活動、還能找最近的截止日期。問我吧！🚀 你需要啥？"
                 )
-            return "I’m WaiZiYu, your YZU sidekick! I can fetch your assignments, list upcoming events, find your nearest deadlines, and answer course questions. Just ask, and I’ll zip it to you! 🚀 What do you need?"
+            return "I’m WaiZiYu, your YZU sidekick! I can fetch your assignments, list upcoming events, and find your nearest deadlines. Just ask, and I’ll zip it to you! 🚀 What do you need?"
 
         # Existing logic for other classifications
         if not items:
