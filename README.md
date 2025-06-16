@@ -1,5 +1,5 @@
 # YZU LINE BOT
-![bot-preview](https://ibb.co/qL3wLLXR)
+![image](https://github.com/user-attachments/assets/78b73076-1ee5-459f-ab0e-6da788e49901)
 
 ## Introduction
 
