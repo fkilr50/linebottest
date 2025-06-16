@@ -1,31 +1,8 @@
-# PyLINE Bot
-LINE Bot Starter Kit using Python
+# YZU LINE BOT
+![bot-preview](https://ibb.co/qL3wLLXR)
 
-![bot-preview](https://cdn-images-1.medium.com/max/1400/1*LvHrVMkIFvWpqNv83St6Yg.png)
+## Introduction
 
-## About the Documentations and LINE Messaging API 
+YZU LINE BOT is an interactive LINE Bot designed to streamline and simplify access to essential university-related information and tasks for both students and professors. It also serves as an alternative to the YZU APP or in some cases, even the YZU Portal. Through LINE, this bot provides a  way to quickly and easily access your Portal info, reducing the need to navigate complex university web portals directly.
 
-See the official API documentation for more information.
-
-English: https://developers.line.me/en/docs/messaging-api/reference/
-
-Japanese: https://developers.line.me/ja/docs/messaging-api/reference/
-
-## Usage and Requirements
-
-PyLINE Bot requires [pip](https://pip.pypa.io/en/stable/installing/) to run.
-
-Clone the project and Install the Python requirements using pip.
-
-```sh
-$ git clone https://github.com/abhishtagatya/pyline-bot
-$ cd pyline-bot
-$ pip install -r requirements.txt
-```
-
-Once the requiremts are installed, you can start creating your bot. Here is a good documentation created by [LINE to create your chatbot. ](https://github.com/line/line-bot-sdk-python/blob/master/README.rst#synopsis)
-
-Need a tutorial to get started? Read my Medium Post on [Creating Your First LINE Bot](https://medium.com/@gatya/creating-your-first-line-bot-3d9d7e88047)
-## Messaging API
-
-Head on over to [LINE Developers](https://developers.line.me/en/docs/messaging-api/overview/) to create your channel and how the Messaging API provided by LINE works.
+You simply login through the LINE BOT and ask away whatever questions you have about your Portal data. The core of this project can be divided into three parts; The LineBot, Scraper, Database and LLM. All these parts are essential for the bot to work properly and as intended. 
