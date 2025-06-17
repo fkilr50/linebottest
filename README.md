@@ -1,106 +1,129 @@
 # YZU LINE BOT
 ![image](https://github.com/user-attachments/assets/78b73076-1ee5-459f-ab0e-6da788e49901)
 
-## Introduction
+## Introduction (Overall Project)
 
-YZU LINE BOT is an interactive LINE Bot designed to streamline and simplify access to essential university-related information and tasks for both students and professors. It also serves as an alternative to the YZU APP or in some cases, even the YZU Portal. Through LINE, this bot provides a  way to quickly and easily access your Portal info, reducing the need to navigate complex university web portals directly.
+YZU LINE BOT is an interactive LINE Bot designed to streamline and simplify access to essential university-related information and tasks for both students and professors. It also serves as an alternative to the YZU APP or in some cases, even the YZU Portal. Through LINE, this bot provides a way to quickly and easily access your Portal info, reducing the need to navigate complex university web portals directly.
 
-You simply login through the LINE BOT and ask away whatever questions you have about your Portal data. The core of this project can be divided into three parts; The LineBot, Scraper, Database and LLM. All these parts are essential for the bot to work properly and as intended. 
+You simply login through the LINE BOT and ask away whatever questions you have about your Portal data. The core of this project can be divided into three parts: The LineBot, Scraper, Database and LLM. All these parts are essential for the bot to work properly and as intended.
 
-## Running the Code
-Setting up the bot requires many different steps to be done first before being able to chat with the bot. 
+---
 
-#### 1. Line Side
-Because this bot is powered with the line-bot sdk, we have to first make sure that our code has properly connect to LINE's servers by entering the correct channel infomations into the code's env file. These channel informations can be found in the LINE Official Account Manager.
+## Setting Up and Running the YZU LINE Bot
+
+This section guides you through the necessary steps to get the entire YZU LINE Bot operational.
+
+### 1. LINE Messaging API Setup
+
+To connect the bot to LINE's servers, you need to configure it with your LINE Channel Access Token and Channel Secret.
+
+1.  Create a provider and a channel for your bot on the [LINE Developers Console](https://developers.line.biz/console/). Choose the "Messaging API" channel type.
+2.  Once your channel is created, navigate to the "Messaging API" tab within your channel's settings.
+3.  You will find your **Channel secret** here.
+4.  Scroll down to "Channel access token" and issue a **Channel access token (long-lived)**.
+5.  These values need to be added to your project's environment configuration (e.g., a `.env` file for the main bot application).
+
+*(The images below show the LINE Official Account Manager, which is related but the core credentials for the SDK are from the LINE Developers Console shown above.)*
 
 ![image](https://github.com/user-attachments/assets/f20548db-dad1-45e4-b455-786f65fcca44)
-![image](https://github.com/user-attachments/assets/e9a6c8a0-113b-4354-be10-8e231825e2c2)
+*LINE Official Account Manager - Basic Settings*
 
-#### 2. Host Side
-After making sure that everything on the side of LINE is correct, we have to setup an API gateway and then entering that link into the Webhook URL in our LINE Official Account Manager.
+![image](https://github.com/user-attachments/assets/e9a6c8a0-113b-4354-be10-8e231825e2c2)
+*LINE Official Account Manager - Messaging API Settings*
+
+### 2. Webhook and Hosting Setup
+
+Your bot needs a publicly accessible HTTPS URL (webhook) for LINE to send messages to.
+
+1.  Deploy your main bot application to a hosting service that provides an HTTPS endpoint (e.g., Heroku, AWS, Google Cloud, Render).
+2.  Once deployed, take the public URL of your bot's webhook endpoint.
+3.  Go back to your channel's "Messaging API" tab in the LINE Developers Console.
+4.  Enter your public HTTPS URL into the "Webhook URL" field.
+5.  Enable "Use webhook".
 
 ![image](https://github.com/user-attachments/assets/1a302878-fd7f-40f8-a8ea-bb76ce0a1076)
-
-#### 3. Page Scraping part
-# WaiZiYu LINE Bot - Page Scraping Component
+*Webhook URL setting in LINE Developers Console*
 
 ---
 
-## Introduction
+### 3. Page Scraping Component Setup (`page_scraping.py`)
 
-The `page_scraping.py` script is responsible for automatically logging into the YZU student portal, navigating to the relevant sections for assignments and activities, and extracting this data. It utilizes:
-- **Selenium:** For browser automation and interaction with web pages.
-- **BeautifulSoup:** For parsing HTML content and extracting data.
-- **Supabase:** As a backend to store the scraped data.
+This component is responsible for gathering data from the YZU portal. The following instructions are specifically for setting up and running `page_scraping.py`.
 
-This script periodically checks for new information and updates the Supabase database, which can then be queried by other parts of the WaiZiYu LINE bot. This README focuses *solely* on the page scraping script and is intended for students in the IN208 Algorithm course who are new to web scraping or Supabase.
+#### Table of Contents (Page Scraping)
+- [Introduction to Page Scraping](#introduction-to-page-scraping)
+- [Prerequisites for Page Scraping](#prerequisites-for-page-scraping)
+- [Setup Instructions for Page Scraping](#setup-instructions-for-page-scraping)
+  - [3.1. Clone the Repository](#31-clone-the-repository)
+  - [3.2. Set Up a Virtual Environment](#32-set-up-a-virtual-environment-recommended)
+  - [3.3. Install Dependencies](#33-install-dependencies)
+  - [3.4. Set Up Supabase](#34-set-up-supabase)
+  - [3.5. Configure Environment Variables for Scraping](#35-configure-environment-variables-for-scraping)
+  - [3.6. Add YZU Credentials to Supabase](#36-add-yzu-credentials-to-supabase)
+- [Running the Page Scraping Script](#running-the-page-scraping-script)
+- [Troubleshooting Page Scraping Issues](#troubleshooting-page-scraping-issues)
+- [Notes on Page Scraping](#notes-on-page-scraping)
+
+#### Introduction to Page Scraping
+
+The `page_scraping.py` script automatically logs into the YZU student portal, navigates to assignments and activities sections, and extracts this data. It utilizes:
+- **Selenium:** For browser automation.
+- **BeautifulSoup:** For parsing HTML.
+- **Supabase:** As a backend to store scraped data.
+
+This script periodically updates the Supabase database, which the main WaiZiYu LINE bot queries. *This section is particularly aimed at students in the IN208 Algorithm course who might be new to web scraping or Supabase, focusing solely on this script.*
 
 ---
 
-## Prerequisites
+#### Prerequisites for Page Scraping
 
-Before you begin, ensure you have the following installed and configured:
-
-*   **Python:** Version 3.8 or higher.
-*   **Web Browser:** A recent version of Microsoft Edge, Google Chrome, or Mozilla Firefox.
-*   **Git:** For cloning the repository.
-*   **Supabase Account:** A free account on [Supabase](https://supabase.com/).
+Ensure you have:
+*   **Python:** Version 3.8+.
+*   **Web Browser:** Recent Microsoft Edge, Google Chrome, or Mozilla Firefox.
+*   **Git:** For cloning.
+*   **Supabase Account:** Free account at [Supabase](https://supabase.com/).
 *   **YZU Portal Credentials:** Your YZU student ID and password.
 *   **Operating System:** Windows, Linux, or macOS.
 
 ---
 
-## Setup Instructions
+#### Setup Instructions for Page Scraping
 
-Follow these steps carefully to get the page scraping script running on your local machine.
+##### 3.1. Clone the Repository
 
-### 1. Clone the Repository
-
-Open your terminal or command prompt and run the following command to clone the project repository:
+If you haven't already, clone the project:
 ```bash
 git clone https://github.com/fkilr50/wai-zi-yu.git
 cd wai-zi-yu
 ```
-*(Replace `your-username` with the actual GitHub username or organization where the repository is hosted.)*
 
-### 2. Set Up a Virtual Environment (Recommended)
+##### 3.2. Set Up a Virtual Environment (Recommended)
 
-It's good practice to use a virtual environment to manage project dependencies.
-
+Navigate to the project directory (`wai-zi-yu`) and create/activate a virtual environment:
 ```bash
-# Navigate to the project directory if you haven't already
-# cd wai-zi-yu
-
 # Create a virtual environment named 'venv'
 python -m venv venv
+
+# Activate on Windows
+.\venv\Scripts\activate
+
+# Activate on macOS/Linux
+source venv/bin/activate
 ```
+*(You should see `(venv)` in your terminal prompt.)*
 
-Activate the virtual environment:
-*   On Windows:
-    ```bash
-    .\venv\Scripts\activate
-    ```
-*   On macOS/Linux:
-    ```bash
-    source venv/bin/activate
-    ```
-You should see `(venv)` at the beginning of your terminal prompt, indicating the virtual environment is active.
+##### 3.3. Install Dependencies
 
-### 3. Install Dependencies
-
-With your virtual environment activated, install the required Python libraries using pip:
+Install required Python libraries for scraping:
 ```bash
 pip install selenium beautifulsoup4 supabase cryptography python-dotenv schedule webdriver_manager
 ```
 
-### 4. Set Up Supabase
+##### 3.4. Set Up Supabase
 
-If you haven't already, sign up or log in to [Supabase](https://supabase.com/) and create a new project.
-
-Once your project is ready:
-1.  Navigate to the **SQL Editor** section in your Supabase project dashboard (usually found in the left sidebar).
-2.  Click on **+ New query**.
-3.  Copy and paste the following SQL statements into the query editor to create the necessary tables. Then, click **RUN**.
+1.  Create a new project on [Supabase](https://supabase.com/).
+2.  Go to the **SQL Editor** in your Supabase project dashboard.
+3.  Click **+ New query** and run the following SQL to create tables:
 
     ```sql
     create table public."Assignment table" (
@@ -141,127 +164,94 @@ Once your project is ready:
     );
     ```
 
-### 5. Configure Environment Variables
+##### 3.5. Configure Environment Variables for Scraping
 
-Create a file named `.env` in the root directory of the `wai-zi-yu` project (i.e., inside the `wai-zi-yu` folder). This file will store your Supabase credentials and an encryption key.
+In the root of the `wai-zi-yu` project, create a `.env` file for the scraper's Supabase credentials and encryption key.
 
-1.  **Get Supabase URL and Key:**
-    *   In your Supabase project dashboard, go to **Project Settings** (the gear icon, usually in the bottom-left).
-    *   Select **API** from the sidebar.
-    *   You will find your **Project URL** (this is `SUPABASE_URL`) and your **Project API Keys**. For `SUPABASE_KEY`, use the `anon` `public` key.
-
-2.  **Generate Fernet Key (`FKEY`):**
-    This key is used to encrypt your YZU password before storing it in the database. Open your terminal (with the virtual environment activated) and run the following Python command:
+1.  **Get Supabase URL & Key:** From your Supabase project: **Project Settings** > **API**. Use **Project URL** for `SUPABASE_URL` and the `anon` `public` key for `SUPABASE_KEY`.
+2.  **Generate Fernet Key (`FKEY`):** For encrypting YZU passwords. In terminal (venv active):
     ```bash
     python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
     ```
-    Copy the long string of characters that this command outputs. This is your `FKEY`.
-
-3.  **Create and populate the `.env` file:**
-    Your `.env` file should look like this, replacing the placeholder values with your actual credentials and generated key:
+    Copy the outputted key.
+3.  **Create `.env` file** (ensure it's in `.gitignore`):
     ```env
     SUPABASE_URL="YOUR_SUPABASE_URL_HERE"
     SUPABASE_KEY="YOUR_SUPABASE_ANON_PUBLIC_KEY_HERE"
     FKEY="YOUR_GENERATED_FERNET_KEY_HERE"
     ```
-    **Important:** Ensure this `.env` file is listed in your `.gitignore` file to prevent accidentally committing sensitive credentials to your repository. A standard Python `.gitignore` usually includes `.env`.
 
-### 6. Add YZU Credentials to Supabase
+##### 3.6. Add YZU Credentials to Supabase
 
-The script needs your YZU portal credentials to log in. These are stored securely (password encrypted) in the `Login data` table in your Supabase database.
-
-1.  **Encrypt your YZU Password:**
-    You need to encrypt your YZU portal password using the `FKEY` you generated and stored in your `.env` file. You can do this by running a small Python script.
-    In your terminal, run `python` to open a Python interpreter, or create a temporary `.py` file with the following content:
-
+1.  **Encrypt YZU Password:** Use the `FKEY` from `.env`. Run this Python snippet (replace placeholders):
     ```python
     from cryptography.fernet import Fernet
-
-    # IMPORTANT: Replace "YOUR_GENERATED_FERNET_KEY_HERE" with the FKEY from your .env file.
-    # It must be the exact same key, converted to bytes.
-    fkey_from_env = b"YOUR_GENERATED_FERNET_KEY_HERE"
-
-    # IMPORTANT: Replace "your_yzu_password" with your actual YZU portal password, converted to bytes.
-    password_to_encrypt = b"your_yzu_password"
-
+    fkey_from_env = b"YOUR_GENERATED_FERNET_KEY_HERE" # Exact FKEY from .env
+    password_to_encrypt = b"your_yzu_password" # Your YZU password
     fernet = Fernet(fkey_from_env)
     encrypted_password = fernet.encrypt(password_to_encrypt)
     print(f"Encrypted password: {encrypted_password.decode()}")
     ```
-    Execute this. Copy the outputted encrypted password string.
-
-2.  **Insert Data into `Login data` Table:**
-    *   Go to your Supabase project dashboard.
-    *   Navigate to the **Table Editor** (grid icon in the left sidebar) and select the `Login data` table.
-    *   Click **+ Insert row**.
-    *   Fill in the fields:
-        *   `LineID`: For testing this script standalone, you can use a placeholder like `"local_user_test"`. This ID is typically used by the full LINE bot to link YZU credentials to a LINE user.
-        *   `StID`: Your YZU Student ID (e.g., `"s1123522"`).
-        *   `Ps`: The **encrypted password string** you generated and copied in the previous step.
-    *   Click **Save**.
+    Copy the output.
+2.  **Insert into `Login data` Table:** In Supabase Table Editor for `Login data`:
+    *   `LineID`: Placeholder like `"local_user_test"` (for standalone scraping test).
+    *   `StID`: Your YZU Student ID (e.g., `"s1123522"`).
+    *   `Ps`: The **encrypted password** from the previous step.
+    *   Save the row.
 
 ---
 
-## Running the Script
+#### Running the Page Scraping Script
 
-Once all setup steps are complete, you are ready to run the page scraping script. Ensure your virtual environment is still activated.
-
-In your terminal, make sure you are in the root directory of the `wai-zi-yu` project, then run:
+With the virtual environment active and in the project's root directory:
 ```bash
 python page_scraping.py
 ```
-
-You should see log messages in your terminal indicating the script's progress. Sample logs might look like this:
+Expected sample logs:
 ```
 INFO - Starting page_scraping.py execution...
-INFO - Found YZU credentials for LineID: local_user_test, StID: s1123522
-INFO - Attempting to login with s1123522...
 INFO - Login successful for s1123522!
-INFO - Scraping assignments...
-INFO - Inserted assignment: 【作業】[演算法概論IN208] Algorithm Design Practice - Week 5
-INFO - Scraping activities...
-INFO - No new activities found.
+INFO - Inserted assignment: 【作業】[演算法概論IN208] Algorithm...
 INFO - Scheduler started, running every 3 minutes.
 ```
-The script will perform an initial scrape and then, by default, will run every 3 minutes to check for new data. To stop the script, press `Ctrl+C` in the terminal.
+The script runs once, then schedules itself. Stop with `Ctrl+C`.
 
 ---
 
-## Troubleshooting
+#### Troubleshooting Page Scraping Issues
 
-If you encounter issues, here are some common problems and their potential solutions:
-
-*   **Browser/WebDriver Errors (e.g., `SessionNotCreatedException`, `WebDriverException`, `NoSuchDriverException`):**
-    *   **Update `webdriver_manager`:** Ensure it's the latest version: `pip install --upgrade webdriver_manager`.
-    *   **Browser Installation:** Make sure you have a compatible web browser (Microsoft Edge, Google Chrome, or Mozilla Firefox) installed and that it's up-to-date. `webdriver_manager` attempts to download the correct driver for your installed browser.
-    *   **Driver Path Issues (Less Common with `webdriver_manager`):** If `webdriver_manager` fails, you might need to manually download the correct WebDriver for your browser and ensure it's in your system's PATH or specified in the script (though `page_scraping.py` is designed to use `webdriver_manager`).
-
-*   **Supabase Connection Issues (e.g., `AuthApiError`, `ConnectionRefusedError`, timeouts):**
-    *   **Check `.env` file:** Double-check that `SUPABASE_URL` and `SUPABASE_KEY` in your `.env` file are exactly correct (no extra quotes, spaces, or typos).
-    *   **Internet Connection:** Verify your machine has a stable internet connection.
-    *   **Supabase Project Status:** Ensure your Supabase project is active and accessible. Check the Supabase status page if issues persist.
-
-*   **YZU Login Failures (e.g., script logs "Login failed" or "Invalid credentials"):**
-    *   **Verify Credentials in Supabase:** Double-check that your `StID` and the *encrypted* `Ps` (password) in the `Login data` table in Supabase are correct.
-    *   **Encryption Key Mismatch:** The most common issue here is that the `FKEY` used to encrypt your password (when you ran the `Fernet` Python snippet) is *different* from the `FKEY` stored in your `.env` file. They must be identical. If in doubt, re-encrypt your password using the `FKEY` from `.env` and update the `Ps` value in Supabase.
-    *   **Manual Login Test:** Try logging into the YZU portal manually through your web browser with your student ID and password to ensure they are correct and your account is active.
-
-*   **`ModuleNotFoundError` (e.g., `No module named 'selenium'`):**
-    *   **Activate Virtual Environment:** Make sure you have activated your Python virtual environment (`source venv/bin/activate` or `.\venv\Scripts\activate`) before running the script.
-    *   **Install Dependencies:** Ensure all dependencies were installed correctly within the active virtual environment using the `pip install ...` command from the setup instructions.
+*   **Browser/WebDriver Errors:** Update `webdriver_manager` (`pip install --upgrade webdriver_manager`). Ensure browser is installed and updated.
+*   **Supabase Connection Issues:** Check `.env` for correct `SUPABASE_URL`, `SUPABASE_KEY`. Verify internet and Supabase project status.
+*   **YZU Login Failures:** Confirm `StID` and encrypted `Ps` in Supabase. Ensure `FKEY` used for encryption matches `.env`. Test YZU login manually.
+*   **`ModuleNotFoundError`:** Activate virtual environment. Ensure dependencies installed in it.
 
 ---
 
-## Notes
-*   **Scope Limitation:** This README and the setup guide are focused *exclusively* on setting up and running the `page_scraping.py` script for data extraction. It does not cover the setup, integration, or operation of the full WaiZiYu LINE bot.
-*   **YZU-Specific Implementation:** The web scraping logic within `page_scraping.py` is specifically tailored to the HTML structure and login process of the Yuan Ze University student portal. It is unlikely to work for other university portals without significant modification.
-*   **Ethical Considerations & Responsible Scraping:** This script is intended for personal use by YZU students to help them manage their academic information. Always be mindful of the YZU portal's terms of service. The script includes a scheduled delay (defaulting to 3 minutes) between checks to avoid overwhelming the university's servers. Do not reduce this delay excessively.
-*   **Support & Contributions:** If you encounter problems not covered in the Troubleshooting section, or if you have suggestions for improvement, please feel free to open an issue on the project's GitHub repository.
+#### Notes on Page Scraping
 
-#### 4. Running the code
-Now that the setup is complete, the bot is now able to take in HTTP requests and reply back to the user in LINE by running the code in VSCode.
-
-![image](https://github.com/user-attachments/assets/e5b60436-3076-4d3f-aef0-3726b8b4e905)
+*   **Scope:** This sub-section focuses *only* on `page_scraping.py`.
+*   **YZU-Specific:** Scraper is tailored for YZU portal.
+*   **Ethical Scraping:** For personal use. Default 3-min schedule is respectful; avoid overly frequent requests.
+*   **Support:** For issues with `page_scraping.py`, open a GitHub issue.
 
 We hope this page scraping component is a helpful tool for your IN208 Algorithm course and for managing your YZU assignments and activities. Happy scraping!
 
+---
+
+### 4. Running the Main LINE Bot Application
+
+After all components (LINE API, Hosting, Page Scraping for data population) are set up:
+
+1.  Ensure your main LINE Bot application code (not `page_scraping.py`) is configured with its own environment variables (LINE Channel tokens, Supabase URL/Key for the bot to read data, any LLM API keys, etc.).
+2.  Run your main bot application on your hosting provider or locally for testing (if you've configured a tool like ngrok for a public webhook during local development).
+
+For example, if your main bot is `main_bot_app.py`:
+```bash
+# Ensure correct .env for the main bot is loaded
+python main_bot_app.py
+```
+
+You should then be able to interact with your bot via the LINE application.
+
+![image](https://github.com/user-attachments/assets/e5b60436-3076-4d3f-aef0-3726b8b4e905)
+*Example of running the bot code (likely the main bot application) in VSCode.*
